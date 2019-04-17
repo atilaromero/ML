@@ -59,7 +59,7 @@ def test_optimize():
     Y = [4,14,11,22,25, 26]
 
     loss, gradients, a_last = optimize(X, Y, a_prev, parameters, learning_rate = 0.01)
-    assert loss == 126.50397572165365
+    assert np.allclose(loss, 126.50397572165365)
     assert np.allclose(gradients["dWaa"][1][2],0.19470931534721261)
     assert np.allclose(np.argmax(gradients["dWax"]),93)
     assert np.allclose(gradients["dWya"][1][2],-0.0077738760320040928)

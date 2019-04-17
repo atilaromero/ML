@@ -120,7 +120,7 @@ def test_loss():
     Y2 = np.array(Y2)[np.newaxis,:]
 
     loss, cache = rnn_forward(X, Y, a_prev, parameters)
-    assert loss == 74.08235894494784
+    assert np.allclose(loss, 74.08235894494784)
 
     model, getStep = mkModel(100)
     model.set_weights((Wax.T, Waa.T, b.T[0], Wya.T, by.T[0]))
