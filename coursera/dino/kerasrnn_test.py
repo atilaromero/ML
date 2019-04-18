@@ -141,3 +141,51 @@ def test_loss():
     loss3 = model.evaluate(X2, Y2, verbose=0)
     assert np.allclose(loss3, loss)
 
+def test_loss_gradients():
+    np.random.seed(1)
+    vocab_size, n_a = 27, 100
+    a_prev = np.zeros((n_a, 1))
+    Wax, Waa, Wya = np.random.randn(n_a, vocab_size), np.random.randn(n_a, n_a), np.random.randn(vocab_size, n_a)
+    b, by = np.random.randn(n_a, 1), np.random.randn(vocab_size, 1)
+    X = [12,3,5,11,22,3]
+    Y = [4,14,11,22,25, 26]
+    parameters = {"Wax": Wax, "Waa": Waa, "Wya": Wya, "b": b, "by": by}
+
+    X2 = [tf.keras.utils.to_categorical(i, 27) for i in X]
+    X2 = np.array(X2)[np.newaxis,:]
+    Y2 = [tf.keras.utils.to_categorical(i, 27) for i in Y]
+    Y2 = np.array(Y2)[np.newaxis,:]
+
+    loss, cache = rnn_forward(X, Y, a_prev, parameters)
+    assert np.allclose(loss, 74.08235894494784)
+
+    model, getStep = mkModel(100)
+    model.set_weights((Wax.T, Waa.T, b.T[0], Wya.T, by.T[0]))
+    step = getStep()
+    Y_2 = model.predict(X2)
+    loss2 = -np.log(Y_2)
+    loss2[Y2 == 0] = 0
+    loss2 = np.sum(loss2)
+    assert np.allclose(loss2, loss)
+
+    def myloss(y_true, y_pred):
+        r = -tf.keras.backend.log(y_pred)
+        r = y_true * r
+        return tf.keras.backend.sum(r)
+
+    model.compile(loss=myloss,
+              optimizer=tf.keras.optimizers.SGD(lr=0.01, momentum=0.0, decay=0.0, nesterov=False, clipvalue=5.0))
+    loss3 = model.evaluate(X2, Y2, verbose=0)
+    assert np.allclose(loss3, loss)
+
+    gradients, a = rnn_backward(X, Y, parameters, cache)
+    gradients = clip(gradients, 5.0)
+
+    b4 = [i.copy() for i in model.get_weights()]
+    model.fit(X2,Y2, batch_size=1)
+    after = [i.copy() for i in model.get_weights()]
+    grads = [i-j for i,j in zip(after,b4)]
+    g1 = grads[0].reshape(2700)
+    g2 = gradients['dWax'].T.reshape(2700) * -0.01
+    assert np.sum((g1-g2)**2)**0.5/np.sum(g1) < 1e-4
+    assert np.sum((g1-g2)**2)**0.5 < 1e-5
