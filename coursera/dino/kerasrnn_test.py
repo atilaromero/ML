@@ -1,14 +1,15 @@
 from kerasrnn import *
 import pickle
-from utils import rnn_forward
+from coursera import optimize, clip
+from utils import rnn_forward, rnn_backward
 
 def test_version():
     assert tf.VERSION == '1.13.1'
-    assert keras.__version__ == '2.2.4-tf'
+    assert tf.keras.__version__ == '2.2.4-tf'
 
 _data = lines2array(names, char_to_ix, ix_to_char)
 X = [np.r_[np.zeros((1,27)),d][np.newaxis,:] for d in _data]
-Y = [np.r_[d, [keras.utils.to_categorical(0,27)]][np.newaxis,:] for d in _data]
+Y = [np.r_[d, [tf.keras.utils.to_categorical(0,27)]][np.newaxis,:] for d in _data]
 
 def test_data():
     assert data_size == 19909
@@ -38,8 +39,8 @@ def test_SimpleRNN1():
     assert np.allclose(a, [[3],[5]])
 
     last = l0 = tf.keras.layers.Input(batch_shape=(1,1,1))
-    last = l1 = keras.layers.SimpleRNN(2, return_sequences=True, stateful=True, activation=tf.keras.activations.linear)(last)
-    model = keras.Model([l0], last)
+    last = l1 = tf.keras.layers.SimpleRNN(2, return_sequences=True, stateful=True, activation=tf.keras.activations.linear)(last)
+    model = tf.keras.Model([l0], last)
     model.set_weights((Wax.T, Waa.T, b.T[0]))
     y = model.predict(x.reshape(1,1,1))
     assert np.allclose(y, [[[3,5]]])
