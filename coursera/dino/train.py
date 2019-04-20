@@ -30,9 +30,10 @@ except OSError:
 
 for j in range(200):
     loss = 0
-    for i in range(len(X[:])):
+    for i in range(len(X)):
+        k = np.random.choice(range(len(X)))
         model.reset_states()
-        history = model.fit(X[i], Y[i], verbose=0)
+        history = model.fit(X[k], Y[k], verbose=0)
         loss += history.history['loss'][-1]
     loss /= len(X)
     print('loss:', loss)
