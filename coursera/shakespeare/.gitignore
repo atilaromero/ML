@@ -1,5 +1,4 @@
 *.pyc
 .vscode
-venv
-env
+env3.6.6
 .pytest_cache/
