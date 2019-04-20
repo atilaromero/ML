@@ -1,0 +1,5 @@
+*.pyc
+.vscode
+env3.6.6
+.pytest_cache/
+temp.mp3
