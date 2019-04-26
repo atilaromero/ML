@@ -1,6 +1,8 @@
 from gtts import gTTS 
 from pydub import AudioSegment
 import numpy as np
+import tempfile
+import os
 
 def generateAudioSamples(text, lang='pt-BR'):
     sound = getAudioFeatures(text, lang)
@@ -9,8 +11,12 @@ def generateAudioSamples(text, lang='pt-BR'):
 
 def getAudioFeatures(text, lang='pt-BR'):
   myobj = gTTS(text=text, lang=lang, slow=False)
-  myobj.save("temp.mp3")
-  return AudioSegment.from_mp3("temp.mp3")
+  f, name = tempfile.mkstemp()
+  os.close(f)
+  myobj.save(name)
+  segment = AudioSegment.from_mp3(name)
+  os.remove(name)
+  return segment
 
 def normalize(samples):
   return samples/np.linalg.norm(samples, ord=np.inf)

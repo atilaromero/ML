@@ -29,40 +29,22 @@ model = tf.keras.Model([l0], last)
 out_chars = 'abcdefghijklmnopqrstuvwxyz '
 chars_to_ix = dict(zip(out_chars,range(len(out_chars))))
 ix_to_chars = dict(zip(range(len(out_chars)),out_chars))
-assert len(out_chars)==27
-assert chars_to_ix['b'] == 1
-assert ix_to_chars[2] == 'c'
 
-def generate_syllables(n=-1):
-  while(n!=0):
-    c = np.random.choice(['','b','c','d','f','g','j','k','l','m','n','p','q','r','s','t','v','x','z'])
-    v = np.random.choice(['a','e','i','o','u'])
-    yield c + v
-    n-=1
+def test_A():
+  assert len(out_chars)==27
+  assert chars_to_ix['b'] == 1
+  assert ix_to_chars[2] == 'c'
 
-xs = [] # array of instances
-ys = []
-max_x = 0 # max of len(x)
-max_y = 0
-for i, word in enumerate(generate_syllables(3)):
-    # audio amplitudes
-    x = generateAudioSamples(word)
-    # first two numbers are parameters for ctc_loss function
-    y = [len(x), len(word), *[chars_to_ix[j] for j in word]]
-    xs.append(x)
-    ys.append(y)
-    max_x = max(max_x, len(x))
-    max_y = max(max_y, len(y))
 
-# xs has variable size, but must be converted to a np.array
-xarr = np.zeros((len(xs), max_x,1))
-yarr = np.zeros((len(ys), max_y))
-for i,x in enumerate(xs):
-    xarr[i,:len(x),0] = x
-for i,y in enumerate(ys):
-    yarr[i,:len(y)] = y
+def test_B():
+  y = 'testando'
+  x = np.array([generateAudioSamples(y)]).reshape(1,28224,1)
+  yn = np.asarray([[28224,8,*[chars_to_ix[i] for i in y]]])
+  assert x.shape == (1,28224,1)
+  assert yn.shape == (1, 10)
 
-model.compile(loss=ctc_loss(yarr.shape),
+  model.compile(loss=ctc_loss(yn.shape),
     optimizer=tf.keras.optimizers.SGD(lr=0.001))
 
-model.fit(xarr, yarr)
+  loss = model.evaluate(x, yn)
+  assert np.allclose([loss], [0])
