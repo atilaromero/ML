@@ -1,5 +1,6 @@
 import tensorflow.keras.backend as K
 import tensorflow as tf
+import numpy as np
 
 out_chars = 'abcdefghijklmnopqrstuvwxyz '
 chars_to_ix = dict(zip(out_chars,range(len(out_chars))))
@@ -15,3 +16,15 @@ def ctc_loss(y_shape):
     cost = K.ctc_batch_cost(k_labels, k_inputs, k_input_lens,k_label_lens)
     return cost
   return f
+
+def to_ctc_format(xs,ys):
+  max_tx = np.max([len(i) for i in xs])
+  max_ty = np.max([len(i) for i in ys])
+  print(max_tx, max_ty)
+  xarr = np.zeros((len(xs), max_tx, xs[0].shape[-1]))
+  yarr = np.zeros((len(ys), max_ty + 2))
+  for i, x in enumerate(xs):
+    xarr[i,:len(x)] = x
+  for i, y in enumerate(ys):
+    yarr[i,:len(y)+2] = [len(x), len(y), *y]
+  return xarr, yarr

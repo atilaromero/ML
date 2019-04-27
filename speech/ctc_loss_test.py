@@ -1,7 +1,7 @@
 import tensorflow as tf
 import numpy as np
 from norm_gtts import norm_gtts
-from ctc_loss import ctc_loss, out_chars, chars_to_ix, ix_to_chars
+from ctc_loss import ctc_loss, out_chars, chars_to_ix, ix_to_chars, to_ctc_format
 
 def test_chars_to_ix():
   assert len(out_chars)==27
@@ -32,3 +32,35 @@ def test_ctc_loss():
 
   loss = model.evaluate(x, yn)
   assert np.allclose([loss], [92922.53125])
+
+
+def test_to_ctc_format():
+  xs = [
+    np.array([[1]]),
+    np.array([[1],[2]]),
+    np.array([[1],[2],[3]]),
+    np.array([[1],[2],[3],[4]]),
+  ]
+
+  ys = [
+    np.array([1]),
+    np.array([1,2]),
+    np.array([1,2,3]),
+    np.array([1,2,3,4]),
+  ]
+
+  xarr,yarr = to_ctc_format(xs, ys)
+  assert xarr.shape == (4,4,1)
+  assert yarr.shape == (4,6)
+  assert np.allclose(xarr, [
+    [[1],[0],[0],[0]],
+    [[1],[2],[0],[0]],
+    [[1],[2],[3],[0]],
+    [[1],[2],[3],[4]],
+  ])
+  assert np.allclose(yarr, [
+    [4,1,1,0,0,0],
+    [4,2,1,2,0,0],
+    [4,3,1,2,3,0],
+    [4,4,1,2,3,4],
+  ])

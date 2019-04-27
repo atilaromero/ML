@@ -21,17 +21,3 @@ def loadFolder(path):
     ys.append(y)
   return xs, ys
 
-def to_ctc_format(xs,ys):
-  max_tx = np.max([len(i) for in in xs])
-  max_ty = np.max([len(i) for in in ys])
-  xarr = np.zeros((len(xs), max_tx, 1))
-  yarr = np.zeros((len(ys), max_ty + 2))
-  for i, x in enumerate(xs):
-    xarr[i,:len(x),0] = x
-  for i, y in enumerate(ys):
-    yarr[i,:len(y)] = [len(x), len(word), *y]
-  return xarr, yarr
-
-if __name__ == '__main__':
-  xs, ys = loadFolder(sys.argv[1])
-  print(ys)
