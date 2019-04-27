@@ -12,6 +12,7 @@ def generateAudioSamples(text, lang='pt-BR'):
 def getAudioFeatures(text, lang='pt-BR'):
   myobj = gTTS(text=text, lang=lang, slow=False)
   f, name = tempfile.mkstemp()
+  name += '.mp3'
   os.close(f)
   myobj.save(name)
   segment = AudioSegment.from_mp3(name)
