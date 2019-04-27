@@ -4,7 +4,7 @@ import numpy as np
 import tempfile
 import os
 
-def generateAudioSamples(text, lang='pt-BR'):
+def norm_gtts(text, lang='pt-BR'):
     sound = getAudioFeatures(text, lang)
     samples = normalize(sound.get_array_of_samples())
     return samples

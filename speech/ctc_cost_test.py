@@ -1,6 +1,6 @@
 import tensorflow as tf
 import numpy as np
-from generateAudioSamples import generateAudioSamples
+from norm_gtts import norm_gtts
 from ctc_loss import ctc_loss, out_chars, chars_to_ix, ix_to_chars
 
 def test_chars_to_ix():
@@ -22,7 +22,7 @@ def test_ctc_loss():
   # model.summary()
 
   y = 'testando'
-  x = np.array([generateAudioSamples(y)]).reshape(1,28224,1)
+  x = np.array([norm_gtts(y)]).reshape(1,28224,1)
   yn = np.asarray([[28224,8,*[chars_to_ix[i] for i in y]]])
   assert x.shape == (1,28224,1)
   assert yn.shape == (1, 10)
