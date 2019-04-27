@@ -7,7 +7,7 @@ def loadWav(path):
   segment = AudioSegment.from_wav(path)
   samples = segment.get_array_of_samples()
   ns = samples/np.linalg.norm(samples, ord=np.inf)
-  return ns
+  return ns[:,np.newaxis]
 
 def loadFolder(path):
   files = os.listdir(path)

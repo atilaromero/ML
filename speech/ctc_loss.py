@@ -20,8 +20,7 @@ def ctc_loss(y_shape):
 def to_ctc_format(xs,ys):
   max_tx = np.max([len(i) for i in xs])
   max_ty = np.max([len(i) for i in ys])
-  print(max_tx, max_ty)
-  xarr = np.zeros((len(xs), max_tx, xs[0].shape[-1]))
+  xarr = np.zeros((len(xs), max_tx, xs[0].shape[1]))
   yarr = np.zeros((len(ys), max_ty + 2))
   for i, x in enumerate(xs):
     xarr[i,:len(x)] = x

@@ -20,4 +20,5 @@ def get_model(yarr_shape, load_weights='model.h5'):
             model.load_weights(load_weights)
         except OSError:
             pass
+    return model
 
