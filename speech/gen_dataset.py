@@ -1,5 +1,6 @@
 import numpy as np
 import subprocess
+import os
 import sys
 from pydub import AudioSegment
 
@@ -14,15 +15,15 @@ def generate_syllables(n=-1):
 def generateAllSyllables():
   for c in consonants:
     for v in vowels:
-        for s in suffixes:
-            yield c+v+s
-
-def saveSound(word):
+        # for s in suffixes:
+            # yield c+v+s
+      yield c+v
+def saveSound(word, dir):
   p = subprocess.Popen(['espeak-ng','-v', 'pt-BR', word, '--stdout'], bufsize=-1, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
   out, _ = p.communicate()
-  with open(word+'.wav', 'wb') as f:
+  with open(os.path.join(dir, word)+'.wav', 'wb') as f:
     f.write(out)
 
 if __name__ == '__main__':
   for x in generateAllSyllables():
-    saveSound(x)  
+    saveSound(x, 'dataset')  

@@ -17,13 +17,29 @@ def ctc_loss(y_shape):
     return cost
   return f
 
-def to_ctc_format(xs,ys):
+def to_ctc_format(xs,ys, max_ty=None):
   max_tx = np.max([len(i) for i in xs])
-  max_ty = np.max([len(i) for i in ys])
+  if max_ty == None:
+    max_ty = np.max([len(i) for i in ys]) + 3
+  assert max_ty >= np.max([len(i) for i in ys]) + 3
   xarr = np.zeros((len(xs), max_tx, xs[0].shape[1]))
-  yarr = np.zeros((len(ys), max_ty + 2))
+  yarr = np.zeros((len(ys), max_ty))
   for i, x in enumerate(xs):
     xarr[i,:len(x)] = x
   for i, y in enumerate(ys):
     yarr[i,:len(y)+2] = [len(x), len(y), *y]
   return xarr, yarr
+
+def ctc_predict(model, xarr):
+    y_pred = model.predict(xarr)
+
+    input_length = K.variable(np.ones((y_pred.shape[0],), dtype=np.int32)*y_pred.shape[1])
+
+    pred, log_pred = K.ctc_decode(
+        y_pred,
+        input_length,
+        beam_width=10,
+        top_paths=1)
+
+    pred = K.eval(pred[0])
+    return [''.join([ix_to_chars[i] for i in p if i>-1]) for p in pred]

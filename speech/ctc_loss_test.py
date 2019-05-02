@@ -64,3 +64,18 @@ def test_to_ctc_format():
     [4,3,1,2,3,0],
     [4,4,1,2,3,4],
   ])
+
+def test_ctc_predict():
+  from model import get_model
+  from ctc_loss import ctc_predict
+  model = get_model(load_weights='')
+  weights = model.get_weights()
+  # set all weights to 1 to make this test deterministic
+  model.set_weights([w * 0 + 1 for w in weights])
+
+  y = 'testando'
+  x = np.array([norm_gtts(y)]).reshape(1,28224,1)
+
+  y_pred = ctc_predict(model, x)
+  # the prediction is awful because the weights are all 1
+  assert y_pred == ['yayaya']
