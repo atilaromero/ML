@@ -5,9 +5,11 @@ from sample import loadFolder
 import numpy as np
 
 def train(path, sample_size=10,batch_size=10):
+    sample_size=int(sample_size)
+    batch_size=int(batch_size)
     model = get_model()
     model.compile(loss=tf.keras.losses.categorical_crossentropy,
-        optimizer=tf.keras.optimizers.SGD(lr=0.1),
+        optimizer=tf.keras.optimizers.Adam(lr=0.001),
         metrics=['accuracy'])
     model.summary()
 
