@@ -1,6 +1,6 @@
 import tensorflow as tf
 import numpy as np
-from generateAudioSamples import generateAudioSamples
+from audio.generateAudioSamples import generateAudioSamples
 
 last = l0 = tf.keras.layers.Input(shape=(None,1))
 # last = tf.keras.layers.Masking(mask_value=100)(last)
@@ -40,4 +40,4 @@ cat_yn = tf.keras.utils.to_categorical(yn,27)
 x = np.array(generateAudioSamples(y)).reshape(1,28224,1)
 print(x.shape)
 print(yn.shape)
-model.fit([x, yn, np.asarray([[28224]]), np.asarray([[8]])], yn)
+model.fit([x, yn, np.asarray([[28222]]), np.asarray([[8]])], yn)
