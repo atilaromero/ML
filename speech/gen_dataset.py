@@ -19,7 +19,7 @@ def generateAllSyllables():
             # yield c+v+s
       yield c+v
 def saveSound(word, dir):
-  p = subprocess.Popen(['espeak-ng','-v', 'pt-BR', word, '--stdout'], bufsize=-1, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+  p = subprocess.Popen(['espeak','-v', 'pt-br', word, '--stdout'], bufsize=-1, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
   out, _ = p.communicate()
   with open(os.path.join(dir, word)+'.wav', 'wb') as f:
     f.write(out)
