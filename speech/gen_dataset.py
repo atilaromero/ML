@@ -12,12 +12,12 @@ def generate_syllables(n=-1):
     yield ''.join([np.random.choice(x) for x in [consonants,vowels,suffixes]])
     n-=1
 
-def generateAllSyllables():
-  for c in consonants:
-    for v in vowels:
-        # for s in suffixes:
-            # yield c+v+s
-      yield c+v
+def generateAllSyllables(pattern='cvs'):
+  for c in ('c' in pattern) and consonants or ['']:
+    for v in ('v' in pattern) and vowels or ['']:
+      for s in ('s' in pattern) and suffixes or ['']:
+        yield c+v+s
+
 def saveSound(word, dir):
   p = subprocess.Popen(['espeak','-v', 'pt-br', word, '--stdout'], bufsize=-1, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
   out, _ = p.communicate()
@@ -25,5 +25,6 @@ def saveSound(word, dir):
     f.write(out)
 
 if __name__ == '__main__':
-  for x in generateAllSyllables():
-    saveSound(x, 'dataset')  
+  os.makedirs(sys.argv[1],exist_ok=True)
+  for x in generateAllSyllables(*sys.argv[2:]):
+    saveSound(x, sys.argv[1])  
