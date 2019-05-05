@@ -14,10 +14,10 @@ class ML:
             except OSError:
                 pass
 
-    def set_compile_kwargs(self, **compile_kwargs)
+    def set_compile_kwargs(self, **compile_kwargs):
         self.compile_kwargs = compile_kwargs
 
-    def set_fit_kwargs(self, **fit_kwargs)
+    def set_fit_kwargs(self, **fit_kwargs):
         self.fit_kwargs = fit_kwargs
 
     def train(self):

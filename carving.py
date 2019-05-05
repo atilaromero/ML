@@ -19,6 +19,59 @@ categories = ['pdf','png', 'jpg']
 ix_to_cat = dict([(i,x) for i,x in enumerate(categories)])
 cat_to_ix = dict([(x,i) for i,x in enumerate(categories)])
 
+import utils
+import utils.load
+import utils.sampler
+
+def test_train():
+    train('carving/dataset',1,10)
+
+def one_hot(arr, num_categories):
+    arr_shape = np.shape(arr)
+    flatten = np.reshape(arr, -1)
+    r = np.zeros((len(flatten),num_categories))
+    r[np.arange(len(flatten)),flatten] = 1
+    return r.reshape((*arr_shape,num_categories))
+
+def test_one_hot():
+    assert np.allclose(one_hot([0,1,2,1,0],3), [[1, 0, 0],
+        [0, 1, 0],
+        [0, 0, 1],
+        [0, 1, 0],
+        [1, 0, 0]])
+    assert np.allclose(one_hot([[0,1,2,1,0]],3), [[[1, 0, 0],
+        [0, 1, 0],
+        [0, 0, 1],
+        [0, 1, 0],
+        [1, 0, 0]]])
+
+def test_ys_from_filenames():
+    ys = ys_from_filenames(['a/a.pdf', 'b/b.png'])
+    assert np.allclose(ys, [[1,0,0],[0,1,0]])
+
+def ys_from_filenames(filenames):
+    ys = np.zeros((len(filenames),len(categories)))
+    cats = [utils.load.category_from_extension(s) for s in filenames]
+    cats = [cat_to_ix[x] for x in cats]
+    ys = one_hot(cats, len(categories))
+    return ys
+
+def xs_from_filenames(filenames):
+    xs = np.zeros((len(filenames),512,256))
+    for i,f in enumerate(filenames):
+        x = sample_sector(f)
+        # one hot encoding
+        xs[i,np.arange(512),x] = 1
+    return xs
+
+def train(examplesFolder, epochs=-1, sample_size=10):
+    examples = utils.load.examples_from(examplesFolder)
+    while(epochs != 0):
+        epochs -= 1
+        sample = utils.sampler.choice(examples, sample_size)
+        ys = ys_from_filenames(sample)
+        xs = xs_from_filenames(sample)
+
 def sample_sector(path):
     with open(path, 'rb') as f:
         f.seek(0,2)
@@ -31,26 +84,15 @@ def sample_sector(path):
         n[:len(b)] = [int(x) for x in b]
         return n
 
-def loadFolder(path, sample_size=-1):
-  files = os.listdir(path)
-  sample_size = int(sample_size)
-  if sample_size > 0:
-    files = np.random.choice(files, size=sample_size, replace=True)
-  xs = np.zeros((len(files),512,256))
-  ys = np.zeros((len(files),len(categories)))
-  for i,f in enumerate(files):
-    y = cat_to_ix[f.rsplit('.',1)[-1]]
-    x = sample_sector(os.path.join(path, f))
-    # one hot encoding
-    xs[i,np.arange(512),x] = 1
-    ys[i,y] = 1
-  return xs, ys
-
 def data_generator():
     while(True):
         xs, ys = loadFolder('carving/dataset')
         yield xs, ys
 
+def compiler(model):
+    model.compile(loss=tf.keras.losses.categorical_crossentropy,
+        optimizer=tf.keras.optimizers.Adam(lr=0.001),
+        metrics=['accuracy'])
 
 if __name__ == '__main__':
     ml = ML(get_model, data_generator, save_file='carving.h5', 
