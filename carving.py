@@ -23,45 +23,17 @@ import utils
 import utils.load
 import utils.sampler
 
-def test_train():
-    train('carving/dataset',1,10)
-
-def one_hot(arr, num_categories):
-    arr_shape = np.shape(arr)
-    flatten = np.reshape(arr, -1)
-    r = np.zeros((len(flatten),num_categories))
-    r[np.arange(len(flatten)),flatten] = 1
-    return r.reshape((*arr_shape,num_categories))
-
-def test_one_hot():
-    assert np.allclose(one_hot([0,1,2,1,0],3), [[1, 0, 0],
-        [0, 1, 0],
-        [0, 0, 1],
-        [0, 1, 0],
-        [1, 0, 0]])
-    assert np.allclose(one_hot([[0,1,2,1,0]],3), [[[1, 0, 0],
-        [0, 1, 0],
-        [0, 0, 1],
-        [0, 1, 0],
-        [1, 0, 0]]])
-
-def test_ys_from_filenames():
-    ys = ys_from_filenames(['a/a.pdf', 'b/b.png'])
-    assert np.allclose(ys, [[1,0,0],[0,1,0]])
-
 def ys_from_filenames(filenames):
-    ys = np.zeros((len(filenames),len(categories)))
     cats = [utils.load.category_from_extension(s) for s in filenames]
     cats = [cat_to_ix[x] for x in cats]
-    ys = one_hot(cats, len(categories))
+    ys = utils.one_hot(cats, len(categories))
     return ys
 
 def xs_from_filenames(filenames):
     xs = np.zeros((len(filenames),512,256))
     for i,f in enumerate(filenames):
         x = sample_sector(f)
-        # one hot encoding
-        xs[i,np.arange(512),x] = 1
+        xs[i] = utils.one_hot(x,256)
     return xs
 
 def train(examplesFolder, epochs=-1, sample_size=10):
