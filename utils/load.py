@@ -3,6 +3,9 @@ import os
 def category_from_extension(path):
     return path.rsplit('.',1)[1]
 
+def category_from_name(path):
+    return os.path.basename(path).rsplit('.',1)[0]
+
 def category_from_folder(path):
     return path.rsplit('/',2)[-2]
 
