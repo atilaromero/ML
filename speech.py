@@ -46,12 +46,22 @@ def train(model, save_file, examplesFolder, batch_size=100, max_ty=100, sample_s
         model.fit(xs,ys,batch_size=batch_size)
         if save_file:
             model.save(save_file)
+        accuracy = get_accuracy(model, sample[:100], xs[:100])
+        print('accuracy: %0.2f' % accuracy)
+
+def get_accuracy(model, sample, xs):
+    y_pred = ctc_predict(model, xs)
+    y_true = [utils.load.category_from_name(f) for f in sample]
+    matches = [i==j for i,j in zip(y_pred, y_true)]
+    accuracy = sum(matches)/len(matches)
+    return accuracy
 
 def evaluate(model, examplesFolder, batch_size=100, max_ty=100, sample_size=1000):
     examples = utils.load.examples_from(examplesFolder)
     sample = utils.sampler.choice(examples, sample_size)
     xs, ys = xs_ys_from_filenames(sample, max_ty)
-    model.evaluate(xs, ys, batch_size=batch_size)
+    accuracy = get_accuracy(model, sample, xs)
+    print('accuracy: %0.2f' % accuracy)
 
 if __name__ == '__main__':
     def _train(save_file, examplesFolder, batch_size=100, max_ty=100, sample_size=5000, epochs=-1):
