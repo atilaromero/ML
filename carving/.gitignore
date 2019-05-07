@@ -1,6 +1,0 @@
-*.pyc
-.vscode
-env3.6.6
-env3.7.3
-.pytest_cache/
-__pycache__

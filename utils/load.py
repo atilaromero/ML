@@ -12,3 +12,10 @@ def examples_from(folder):
             for f in filenames:
                 yield os.path.join(dirpath, f)
     return list(inner())
+
+def maybe_load_weigths(model, save_file=''):
+    if save_file:
+        try:
+            model.load_weights(save_file)
+        except OSError:
+            pass
