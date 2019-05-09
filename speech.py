@@ -49,9 +49,13 @@ def train(model, save_file, examplesFolder, batch_size=100, max_ty=100, sample_s
         accuracy = get_accuracy(model, sample[:100], xs[:100])
         print('accuracy: %0.2f' % accuracy)
 
-def get_accuracy(model, sample, xs):
+def predict(model, sample, xs):
     y_pred = ctc_predict(model, xs)
     y_true = [utils.load.category_from_name(f) for f in sample]
+    return y_true, y_pred
+
+def get_accuracy(model, sample, xs):
+    y_true, y_pred = predict(model, sample, xs)
     matches = [i==j for i,j in zip(y_pred, y_true)]
     accuracy = sum(matches)/len(matches)
     return accuracy
@@ -63,23 +67,46 @@ def evaluate(model, examplesFolder, batch_size=100, max_ty=100, sample_size=1000
     accuracy = get_accuracy(model, sample, xs)
     print('accuracy: %0.2f' % accuracy)
 
-if __name__ == '__main__':
-    def _train(save_file, examplesFolder, batch_size=100, max_ty=100, sample_size=5000, epochs=-1):
-        model = get_model()
-        utils.load.maybe_load_weigths(model, save_file=save_file)
-        compile(model, batch_size=batch_size, max_ty=max_ty)
-        train(model, save_file, examplesFolder, batch_size, max_ty, sample_size, epochs)
+def correct(model, examplesFolder, batch_size=100, max_ty=100):
+    examples = utils.load.examples_from(examplesFolder)
+    xs, ys = xs_ys_from_filenames(examples, max_ty)
+    y_true, y_pred = predict(model, examples, xs)
+    for t,p in zip(y_true, y_pred):
+        if t == p:
+            print(repr(t), repr(p), )
 
-    def _evaluate(save_file, examplesFolder, batch_size=100, max_ty=100, sample_size=1000):
+def predictions(model, examplesFolder, batch_size=100, max_ty=100):
+    examples = utils.load.examples_from(examplesFolder)
+    xs, ys = xs_ys_from_filenames(examples, max_ty)
+    y_pred = model.predict(xs,batch_size=batch_size)
+    print(y_pred)
+
+def failed(model, examplesFolder, batch_size=100, max_ty=100):
+    examples = utils.load.examples_from(examplesFolder)
+    xs, ys = xs_ys_from_filenames(examples, max_ty)
+    y_true, y_pred = predict(model, examples, xs)
+    for t,p in zip(y_true, y_pred):
+        if t != p:
+            print(repr(t), repr(p))
+
+if __name__ == '__main__':
+    def _model(save_file, examplesFolder, batch_size=100, max_ty=100):
         model = get_model()
         compile(model, batch_size=batch_size, max_ty=max_ty)
         utils.load.maybe_load_weigths(model, save_file=save_file)
-        evaluate(model, examplesFolder, batch_size, max_ty, sample_size)
+        return model
+    model = _model(*sys.argv[2:6])
 
     if sys.argv[1] == 'train':
-        _train(*sys.argv[2:])
-    if sys.argv[1] == 'evaluate':
-        _evaluate(*sys.argv[2:])
+        train(model, *sys.argv[2:])
+    elif sys.argv[1] == 'evaluate':
+        evaluate(model, *sys.argv[3:])
+    elif sys.argv[1] == 'correct':
+        correct(model, *sys.argv[3:])
+    elif sys.argv[1] == 'failed':
+        failed(model, *sys.argv[3:])
+    elif sys.argv[1] == 'predictions':
+        predictions(model, *sys.argv[3:])
     else:
         print(f'Use {sys.argv[0]} COMMAND')
         print(f'commands:')
