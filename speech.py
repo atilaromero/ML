@@ -14,7 +14,7 @@ def get_model():
     # last = tf.keras.layers.Masking(mask_value=100)(last)
     # last = tf.keras.layers.LSTM(128, return_sequences=True, dropout=0.5)(last)
     # last = tf.keras.layers.LSTM(128, return_sequences=True, dropout=0.5)(last)
-    last = tf.keras.layers.LSTM(128, return_sequences=True, dropout=0.5)(last)
+    last = tf.keras.layers.LSTM(128, return_sequences=True)(last)
     last = tf.keras.layers.Dense(27)(last)
     last = tf.keras.layers.Activation('softmax')(last)
 
@@ -23,7 +23,7 @@ def get_model():
 
 def compile(model, batch_size, max_ty):
     model.compile(loss=ctc_loss((batch_size, max_ty)),
-        optimizer=tf.keras.optimizers.SGD(lr=0.001, momentum=0.9, nesterov=True))
+        optimizer=tf.keras.optimizers.SGD(lr=0.0001, clipnorm=1.0))
 
 def xs_ys_from_filenames(filenames, max_ty):
     xs = []
@@ -46,8 +46,8 @@ def train(model, save_file, examplesFolder, batch_size=140, max_ty=100, sample_s
         # sample = utils.sampler.choice(examples, sample_size)
         # xs, ys = xs_ys_from_filenames(sample, max_ty)
         w0 = model.get_weights()
-        model.fit(xs,ys,batch_size=batch_size)
-        if epochs%10 == 0:
+        model.fit(xs,ys,batch_size=batch_size,shuffle=True)
+        if epochs%100 == 0:
             w1 = model.get_weights()
             for l0,l1 in zip(w0,w1):
                 diff = l1-l0
@@ -122,8 +122,8 @@ if __name__ == '__main__':
     elif sys.argv[1] == 'predictions':
         predictions(model, *sys.argv[3:])
     else:
-        print(f'Use {sys.argv[0]} COMMAND')
-        print(f'commands:')
-        print(f'    train save_file, examplesFolder, batch_size=100, max_ty=100, sample_size=5000, epochs=-1')
-        print(f'    evaluate save_file, examplesFolder, batch_size=100, max_ty=100, sample_size=1000')
+        print('Use %s{sys.argv[0]} COMMAND')
+        print('commands:')
+        print('    train save_file, examplesFolder, batch_size=100, max_ty=100, sample_size=5000, epochs=-1')
+        print('    evaluate save_file, examplesFolder, batch_size=100, max_ty=100, sample_size=1000')
         exit(1)

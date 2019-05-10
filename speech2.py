@@ -27,7 +27,7 @@ def get_model():
     # last = tf.keras.layers.Masking(mask_value=100)(last)
     # last = tf.keras.layers.LSTM(128, return_sequences=True, dropout=0.5)(last)
     # last = tf.keras.layers.LSTM(128, return_sequences=True, dropout=0.5)(last)
-    last = tf.keras.layers.LSTM(128, return_sequences=True, dropout=0.5, activation='tanh')(last)
+    last = tf.keras.layers.LSTM(128, return_sequences=True)(last)
     last = tf.keras.layers.Dense(27)(last)
     last = tf.keras.layers.Activation('softmax')(last)
 
@@ -36,7 +36,7 @@ def get_model():
 
 def compile(model, batch_size, max_ty):
     model.compile(loss=ctc_loss((batch_size, max_ty)),
-        optimizer=tf.keras.optimizers.SGD(lr=0.001, momentum=0.9, nesterov=True))
+        optimizer=tf.keras.optimizers.Adam())
 
 def xs_ys_from_filenames(filenames, max_ty):
     xs = []
@@ -52,28 +52,30 @@ def xs_ys_from_filenames(filenames, max_ty):
 
 def train(model, save_file, examplesFolder, batch_size=None, max_ty=100, sample_size=5, epochs=-1):
     examples = utils.load.examples_from(examplesFolder)
+    sample = examples
+    xs, ys = xs_ys_from_filenames(sample, max_ty)
     batch_size=batch_size and int(batch_size) or len(examples)
     while(epochs != 0):
         epochs -= 1
         # sample = utils.sampler.choice(examples, sample_size)
-        sample = examples
-        xs, ys = xs_ys_from_filenames(sample, max_ty)
+        # xs, ys = xs_ys_from_filenames(sample, max_ty)
         w0 = model.get_weights()
         model.fit(xs,ys,batch_size=batch_size)
-        w1 = model.get_weights()
-        for l0,l1 in zip(w0,w1):
-            diff = l1-l0
-            sadiff = np.sum(np.abs(diff))
-            saw1 = np.sum(np.abs(l1))
-            print('sum(abs(grads))','%1.5E'%sadiff,
-                  'sum(grads)','%1.5E'%np.sum(diff),
-                  'sum(abs(weights))', '%1.5E'%saw1, 
-                  'zeros', len(np.where(l1 == 0)), 
-                  l1.shape)
-        if save_file:
-            model.save(save_file)
-        accuracy = get_accuracy(model, sample[:100], xs[:100])
-        print('accuracy: %0.2f' % accuracy)
+        if epochs%100 ==0:
+            w1 = model.get_weights()
+            for l0,l1 in zip(w0,w1):
+                diff = l1-l0
+                sadiff = np.sum(np.abs(diff))
+                saw1 = np.sum(np.abs(l1))
+                print('sum(abs(grads))','%1.5E'%sadiff,
+                    'sum(grads)','%1.5E'%np.sum(diff),
+                    'sum(abs(weights))', '%1.5E'%saw1, 
+                    'zeros', len(np.where(l1 == 0)), 
+                    l1.shape)
+            if save_file:
+                model.save(save_file)
+            accuracy = get_accuracy(model, sample[:100], xs[:100])
+            print('accuracy: %0.2f' % accuracy)
 
 def gradients(model, save_file, examplesFolder, batch_size=100, max_ty=100, sample_size=5000, epochs=1):
     examples = utils.load.examples_from(examplesFolder)
