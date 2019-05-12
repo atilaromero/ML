@@ -1,12 +1,12 @@
 import tensorflow as tf
 import numpy as np
 
-data = open('dinos.txt', 'r').read()
+data = open('coursera/dino/dinos.txt', 'r').read()
 data= data.lower()
 chars = list(set(data))
 data_size, vocab_size = len(data), len(chars)
 
-with open("dinos.txt") as f:
+with open('coursera/dino/dinos.txt') as f:
   names = f.readlines()
 names = [x.lower().strip() for x in names]
 
