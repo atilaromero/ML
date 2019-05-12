@@ -1,32 +1,54 @@
 import utils.load
 import numpy as np
 from abc import ABC, abstractmethod
+import tensorflow as tf
 from tensorflow.keras.callbacks import Callback
-
-from ctc.ctc_loss import ctc_predict, from_ctc_format
 
 def get_accuracy(y_true, y_pred):
     matches = [i == j for i, j in zip(y_pred, y_true)]
     accuracy = sum(matches)/len(matches)
     return accuracy
 
-class print_accuracy_cb(Callback):
-    def on_epoch_end(self, epoch, logs=None):
-        y_true, y_pred = self.get_true_pred(xs, ys)
+class PrintAccuracyCB(Callback):
+    def __init__(self, main):
+        self.main = main
+    def on_epoch_end(self, epoch, logs):
+        xs, ys = self.main.data
+        y_true, y_pred = self.main.get_true_pred(xs, ys)
         accuracy = get_accuracy(y_true, y_pred)
-        print('accuracy: %0.2f' % accuracy)
+        print(' - accuracy: %0.2f' % accuracy)
 
 class AbstractMain(ABC):
-    def __init__(self, command, save_file, examples_folder, batch_size, max_ty=100, sample_size=5, epochs=-1):
+    def __init__(self, command, save_file, examples_folder, batch_size, max_ty=100, sample_size=5, epochs=10000):
         self.save_file = save_file
         self.examples_folder = examples_folder
         self.batch_size = int(batch_size)
         self.max_ty = int(max_ty)
         self.sample_size = int(sample_size)
         self.epochs = int(epochs)
-        self.goal_accuracy = 0.9
         self.callbacks = [
-            print_accuracy_cb,
+            tf.keras.callbacks.TerminateOnNaN(),
+            tf.keras.callbacks.ModelCheckpoint(
+                self.save_file, 
+                monitor='loss',
+                save_best_only=True,
+                save_weights_only=True,
+                period=100),
+            tf.keras.callbacks.ReduceLROnPlateau(
+                monitor='loss',
+                patience=10,
+                factor=0.8,
+                min_lr=1e-6,
+            ),
+            tf.keras.callbacks.EarlyStopping(
+                monitor='loss',
+                min_delta=0.001,
+                patience=500,
+            ),
+            tf.keras.callbacks.TensorBoard(
+                log_dir=self.save_file.rsplit('.',1)[0] + '.tboard',
+            ),
+            PrintAccuracyCB(self),
         ]
 
         self.model = self.get_model()
@@ -66,25 +88,12 @@ class AbstractMain(ABC):
 
     def train(self):
         xs, ys = self.get_xs_ys()
+        self.data = xs, ys
         accuracy = 0
-        w1 = self.model.get_weights()
-        while(self.epochs != 0 and accuracy <self.goal_accuracy):
-            self.epochs -= 1
-            w0 = w1
-            self.model.fit(xs,ys,batch_size=self.batch_size, callbacks=self.callbacks)
-            if self.epochs%100 ==0:
-                w1 = self.model.get_weights()
-                for l0,l1 in zip(w0,w1):
-                    diff = l1-l0
-                    sadiff = np.sum(np.abs(diff))
-                    saw1 = np.sum(np.abs(l1))
-                    print('sum(abs(grads))','%1.5E'%sadiff,
-                        'sum(grads)','%1.5E'%np.sum(diff),
-                        'sum(abs(weights))', '%1.5E'%saw1, 
-                        'zeros', len(np.where(l1 == 0)), 
-                        l1.shape)
-                if self.save_file:
-                    self.model.save(self.save_file)
+        self.model.fit(xs,ys,
+            batch_size=self.batch_size,
+            epochs=self.epochs,
+            callbacks=self.callbacks)
 
     def evaluate(self):
         xs, ys = self.get_xs_ys()
