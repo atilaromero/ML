@@ -5,3 +5,5 @@ env3.6.6
 __pycache__/
 .vscode/
 env3.5.3/
+.mypy_cache/
+env3.6.6-gpu/
