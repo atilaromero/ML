@@ -34,16 +34,20 @@ def from_ctc_format(ys):
   ixss = [y[2:][:int(y[1])] for y in ys]
   return [''.join([ix_to_chars[ix] for ix in ixs]) for ixs in ixss]
 
+
+
 def ctc_predict(model, xarr):
-    y_pred = model.predict(xarr)
+  y_pred = model.predict(xarr)
+  pred = ctc_decode(y_pred)
+  pred = K.eval(pred)
+  return [''.join([ix_to_chars[i] for i in p if i>-1]) for p in pred]
 
-    input_length = K.variable(np.ones((y_pred.shape[0],), dtype=np.int32)*y_pred.shape[1])
+def ctc_decode(y_pred):
+  input_length = K.variable(np.ones((y_pred.shape[0],), dtype=np.int32)*y_pred.shape[1])
 
-    pred, log_pred = K.ctc_decode(
-        y_pred,
-        input_length,
-        beam_width=10,
-        top_paths=1)
-
-    pred = K.eval(pred[0])
-    return [''.join([ix_to_chars[i] for i in p if i>-1]) for p in pred]
+  pred, log_pred = K.ctc_decode(
+    y_pred,
+    input_length,
+    beam_width=50,
+    top_paths=1)
+  return pred[0]
