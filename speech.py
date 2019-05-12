@@ -23,7 +23,7 @@ def get_model():
 
 def compile(model, batch_size, max_ty):
     model.compile(loss=ctc_loss((batch_size, max_ty)),
-        optimizer=tf.keras.optimizers.SGD(lr=0.0001, clipnorm=1.0))
+        optimizer=tf.keras.optimizers.SGD(lr=0.001, momentum=0.5, clipnorm=1.0))
 
 def xs_ys_from_filenames(filenames, max_ty):
     xs = []
