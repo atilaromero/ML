@@ -30,6 +30,10 @@ def to_ctc_format(xs,ys, max_ty=None):
     yarr[i,:len(y)+2] = [len(x), len(y), *y]
   return xarr, yarr
 
+def from_ctc_format(ys):
+  ixss = [y[2:][:int(y[1])] for y in ys]
+  return [''.join([ix_to_chars[ix] for ix in ixs]) for ixs in ixss]
+
 def ctc_predict(model, xarr):
     y_pred = model.predict(xarr)
 
