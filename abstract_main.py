@@ -10,12 +10,10 @@ def get_accuracy(y_true, y_pred):
     return accuracy
 
 class AbstractMain(ABC):
-    def __init__(self, command, save_file, examples_folder, batch_size=-1, max_ty=100, sample_size=5, epochs=-1):
+    def __init__(self, command, save_file, examples_folder, batch_size, max_ty=100, sample_size=5, epochs=-1):
         self.save_file = save_file
         self.examples_folder = examples_folder
         self.batch_size = int(batch_size)
-        if self.batch_size == -1:
-            self.batch_size = None
         self.max_ty = int(max_ty)
         self.sample_size = int(sample_size)
         self.epochs = int(epochs)
@@ -41,19 +39,19 @@ class AbstractMain(ABC):
             exit(1)
 
     @abstractmethod
-    def get_model():
+    def get_model(self):
         pass
 
     @abstractmethod
-    def compile():
+    def compile(self):
         pass
 
     @abstractmethod
-    def get_true_pred():
+    def get_true_pred(self):
         pass
 
     @abstractmethod
-    def get_xs_ys():
+    def get_xs_ys(self):
         pass
 
     def train(self):
