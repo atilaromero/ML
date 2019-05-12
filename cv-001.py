@@ -62,7 +62,8 @@ def train(model, save_file, examplesFolder, batch_size=None, max_ty=100, sample_
     sample = examples
     xs, ys = xs_ys_from_filenames(sample, max_ty)
     batch_size=batch_size and int(batch_size) or len(examples)
-    while(epochs != 0):
+    accuracy = 0
+    while(epochs != 0 and accuracy <0.9):
         epochs -= 1
         # sample = utils.sampler.choice(examples, sample_size)
         # xs, ys = xs_ys_from_filenames(sample, max_ty)
