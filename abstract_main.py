@@ -13,10 +13,11 @@ class PrintAccuracyCB(Callback):
     def __init__(self, main):
         self.main = main
     def on_epoch_end(self, epoch, logs):
-        xs, ys = self.main.data
-        y_true, y_pred = self.main.get_true_pred(xs, ys)
-        accuracy = get_accuracy(y_true, y_pred)
-        print(' - accuracy: %0.2f' % accuracy)
+        if epoch % 10 == 0:
+            xs, ys = self.main.data
+            y_true, y_pred = self.main.get_true_pred(xs, ys)
+            accuracy = get_accuracy(y_true, y_pred)
+            print(' - accuracy: %0.2f' % accuracy)
 
 class AbstractMain(ABC):
     def __init__(self, command, save_file, examples_folder, batch_size, max_ty=100, sample_size=5, epochs=10000):
@@ -26,30 +27,7 @@ class AbstractMain(ABC):
         self.max_ty = int(max_ty)
         self.sample_size = int(sample_size)
         self.epochs = int(epochs)
-        self.callbacks = [
-            tf.keras.callbacks.TerminateOnNaN(),
-            tf.keras.callbacks.ModelCheckpoint(
-                self.save_file, 
-                monitor='loss',
-                save_best_only=True,
-                save_weights_only=True,
-                period=100),
-            tf.keras.callbacks.ReduceLROnPlateau(
-                monitor='loss',
-                patience=10,
-                factor=0.8,
-                min_lr=1e-6,
-            ),
-            tf.keras.callbacks.EarlyStopping(
-                monitor='loss',
-                min_delta=0.001,
-                patience=500,
-            ),
-            tf.keras.callbacks.TensorBoard(
-                log_dir=self.save_file.rsplit('.',1)[0] + '.tboard',
-            ),
-            PrintAccuracyCB(self),
-        ]
+        self.callbacks = self.get_callbacks()
 
         self.model = self.get_model()
         self.compile()
@@ -71,6 +49,10 @@ class AbstractMain(ABC):
             exit(1)
 
     @abstractmethod
+    def get_callbacks(self):
+        pass
+
+    @abstractmethod
     def get_model(self):
         pass
 
@@ -89,7 +71,6 @@ class AbstractMain(ABC):
     def train(self):
         xs, ys = self.get_xs_ys()
         self.data = xs, ys
-        accuracy = 0
         self.model.fit(xs,ys,
             batch_size=self.batch_size,
             epochs=self.epochs,
