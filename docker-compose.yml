@@ -1,0 +1,22 @@
+version: '2'
+services:
+  coder:
+    build: 
+      context: .
+      dockerfile: Dockerfile.coder
+    ports:
+    - 127.0.0.1:8443:8443
+    - 127.0.0.1:6006:6006
+    volumes:
+    - .:/home/coder/project
+  vscode:
+    build: 
+      context: .
+      dockerfile: Dockerfile.vscode
+    environment:
+    - DISPLAY
+    ports:
+    - 127.0.0.1:6006:6006
+    volumes:
+    - .:/home/coder/project
+    - /tmp/.X11-unix/:/tmp/.X11-unix/
