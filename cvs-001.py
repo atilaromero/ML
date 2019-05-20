@@ -2,7 +2,7 @@ import sys
 import tensorflow as tf
 import utils.load
 
-from abstract_main import AbstractMain
+from abstract_main import AbstractMain, AccuracyCB
 from ctc.ctc_loss import chars_to_ix, to_ctc_format, ctc_loss, ctc_predict, from_ctc_format
 
 print("tf.VERSION", tf.VERSION)
@@ -46,7 +46,7 @@ class Custom(AbstractMain):
             # tf.keras.callbacks.TensorBoard(
             #     log_dir=self.save_file.rsplit('.',1)[0] + '.tboard',
             # ),
-            # PrintAccuracyCB(self),
+            AccuracyCB(self, show=True, stop=1.0, interval=10),
         ]
 
     def get_model(self):

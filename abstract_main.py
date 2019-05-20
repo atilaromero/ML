@@ -9,15 +9,22 @@ def get_accuracy(y_true, y_pred):
     accuracy = sum(matches)/len(matches)
     return accuracy
 
-class PrintAccuracyCB(Callback):
-    def __init__(self, main):
+class AccuracyCB(Callback):
+    def __init__(self, main, show=True, stop=None, interval=10):
         self.main = main
+        self.show = show
+        self.stop = stop
+        self.interval = interval
     def on_epoch_end(self, epoch, logs):
-        if epoch % 10 == 0:
+        if epoch % self.interval == 0:
             xs, ys = self.main.data
             y_true, y_pred = self.main.get_true_pred(xs, ys)
             accuracy = get_accuracy(y_true, y_pred)
-            print(' - accuracy: %0.2f' % accuracy)
+            if self.show:
+                print(' - accuracy: %0.2f' % accuracy)
+            if self.stop:
+                if accuracy >= self.stop:
+                    self.model.stop_training = True
 
 class AbstractMain(ABC):
     def __init__(self, command, save_file, examples_folder, batch_size, max_ty=100, sample_size=5, epochs=10000):
