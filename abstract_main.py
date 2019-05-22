@@ -3,6 +3,9 @@ import numpy as np
 from abc import ABC, abstractmethod
 import tensorflow as tf
 from tensorflow.keras.callbacks import Callback
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
 
 def get_accuracy(y_true, y_pred):
     matches = [i == j for i, j in zip(y_pred, y_true)]
@@ -27,7 +30,7 @@ class AccuracyCB(Callback):
                     self.model.stop_training = True
 
 class AbstractMain(ABC):
-    def __init__(self, command, save_file, examples_folder, batch_size, max_ty=100, sample_size=5, epochs=10000):
+    def __init__(self, command, save_file, examples_folder, batch_size, max_ty=100, sample_size=5, epochs=1000000):
         self.save_file = save_file
         self.examples_folder = examples_folder
         self.batch_size = int(batch_size)
@@ -78,10 +81,16 @@ class AbstractMain(ABC):
     def train(self):
         xs, ys = self.get_xs_ys()
         self.data = xs, ys
-        self.model.fit(xs,ys,
+        history = self.model.fit(xs,ys,
             batch_size=self.batch_size,
             epochs=self.epochs,
             callbacks=self.callbacks)
+        keys = history.history.keys()
+        for k in keys:
+            plt.plot(history.history[k])
+        plt.legend(keys)
+        plt.savefig('history.png')
+
 
     def evaluate(self):
         xs, ys = self.get_xs_ys()
