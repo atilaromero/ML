@@ -53,9 +53,11 @@ class AbstractMain(ABC):
             self.correct()
         elif command == 'failed':
             self.failed()
+        elif command == 'fit_generator':
+            self.fit_generator()
         else:
             print('Arguments command, save_file, examples_folder, batch_size=140, max_ty=100, sample_size=5, self.epochs=-1')
-            print('commands: train, evaluate, predict, correct, failed')
+            print('commands: train, evaluate, predict, correct, failed, fit_generator')
             exit(1)
 
     @abstractmethod
@@ -90,6 +92,38 @@ class AbstractMain(ABC):
             plt.plot(history.history[k])
         plt.legend(keys)
         plt.savefig('history.png')
+
+    def fit_generator(self):
+        xs, ys = self.get_xs_ys()
+        _xs, _ys = xs[:5], ys[:5]
+        args = {}
+        args['i'] = 5
+        args['accuracy'] = 0
+        def gen(step):
+            while(True):
+                i = args['i']
+                if i> len(xs):
+                    i = len(xs)
+                _xs, _ys = xs[:i], ys[:i]
+                for j in range(0,i,step):
+                    yield _xs[j:j+step], _ys[j:j+step]
+        def cb(epoch, logs):
+            if epoch % 10 == 0:
+                y_true, y_pred = self.get_true_pred(_xs, _ys)
+                args['accuracy'] = get_accuracy(y_true, y_pred)
+                print()
+                for t,p in zip(y_true, y_pred):
+                    print(repr(t), repr(p))
+                print('accuracy', args['accuracy'])
+                print('num samples:', args['i'])
+            if args['accuracy'] > 0.9:
+                args['i']+=1
+                if args['i']> len(xs):
+                    self.model.stop_training = True
+        self.model.fit_generator(gen(self.batch_size), 
+            epochs=self.epochs,
+            steps_per_epoch=5,
+            callbacks=[tf.keras.callbacks.LambdaCallback(on_epoch_end=cb)])
 
 
     def evaluate(self):
