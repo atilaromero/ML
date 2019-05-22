@@ -24,7 +24,17 @@ def saveSound(word, dir):
   with open(os.path.join(dir, word)+'.wav', 'wb') as f:
     f.write(out)
 
+def main(*args):
+  os.makedirs(args[1],exist_ok=True)
+  for x in generateAllSyllables(*args[2:]):
+    saveSound(x, args[1])  
+
 if __name__ == '__main__':
-  os.makedirs(sys.argv[1],exist_ok=True)
-  for x in generateAllSyllables(*sys.argv[2:]):
-    saveSound(x, sys.argv[1])  
+  args = sys.argv[:]
+  if len(args) == 1:
+    d = 'datasets/speech/syllables/'
+    main(args[0], d+'v', 'v')
+    main(args[0], d+'cv', 'cv')
+    main(args[0], d+'cvs', 'cvs')
+  else:
+    main(*args)
