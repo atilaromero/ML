@@ -3,6 +3,10 @@ import sys
 import numpy as np
 import tensorflow as tf
 
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
 sys.path.append('../..')
 import utils
 import utils.load
@@ -60,9 +64,17 @@ def train(model, save_file, examplesFolder, sample_size=100, epochs=-1, batch_si
         sample = utils.sampler.choice(examples, sample_size)
         ys = ys_from_filenames(sample)
         xs = xs_from_filenames(sample)
-        model.fit(xs,ys,batch_size=batch_size)
-        if save_file:
-            model.save(save_file)
+        history = model.fit(xs,ys,batch_size=batch_size)
+        if epochs % 5 == 0:
+            if save_file:
+                model.save(save_file)
+            keys = history.history.keys()
+            for k in keys:
+                plt.plot(history.history[k])
+            plt.legend(keys)
+            plt.savefig(save_file.rsplit('.',1)[0] + '.png')
+            if history.history['acc'][-1] > 0.9:
+                exit(0)
 
 def evaluate(model, examplesFolder, sample_size=1000):
     examples = utils.load.examples_from(examplesFolder)

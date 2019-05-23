@@ -1,6 +1,5 @@
-no stop condition, model has to be manually watched
+100/100 [==============================] - 3s 31ms/sample - loss: 0.3119 - acc: 0.9100
 
-not timed yet
-
-1000/1000 [==============================] - 5s 5ms/sample - loss: 0.1195 - acc: 0.9840
-
+real    7m29.966s
+user    28m9.380s
+sys     8m24.378s
