@@ -23,7 +23,8 @@ def test_ix_to_char():
     assert ix_to_char == {0: '\n', 1: 'a', 2: 'b', 3: 'c', 4: 'd', 5: 'e', 6: 'f', 7: 'g', 8: 'h', 9: 'i', 10: 'j', 11: 'k', 12: 'l', 13: 'm', 14: 'n', 15: 'o', 16: 'p', 17: 'q', 18: 'r', 19: 's', 20: 't', 21: 'u', 22: 'v', 23: 'w', 24: 'x', 25: 'y', 26: 'z'}
 
 def test_clip():
-    with open('coursera/dino/testdata/test_clip_gradients.pkl', 'rb') as f:
+    curdir = os.path.dirname(__file__)
+    with open(curdir + '/testdata/test_clip_gradients.pkl', 'rb') as f:
         gradients = pickle.load(f)
     gradients = clip(gradients, 10)
     assert gradients["dWaa"][1][2] == 10.0
@@ -33,7 +34,8 @@ def test_clip():
     assert all(gradients["dby"][1] == [8.45833407057182])
 
 def test_sample():
-    with open('coursera/dino/testdata/test_sample_parameters.pkl', 'rb') as f:
+    curdir = os.path.dirname(__file__)
+    with open(curdir + '/testdata/test_sample_parameters.pkl', 'rb') as f:
         parameters = pickle.load(f)
 
     indices = sample(parameters, char_to_ix, 0)
@@ -41,9 +43,10 @@ def test_sample():
     assert all([ix_to_char[i] == j for i, j  in zip(indices, ['l', 'z', 'v', 't', 'o', 'y', 't', 'a', 'n', 'n', 'n', 'n', 'h', 'c', 'n', 'e', 'n', 'b', 'g', 'c', 'b', 'c', 'o', 'o', 'q', 'z', 'z', 'e', 'w', 'n', 'o', 'c', 'l', 'm', 'o', 'n', 'd', 't', 'v', 'j', 'o', 't', 'v', 'l', 'o', 't', 'k', 'u', 'l', 'y', '\n'])])
 
 def test_rnn_step_forward():
-    with open('coursera/dino/testdata/test_sample_parameters.pkl', 'rb') as f:
+    curdir = os.path.dirname(__file__)
+    with open(curdir + '/testdata/test_sample_parameters.pkl', 'rb') as f:
         parameters = pickle.load(f)
-    with open('coursera/dino/testdata/test_rnn_step_forward.pkl', 'rb') as f:
+    with open(curdir + '/testdata/test_rnn_step_forward.pkl', 'rb') as f:
         expected = pickle.load(f)
     x = np.zeros((27,1))
     a = np.zeros(parameters['b'].shape)
