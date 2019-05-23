@@ -72,7 +72,7 @@ def evaluate(model, examplesFolder, sample_size=1000):
     model.evaluate(xs, ys)
 
 if __name__ == '__main__':
-    if len(sys.argv == 1):
+    if len(sys.argv) == 1:
         model = get_model()
         utils.load.maybe_load_weigths(model, 'model.h5')
         compile(model)
