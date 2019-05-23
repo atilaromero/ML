@@ -87,9 +87,10 @@ def test_SimpleRNN3():
     assert np.allclose(y, [a.T])
 
 def test_rnn_step_forward():
-    with open('coursera/dino/testdata/test_sample_parameters.pkl', 'rb') as f:
+    curdir = os.path.dirname(__file__)
+    with open(curdir + '/testdata/test_sample_parameters.pkl', 'rb') as f:
         parameters = pickle.load(f)
-    with open('coursera/dino/testdata/test_rnn_step_forward.pkl', 'rb') as f:
+    with open(curdir + '/testdata/test_rnn_step_forward.pkl', 'rb') as f:
         expected = pickle.load(f)
     assert parameters['b'].shape == (50,1)
     Wax = parameters['Wax']

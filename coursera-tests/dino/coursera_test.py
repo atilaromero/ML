@@ -3,8 +3,11 @@ from utils import *
 import random
 from coursera import *
 import pickle
+import os 
 
-data = open('coursera/dino/dinos.txt', 'r').read()
+dinopath = os.path.join(os.path.dirname(__file__), 'dinos.txt')
+
+data = open(dinopath, 'r').read()
 data= data.lower()
 chars = list(set(data))
 data_size, vocab_size = len(data), len(chars)
