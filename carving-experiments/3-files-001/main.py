@@ -3,6 +3,11 @@ import sys
 import numpy as np
 import tensorflow as tf
 
+sys.path.append('../..')
+import utils
+import utils.load
+import utils.sampler
+
 def get_model():
     last = l0 = tf.keras.layers.Input(shape=(512,256))
     last = tf.keras.layers.Conv1D(16, (4,), padding="same", activation="relu")(last)
@@ -22,10 +27,6 @@ def compile(model):
 categories = ['pdf','png', 'jpg']
 ix_to_cat = dict([(i,x) for i,x in enumerate(categories)])
 cat_to_ix = dict([(x,i) for i,x in enumerate(categories)])
-
-import utils
-import utils.load
-import utils.sampler
 
 def sample_sector(path):
     with open(path, 'rb') as f:
@@ -71,6 +72,11 @@ def evaluate(model, examplesFolder, sample_size=1000):
     model.evaluate(xs, ys)
 
 if __name__ == '__main__':
+    if len(sys.argv == 1):
+        model = get_model()
+        utils.load.maybe_load_weigths(model, 'model.h5')
+        compile(model)
+        train(model, 'model.h5', '../../datasets/carving/3files')
     if sys.argv[1] == 'train':
         model = get_model()
         utils.load.maybe_load_weigths(model, sys.argv[2])
