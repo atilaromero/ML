@@ -30,13 +30,13 @@ RUN code --install-extension VisualStudioExptTeam.vscodeintellicode
 
 
 RUN mkdir -p /home/coder/.config/Code/User/
-RUN echo "{\n\
+RUN echo $'{\n\
     "editor.wordWrap": "on", \n\
     "editor.renderWhitespace": "boundary", \n\
     "python.testing.pyTestEnabled": true, \n\
     "python.linting.pylintEnabled": false, \n\
     "python.linting.mypyEnabled": true \n\
-}" > /home/coder/.config/Code/User/settings.json
+}' > /home/coder/.config/Code/User/settings.json
 
 EXPOSE 6006
 CMD ["code", "-w", "/home/coder/project/"]
