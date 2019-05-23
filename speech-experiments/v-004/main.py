@@ -47,23 +47,19 @@ class Custom(AbstractMain):
             tf.keras.callbacks.TensorBoard(
                 log_dir=self.save_file.rsplit('.',1)[0] + '.tboard'
             ),
-            AccuracyCB(self, show=True, stop=1.0, interval=500),
+            AccuracyCB(self, show=True, stop=1.0, interval=100),
         ]
 
     def get_model(self):
         last = l0 = tf.keras.layers.Input(shape=(None,221))
         last = tf.keras.layers.Conv1D(16, (3,), padding="same", activation="relu")(last)
-        last = tf.keras.layers.MaxPool1D()(last)
+        last = tf.keras.layers.MaxPool1D(pool_size=2, strides=1)(last)
         last = tf.keras.layers.Conv1D(8, (3,), padding="same", activation="relu")(last)
-        last = tf.keras.layers.MaxPool1D()(last)
+        last = tf.keras.layers.MaxPool1D(pool_size=2, strides=1)(last)
         last = tf.keras.layers.Conv1D(8, (3,), padding="same", activation="relu")(last)
-        last = tf.keras.layers.MaxPool1D()(last)
         last = tf.keras.layers.Conv1D(8, (3,), padding="same", activation="relu")(last)
-        last = tf.keras.layers.MaxPool1D()(last)
         last = tf.keras.layers.Conv1D(8, (3,), padding="same", activation="relu")(last)
-        last = tf.keras.layers.MaxPool1D()(last)
         last = tf.keras.layers.Conv1D(8, (3,), padding="same", activation="relu")(last)
-        last = tf.keras.layers.MaxPool1D()(last)
         last = tf.keras.layers.Conv1D(4, (3,), padding="same", activation="relu")(last)
         last = tf.keras.layers.LSTM(64, return_sequences=True)(last)
         last = tf.keras.layers.Dense(27)(last)
