@@ -2,6 +2,7 @@ import os
 import sys
 import numpy as np
 import tensorflow as tf
+from tensorflow.keras.layers import Input, Conv1D, MaxPooling1D, LSTM, Dense, Activation
 
 import matplotlib
 matplotlib.use('Agg')
@@ -13,14 +14,20 @@ import utils.load
 import utils.sampler
 
 def get_model():
-    last = l0 = tf.keras.layers.Input(shape=(512,256))
-    last = tf.keras.layers.Conv1D(16, (4,), padding="same", activation="relu")(last)
-    last = tf.keras.layers.MaxPooling1D(pool_size=(2,))(last)
-    last = tf.keras.layers.LSTM(16, return_sequences=False, dropout=0.5,kernel_initializer=tf.keras.initializers.Ones())(last)
-    last = tf.keras.layers.Dense(3)(last)
-    last = tf.keras.layers.Activation('softmax')(last)
+    last = l0 = Input(shape=(512,256))
+    last = Conv1D(4, (3,), padding="same", activation="relu")(last)
+    last = MaxPooling1D(pool_size=2, strides=2, data_format='channels_first')(last)
+    last = Conv1D(16, (3,), padding="same", activation="relu")(last)
+    last = MaxPooling1D(pool_size=2, strides=2, data_format='channels_first')(last)
+    last = Conv1D(8, (3,), padding="same", activation="relu")(last)
+    last = MaxPooling1D(pool_size=2, strides=2, data_format='channels_first')(last)
+    last = LSTM(16, return_sequences=True)(last)
+    last = LSTM(16, return_sequences=False)(last)
+    last = Dense(3)(last)
+    last = Activation('softmax')(last)
 
     model = tf.keras.Model([l0], last)
+    model.summary()
     return model
 
 def compile(model):
