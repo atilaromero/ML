@@ -14,19 +14,19 @@ import utils.load
 import utils.sampler
 
 def get_model():
-    last = l0 = Input(shape=(512,256))
-    last = Conv1D(128, (3,), padding="same", activation="relu")(last)
-    last = MaxPooling1D(pool_size=2, strides=2, data_format='channels_first')(last)
-    last = Conv1D(64, (3,), padding="same", activation="relu")(last)
-    last = MaxPooling1D(pool_size=2, strides=2, data_format='channels_first')(last)
-    last = Conv1D(32, (3,), padding="same", activation="relu")(last)
-    last = MaxPooling1D(pool_size=2, strides=2, data_format='channels_first')(last)
-    last = LSTM(16, return_sequences=True)(last)
-    last = LSTM(16, return_sequences=True)(last)
-    last = LSTM(16, return_sequences=True)(last)
-    last = LSTM(16, return_sequences=False)(last)
-    last = Dense(3)(last)
-    last = Activation('softmax')(last)
+    last = l0 = Input(shape=(None,256))
+    # last = Conv1D(128, (3,), padding="same", activation="relu")(last)
+    # last = MaxPooling1D(pool_size=2, strides=2, data_format='channels_first')(last)
+    # last = Conv1D(64, (3,), padding="same", activation="relu")(last)
+    # last = MaxPooling1D(pool_size=2, strides=2, data_format='channels_first')(last)
+    # last = Conv1D(32, (3,), padding="same", activation="relu")(last)
+    # last = MaxPooling1D(pool_size=2, strides=2, data_format='channels_first')(last)
+    last = l0 = tf.keras.layers.Input(shape=(512,256))
+    last = tf.keras.layers.Conv1D(16, (4,), padding="same", activation="relu")(last)
+    last = tf.keras.layers.MaxPooling1D(pool_size=(2,))(last)
+    last = tf.keras.layers.LSTM(16, return_sequences=False, dropout=0.5,kernel_initializer=tf.keras.initializers.Ones())(last)
+    last = tf.keras.layers.Dense(3)(last)
+    last = tf.keras.layers.Activation('softmax')(last)
 
     model = tf.keras.Model([l0], last)
     model.summary()
@@ -66,11 +66,14 @@ def xs_from_filenames(filenames):
         xs[i] = utils.one_hot(x,256)
     return xs
 
-def sector_generator(filenames):
+def sector_generator(filenames, batch_size):
     while True:
-        xs = xs_from_filenames(filenames)
-        ys = ys_from_filenames(filenames)
-        yield xs, ys
+        sample = filenames[:]
+        np.random.shuffle(sample)
+        for i in range(0,len(sample),batch_size):
+            xs = xs_from_filenames(sample[i:i+batch_size])
+            ys = ys_from_filenames(sample[i:i+batch_size])
+            yield xs, ys
 
 class MyCallback(tf.keras.callbacks.Callback):
     def __init__(self, save_file):
@@ -85,12 +88,12 @@ if __name__ == '__main__':
     model = get_model()
     utils.load.maybe_load_weigths(model, 'model.h5')
     compile(model)
-    train = utils.load.examples_from('../../datasets/carving/train')
+    train = utils.load.examples_from('../../datasets/carving/3files')
     validation = utils.load.examples_from('../../datasets/carving/dev')
-    history = model.fit_generator(sector_generator(train),
-        validation_data=sector_generator(validation),
+    history = model.fit_generator(sector_generator(train, 3),
+        validation_data=sector_generator(validation, 10),
         validation_steps=10,
-        steps_per_epoch=10,
+        steps_per_epoch=100,
         epochs=1000,
         callbacks=[MyCallback('model.h5')],
     )
