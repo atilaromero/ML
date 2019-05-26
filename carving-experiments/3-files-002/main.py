@@ -15,7 +15,11 @@ import utils.sampler
 
 def get_model():
     last = l0 = Input(shape=(512,256))
-    last = Conv1D(4, (3,), padding="same", activation="relu")(last)
+    last = Conv1D(128, (3,), padding="same", activation="relu")(last)
+    last = MaxPooling1D(pool_size=2, strides=2, data_format='channels_first')(last)
+    last = Conv1D(64, (3,), padding="same", activation="relu")(last)
+    last = MaxPooling1D(pool_size=2, strides=2, data_format='channels_first')(last)
+    last = Conv1D(32, (3,), padding="same", activation="relu")(last)
     last = MaxPooling1D(pool_size=2, strides=2, data_format='channels_first')(last)
     last = Conv1D(16, (3,), padding="same", activation="relu")(last)
     last = MaxPooling1D(pool_size=2, strides=2, data_format='channels_first')(last)
