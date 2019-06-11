@@ -47,7 +47,7 @@ class Custom(AbstractMain):
             tf.keras.callbacks.TensorBoard(
                 log_dir=self.save_file.rsplit('.',1)[0] + '.tboard'
             ),
-            AccuracyCB(self, show=True, stop=1.0, interval=500),
+            AccuracyCB(self, show=True, stop=1.0, interval=200),
         ]
 
     def get_model(self):
@@ -64,6 +64,7 @@ class Custom(AbstractMain):
         last = tf.keras.layers.Activation('softmax')(last)
 
         model = tf.keras.Model([l0], last)
+        model.summary()
         return model
 
     def get_true_pred(self, xs, ys):
