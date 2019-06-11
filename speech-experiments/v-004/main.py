@@ -6,7 +6,7 @@ import utils.load
 from utils.abstract_main import AbstractMain, AccuracyCB
 from ctc.ctc_loss import chars_to_ix, to_ctc_format, ctc_loss, ctc_predict, from_ctc_format
 
-from tensorflow.keras.layers import LSTM, Dense, Activation, Conv1D, MaxPool1D
+from tensorflow.keras.layers import LSTM, Dense, Activation, Conv1D, MaxPool1D, Input
 
 print("tf.VERSION", tf.VERSION)
 print("tf.keras.__version__", tf.keras.__version__)
@@ -53,21 +53,24 @@ class Custom(AbstractMain):
         ]
 
     def get_model(self):
-        last = l0 = tf.keras.layers.Input(shape=(None,221))
+        maxpool = MaxPool1D(pool_size=2,
+                            strides=1,
+                            data_format='channels_first')
+        last = l0 = Input(shape=(None,221))
         last = Conv1D(16, (3,), padding="same", activation="relu")(last)
-        last = MaxPool1D(pool_size=2, strides=1, data_format='channels_first')(last)
+        last = maxpool(last)
         last = Conv1D(8, (3,), padding="same", activation="relu")(last)
-        last = MaxPool1D(pool_size=2, strides=1, data_format='channels_first')(last)
+        last = maxpool(last)
         last = Conv1D(8, (3,), padding="same", activation="relu")(last)
-        last = MaxPool1D(pool_size=2, strides=1, data_format='channels_first')(last)
+        last = maxpool(last)
         last = Conv1D(8, (3,), padding="same", activation="relu")(last)
-        last = MaxPool1D(pool_size=2, strides=1, data_format='channels_first')(last)
+        last = maxpool(last)
         last = Conv1D(8, (3,), padding="same", activation="relu")(last)
-        last = MaxPool1D(pool_size=2, strides=1, data_format='channels_first')(last)
+        last = maxpool(last)
         last = Conv1D(8, (3,), padding="same", activation="relu")(last)
-        last = MaxPool1D(pool_size=2, strides=1, data_format='channels_first')(last)
+        last = maxpool(last)
         last = Conv1D(4, (3,), padding="same", activation="relu")(last)
-        last = MaxPool1D(pool_size=2, strides=1, data_format='channels_first')(last)
+        last = maxpool(last)
         last = LSTM(64, return_sequences=True)(last)
         last = Dense(27)(last)
         last = Activation('softmax')(last)
