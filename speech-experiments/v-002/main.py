@@ -1,9 +1,9 @@
 import tensorflow as tf
 import sys
-sys.path.append("..")
+sys.path.append("../..")
 import utils.load
 
-from abstract_main import AbstractMain, AccuracyCB
+from utils.abstract_main import AbstractMain, AccuracyCB
 from ctc.ctc_loss import chars_to_ix, to_ctc_format, ctc_loss, ctc_predict, from_ctc_format
 
 print("tf.VERSION", tf.VERSION)
@@ -81,7 +81,7 @@ if __name__ == '__main__':
     import time
     start = time.time()
     if len(sys.argv) == 1:
-        Custom('train', 'v.h5', '../datasets/speech/syllables/v/', 5)
+        Custom('train', 'v.h5', '../../datasets/speech/syllables/v/', 5)
     else:
         Custom(*sys.argv[1:])
     print('elapsed time:', time.time() - start)
