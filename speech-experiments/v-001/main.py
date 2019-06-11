@@ -27,15 +27,9 @@ def get_layer_output_grad(model, inputs, outputs, layer=-1):
 
 def get_model():
     last = l0 = Input(shape=(None,221))
-    # last = TimeDistributed(
-    # )(last)
     last = Conv1D(16, (3,), padding="same", activation="relu")(last)
     last = Conv1D(8, (3,), padding="same", activation="relu")(last)
     last = Conv1D(4, (3,), padding="same", activation="relu")(last)
-    # last = 
-    # last = MaxPooling1D(pool_size=(2,))(last)
-    # last = LSTM(64, return_sequences=True)(last)
-    # last = LSTM(64, return_sequences=True)(last)
     last = LSTM(64, return_sequences=True)(last)
     last = Dense(27)(last)
     last = Activation('softmax')(last)
