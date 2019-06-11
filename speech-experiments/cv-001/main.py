@@ -2,10 +2,13 @@ import os
 import sys
 import numpy as np
 import tensorflow as tf
+sys.path.append("../..")
 import utils
 import utils.load
 import utils.sampler
 import tensorflow.keras.backend as K
+from tensorflow.keras.layers import Input, Conv1D, LSTM, Dense, Activation
+
 
 print("tf.VERSION", tf.VERSION)
 print("tf.keras.__version__", tf.keras.__version__)
@@ -23,19 +26,13 @@ def get_layer_output_grad(model, inputs, outputs, layer=-1):
     return output_grad
 
 def get_model():
-    last = l0 = tf.keras.layers.Input(shape=(None,221))
-    # last = tf.keras.layers.TimeDistributed(
-    # )(last)
-    last = tf.keras.layers.Conv1D(16, (3,), padding="same", activation="relu")(last)
-    last = tf.keras.layers.Conv1D(8, (3,), padding="same", activation="relu")(last)
-    last = tf.keras.layers.Conv1D(4, (3,), padding="same", activation="relu")(last)
-    # last = tf.keras.layers.
-    # last = tf.keras.layers.MaxPooling1D(pool_size=(2,))(last)
-    # last = tf.keras.layers.LSTM(64, return_sequences=True)(last)
-    # last = tf.keras.layers.LSTM(64, return_sequences=True)(last)
-    last = tf.keras.layers.LSTM(64, return_sequences=True)(last)
-    last = tf.keras.layers.Dense(27)(last)
-    last = tf.keras.layers.Activation('softmax')(last)
+    last = l0 = Input(shape=(None,221))
+    last = Conv1D(16, (3,), padding="same", activation="relu")(last)
+    last = Conv1D(8, (3,), padding="same", activation="relu")(last)
+    last = Conv1D(4, (3,), padding="same", activation="relu")(last)
+    last = LSTM(64, return_sequences=True)(last)
+    last = Dense(27)(last)
+    last = Activation('softmax')(last)
 
     model = tf.keras.Model([l0], last)
     model.summary()
@@ -148,6 +145,12 @@ if __name__ == '__main__':
         compile(model, batch_size=batch_size, max_ty=max_ty)
         utils.load.maybe_load_weigths(model, save_file=save_file)
         return model
+    if len(sys.argv) == 1:
+        model = _model('cv.h5', '../../datasets/speech/syllables/cv',batch_size=140)
+        train(model, 'cv.h5', '../../datasets/speech/syllables/cv',batch_size=140)
+        exit(0)
+    model = _model(*sys.argv[2:6])
+
     model = _model(*sys.argv[2:6])
 
     if sys.argv[1] == 'train':
