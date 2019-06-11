@@ -5,6 +5,7 @@ import utils.load
 
 from utils.abstract_main import AbstractMain, AccuracyCB
 from ctc.ctc_loss import chars_to_ix, to_ctc_format, ctc_loss, ctc_predict, from_ctc_format
+from tensorflow.keras.layers import Input, Conv1D, LSTM, Dense, Activation
 
 print("tf.VERSION", tf.VERSION)
 print("tf.keras.__version__", tf.keras.__version__)
@@ -51,17 +52,17 @@ class Custom(AbstractMain):
         ]
 
     def get_model(self):
-        last = l0 = tf.keras.layers.Input(shape=(None,221))
-        last = tf.keras.layers.Conv1D(16, (3,), padding="same", activation="relu")(last)
-        last = tf.keras.layers.Conv1D(8, (3,), padding="same", activation="relu")(last)
-        last = tf.keras.layers.Conv1D(8, (3,), padding="same", activation="relu")(last)
-        last = tf.keras.layers.Conv1D(8, (3,), padding="same", activation="relu")(last)
-        last = tf.keras.layers.Conv1D(8, (3,), padding="same", activation="relu")(last)
-        last = tf.keras.layers.Conv1D(8, (3,), padding="same", activation="relu")(last)
-        last = tf.keras.layers.Conv1D(4, (3,), padding="same", activation="relu")(last)
-        last = tf.keras.layers.LSTM(64, return_sequences=True)(last)
-        last = tf.keras.layers.Dense(27)(last)
-        last = tf.keras.layers.Activation('softmax')(last)
+        last = l0 = Input(shape=(None,221))
+        last = Conv1D(16, (3,), padding="same", activation="relu")(last)
+        last = Conv1D(8, (3,), padding="same", activation="relu")(last)
+        last = Conv1D(8, (3,), padding="same", activation="relu")(last)
+        last = Conv1D(8, (3,), padding="same", activation="relu")(last)
+        last = Conv1D(8, (3,), padding="same", activation="relu")(last)
+        last = Conv1D(8, (3,), padding="same", activation="relu")(last)
+        last = Conv1D(4, (3,), padding="same", activation="relu")(last)
+        last = LSTM(64, return_sequences=True)(last)
+        last = Dense(27)(last)
+        last = Activation('softmax')(last)
 
         model = tf.keras.Model([l0], last)
         model.summary()
