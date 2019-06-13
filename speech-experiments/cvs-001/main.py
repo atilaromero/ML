@@ -55,6 +55,6 @@ class Custom(AbstractMain):
 if __name__ == '__main__':
     if len(sys.argv) == 1:
         #(self, command, save_file, examples_folder, batch_size, max_ty=100, sample_size=5, epochs=10000):
-        Custom('train', 'cvs.h5', '../../datasets/speech/syllables/cv', 140, 100, 700)
+        Custom('train', 'cvs.h5', '../../datasets/speech/syllables/cv', 140)
         exit(0) 
     Custom(*sys.argv[1:])
