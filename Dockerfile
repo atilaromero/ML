@@ -14,4 +14,5 @@ RUN pip3 install matplotlib==3.0.3
 RUN pip3 install pydub==0.23.1
 RUN pip3 install mypy==0.701
 
+RUN apt-get install -y --no-install-recommends make
 
