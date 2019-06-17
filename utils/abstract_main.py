@@ -12,33 +12,41 @@ def get_accuracy(y_true, y_pred):
     accuracy = sum(matches)/len(matches)
     return accuracy
 
+
 class AccuracyCB(Callback):
     def __init__(self, main, show=True, stop=None, interval=10):
         self.main = main
         self.show = show
         self.stop = stop
         self.interval = interval
+        self.loss_goal = 0.5
+    def should_increase_dataset(self, loss):
+        return hasattr(self.main, 'data_step') and loss < self.loss_goal
+    def should_stop_training(self, accuracy):
+        if hasattr(self.main, 'alldata'):
+            if len(self.main.data[0]) < len(self.main.alldata[0]):
+                return False
+        return self.stop and accuracy >= self.stop
+    def increase_dataset(self):
+        xs, ys = self.main.data
+        axs, ays = self.main.alldata
+        if len(xs) <= len(axs):
+            xs = axs[:len(xs)+1]
+            ys = ays[:len(ys)+1]
+            self.main.data = xs, ys
     def on_epoch_end(self, epoch, logs):
+        if self.should_increase_dataset(logs['loss']):
+            self.increase_dataset()
         if epoch % self.interval != 0:
             return
-        xs, ys = self.main.data
-        y_true, y_pred = self.main.get_true_pred(xs, ys)
+        y_true, y_pred = self.main.get_true_pred(*self.main.data)
         accuracy = get_accuracy(y_true, y_pred)
         if self.show:
             for t,p in zip(y_true, y_pred):
                 print(repr(t), repr(p))
             print(' - accuracy: %0.2f' % accuracy)
-        if self.stop:
-            if hasattr(self.main, 'data_step'):
-                if accuracy >= self.stop*0.5:
-                    axs, ays = self.main.alldata
-                    if len(xs) <= len(axs):
-                        xs = axs[:len(xs)+self.main.data_step]
-                        ys = ays[:len(ys)+self.main.data_step]
-                        self.main.data = xs, ys
-                        return
-            if accuracy >= self.stop:
-                self.model.stop_training = True
+        if self.should_stop_training(accuracy):
+            self.model.stop_training = True
 
 class AbstractMain(ABC):
     def __init__(self, command, save_file, examples_folder, batch_size, max_ty=100, sample_size=5, epochs=1000000):
