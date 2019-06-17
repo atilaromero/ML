@@ -1,9 +1,9 @@
-import sys
 import tensorflow as tf
-sys.path.append('../..')
+import sys
+sys.path.append("../..")
 import utils.load
 
-from abstract_main import AbstractMain
+from utils.abstract_main import AbstractMain, AccuracyCB
 from ctc.ctc_loss import chars_to_ix, to_ctc_format, ctc_loss, ctc_predict, from_ctc_format
 
 print("tf.VERSION", tf.VERSION)
@@ -24,6 +24,32 @@ def xs_ys_from_filenames(filenames, max_ty):
     return xs, ys
 
 class Custom(AbstractMain):
+    def get_callbacks(self):
+        return [
+            # tf.keras.callbacks.TerminateOnNaN(),
+            tf.keras.callbacks.ModelCheckpoint(
+                self.save_file, 
+                monitor='loss',
+                save_best_only=True,
+                save_weights_only=True,
+                period=100),
+            # tf.keras.callbacks.ReduceLROnPlateau(
+            #     monitor='loss',
+            #     patience=10,
+            #     factor=0.8,
+            #     min_lr=1e-6,
+            # ),
+            # tf.keras.callbacks.EarlyStopping(
+            #     monitor='loss',
+            #     min_delta=0.001,
+            #     patience=500,
+            # ),
+            tf.keras.callbacks.TensorBoard(
+                log_dir=self.save_file.rsplit('.',1)[0] + '.tboard',
+            ),
+            AccuracyCB(self, show=True, stop=0.9, interval=100),
+        ]
+
     def get_model(self):
         last = l0 = tf.keras.layers.Input(shape=(None,221))
         last = tf.keras.layers.Conv1D(16, (3,), padding="same", activation="relu")(last)
@@ -34,7 +60,6 @@ class Custom(AbstractMain):
         last = tf.keras.layers.Activation('softmax')(last)
 
         model = tf.keras.Model([l0], last)
-        self.goal_accuracy = 0.95
         return model
 
     def get_true_pred(self, xs, ys):
@@ -53,8 +78,11 @@ class Custom(AbstractMain):
         return xs, ys
 
 if __name__ == '__main__':
+    import time
+    start = time.time()
     if len(sys.argv) == 1:
-        #(self, command, save_file, examples_folder, batch_size, max_ty=100, sample_size=5, epochs=10000):
-        Custom('train', 'cvs.h5', '../../datasets/speech/syllables/cv', 140)
-        exit(0) 
-    Custom(*sys.argv[1:])
+        Custom('train', 'cvs.h5', '../../datasets/speech/syllables/cvs', 140)
+    else:
+        Custom(*sys.argv[1:])
+    print('elapsed time:', time.time() - start)
+E
