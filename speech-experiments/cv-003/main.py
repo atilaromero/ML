@@ -81,7 +81,7 @@ if __name__ == '__main__':
     import time
     start = time.time()
     if len(sys.argv) == 1:
-        Custom('train', 'cv.h5', '../../datasets/speech/syllables/cv/', 140)
+        Custom('fit_generator', 'cv.h5', '../../datasets/speech/syllables/cv/', 140)
     else:
         Custom(*sys.argv[1:])
     print('elapsed time:', time.time() - start)
