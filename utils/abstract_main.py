@@ -19,7 +19,7 @@ class AccuracyCB(Callback):
         self.show = show
         self.stop = stop
         self.interval = interval
-        self.loss_goal = 0.5
+        self.loss_goal = 0.3
     def should_increase_dataset(self, loss):
         return hasattr(self.main, 'data_step') and loss < self.loss_goal
     def should_stop_training(self, accuracy):
