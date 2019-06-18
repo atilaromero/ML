@@ -85,4 +85,3 @@ if __name__ == '__main__':
     else:
         Custom(*sys.argv[1:])
     print('elapsed time:', time.time() - start)
-E
