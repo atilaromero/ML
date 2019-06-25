@@ -73,8 +73,8 @@ def train(model, save_file, examplesFolder, sample_size=100, epochs=-1, batch_si
                 plt.plot(history.history[k])
             plt.legend(keys)
             plt.savefig(save_file.rsplit('.',1)[0] + '.png')
-            if history.history['acc'][-1] > 0.9:
-                exit(0)
+        if history.history['acc'][-1] > 0.9:
+            exit(0)
 
 def evaluate(model, examplesFolder, sample_size=1000):
     examples = utils.load.examples_from(examplesFolder)
