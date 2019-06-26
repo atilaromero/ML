@@ -79,8 +79,8 @@ class MyCallback(tf.keras.callbacks.Callback):
     def on_epoch_end(self, epoch, logs):
         if epoch % 5 == 0:
             self.model.save(self.save_file)
-            if logs['acc'] > 0.9:
-                self.model.stop_training = True
+        if logs['acc'] > 0.9:
+            self.model.stop_training = True
 
 if __name__ == '__main__':
     model = get_model()
@@ -92,7 +92,7 @@ if __name__ == '__main__':
         validation_data=sector_generator(validation, 10),
         validation_steps=10,
         steps_per_epoch=100,
-        epochs=1000,
+        epochs=150,
         callbacks=[
             MyCallback('model.h5'),
             tf.keras.callbacks.TensorBoard(

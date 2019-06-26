@@ -80,14 +80,14 @@ class MyCallback(tf.keras.callbacks.Callback):
     def on_epoch_end(self, epoch, logs):
         if epoch % 5 == 0:
             self.model.save(self.save_file)
-            if logs['acc'] > 0.9:
-                self.model.stop_training = True
+        if logs['acc'] > 0.9:
+            self.model.stop_training = True
 
 def train(model, save_file, examplesFolder):
     examples = utils.load.examples_from(examplesFolder)
     history = model.fit_generator(sector_generator(examples),
         steps_per_epoch=10,
-        epochs=1000,
+        epochs=150,
         callbacks=[MyCallback(save_file)],
     )
 

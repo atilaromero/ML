@@ -81,8 +81,8 @@ class MyCallback(tf.keras.callbacks.Callback):
     def on_epoch_end(self, epoch, logs):
         if epoch % 5 == 0:
             self.model.save(self.save_file)
-            if logs['acc'] > 0.9:
-                self.model.stop_training = True
+        if logs['acc'] > 0.9:
+            self.model.stop_training = True
 
 if __name__ == '__main__':
     model = get_model()

@@ -25,7 +25,7 @@ def get_model():
 
 def compile(model):
     model.compile(loss=tf.keras.losses.categorical_crossentropy,
-        optimizer=tf.keras.optimizers.Adam(lr=0.001),
+        optimizer=tf.keras.optimizers.Adam(),
         metrics=['accuracy'])
 
 categories = ['pdf','png', 'jpg']
@@ -88,7 +88,7 @@ if __name__ == '__main__':
         model = get_model()
         utils.load.maybe_load_weigths(model, 'model.h5')
         compile(model)
-        train(model, 'model.h5', '../../datasets/carving/3files')
+        train(model, 'model.h5', '../../datasets/carving/3files', epochs=150)
     if sys.argv[1] == 'train':
         model = get_model()
         utils.load.maybe_load_weigths(model, sys.argv[2])

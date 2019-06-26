@@ -95,7 +95,7 @@ if __name__ == '__main__':
         validation_data=sector_generator(validation, 10),
         validation_steps=10,
         steps_per_epoch=100,
-        epochs=1000,
+        epochs=150,
         callbacks=[
             MyCallback('model.h5'),
             tf.keras.callbacks.TensorBoard(
