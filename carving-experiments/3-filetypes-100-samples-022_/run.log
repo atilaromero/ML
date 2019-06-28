@@ -1,0 +1,27 @@
+WARNING:tensorflow:From /usr/local/lib/python3.6/dist-packages/tensorflow/python/ops/resource_variable_ops.py:435: colocate_with (from tensorflow.python.framework.ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Colocations handled automatically by placer.
+WARNING:tensorflow:From /usr/local/lib/python3.6/dist-packages/tensorflow/python/ops/math_ops.py:3066: to_int32 (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.cast instead.
+2019-06-27 13:35:44.945906: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2593550000 Hz
+2019-06-27 13:35:44.948281: I tensorflow/compiler/xla/service/service.cc:150] XLA service 0x4f735e0 executing computations on platform Host. Devices:
+2019-06-27 13:35:44.948311: I tensorflow/compiler/xla/service/service.cc:158]   StreamExecutor device (0): <undefined>, <undefined>
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input_1 (InputLayer)         (None, 512, 256)          0         
+_________________________________________________________________
+conv1d (Conv1D)              (None, 481, 128)          1048704   
+_________________________________________________________________
+lstm (LSTM)                  (None, 481, 64)           49408     
+_________________________________________________________________
+lstm_1 (LSTM)                (None, 3)                 816       
+_________________________________________________________________
+activation (Activation)      (None, 3)                 0         
+=================================================================
+Total params: 1,098,928
+Trainable params: 1,098,928
+Non-trainable params: 0
+_________________________________________________________________
+Epoch 1/150
