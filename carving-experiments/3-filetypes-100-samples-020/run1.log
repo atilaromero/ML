@@ -1,0 +1,45 @@
+WARNING:tensorflow:From /usr/local/lib/python3.6/dist-packages/tensorflow/python/ops/resource_variable_ops.py:435: colocate_with (from tensorflow.python.framework.ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Colocations handled automatically by placer.
+2019-06-28 15:08:21.760054: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2593550000 Hz
+2019-06-28 15:08:21.762367: I tensorflow/compiler/xla/service/service.cc:150] XLA service 0x230c6d0 executing computations on platform Host. Devices:
+2019-06-28 15:08:21.762403: I tensorflow/compiler/xla/service/service.cc:158]   StreamExecutor device (0): <undefined>, <undefined>
+WARNING:tensorflow:From /usr/local/lib/python3.6/dist-packages/tensorflow/python/ops/math_ops.py:3066: to_int32 (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.cast instead.
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input_1 (InputLayer)         (None, 512, 256)          0         
+_________________________________________________________________
+conv1d (Conv1D)              (None, 64, 128)           262272    
+_________________________________________________________________
+max_pooling1d (MaxPooling1D) (None, 64, 64)            0         
+_________________________________________________________________
+conv1d_1 (Conv1D)            (None, 8, 64)             32832     
+_________________________________________________________________
+max_pooling1d_1 (MaxPooling1 (None, 8, 32)             0         
+_________________________________________________________________
+lstm (LSTM)                  (None, 8, 64)             24832     
+_________________________________________________________________
+lstm_1 (LSTM)                (None, 3)                 816       
+_________________________________________________________________
+activation (Activation)      (None, 3)                 0         
+=================================================================
+Total params: 320,752
+Trainable params: 320,752
+Non-trainable params: 0
+_________________________________________________________________
+Epoch 1/150
+100/100 [==============================] - 1s 13ms/step - loss: 0.4702 - acc: 0.8630
+1000/1000 [==============================] - 31s 31ms/step - loss: 0.4124 - acc: 0.8990 - val_loss: 0.4702 - val_acc: 0.8630
+Epoch 2/150
+100/100 [==============================] - 1s 12ms/step - loss: 0.4360 - acc: 0.8870
+1000/1000 [==============================] - 28s 28ms/step - loss: 0.4314 - acc: 0.8853 - val_loss: 0.4360 - val_acc: 0.8870
+Epoch 3/150
+100/100 [==============================] - 1s 10ms/step - loss: 0.4707 - acc: 0.8590
+1000/1000 [==============================] - 28s 28ms/step - loss: 0.4293 - acc: 0.8940 - val_loss: 0.4707 - val_acc: 0.8590
+Epoch 4/150
+100/100 [==============================] - 1s 12ms/step - loss: 0.4365 - acc: 0.8900
+1000/1000 [==============================] - 28s 28ms/step - loss: 0.4352 - acc: 0.8857 - val_loss: 0.4365 - val_acc: 0.8900
+Epoch 5/150
