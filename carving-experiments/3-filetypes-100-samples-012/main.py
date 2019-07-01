@@ -2,7 +2,7 @@ import os
 import sys
 import numpy as np
 import tensorflow as tf
-from tensorflow.keras.layers import Input, Conv1D, MaxPooling1D, LSTM, Dense, Activation, TimeDistributed
+from tensorflow.keras.layers import Input, Conv1D, MaxPooling1D, LSTM, Dense, Activation
 
 import matplotlib
 matplotlib.use('Agg')
@@ -15,8 +15,8 @@ import utils.sampler
 
 def get_model():
     last = l0 = tf.keras.layers.Input(shape=(512,256))
-    last = tf.keras.layers.Conv1D(3, (32,), strides=16)(last)
-    last = tf.keras.layers.LSTM(3)(last)
+    last = tf.keras.layers.Flatten()(last)
+    last = tf.keras.layers.Dense(3)(last)
     last = tf.keras.layers.Activation('softmax')(last)
 
     model = tf.keras.Model([l0], last)
@@ -60,7 +60,7 @@ def ys_from_filenames(filenames):
 def xs_from_filenames(filenames):
     xs = np.zeros((len(filenames),512,256))
     for i,f in enumerate(filenames):
-        x = first_sector(f)
+        x = sample_sector(f)
         xs[i] = utils.one_hot(x,256)
     return xs
 
