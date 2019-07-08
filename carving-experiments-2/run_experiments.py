@@ -72,12 +72,17 @@ def sector_generator(filenames, batch_size, blocks):
             yield xs, ys
 
 class MyCallback(tf.keras.callbacks.Callback):
-    def __init__(self, save_file=None):
+    def __init__(self, save_file=None, seconds_limit=10*60):
+        self.seconds_limit = seconds_limit
+        self.start_time = time.time()
         self.save_file = save_file
     def on_epoch_end(self, epoch, logs):
         if self.save_file:
             self.model.save(self.save_file)
         if logs['acc'] > 0.9:
+            self.model.stop_training = True
+        elapsed = time.time()-self.start_time
+        if self.seconds_limit and elapsed > self.seconds_limit:
             self.model.stop_training = True
 
 Experiment = namedtuple('Experiment', 'name model blocks')
@@ -92,6 +97,8 @@ def run_experiments(experiments,
     validation = utils.load.examples_from('../../datasets/carving/dev')
     for e in experiments:
         compile(e.model)
+        print(e.name)
+        e.model.summary()
         start = time.time()
         history = e.model.fit_generator(sector_generator(train, batch_size, e.blocks),
             validation_data=sector_generator(validation, validation_batch_size, e.blocks),
@@ -111,19 +118,20 @@ def run_experiments(experiments,
         epochs_count = len(history.epoch)
         val_acc = history.history['val_acc'][-1]
         acc = history.history['acc'][-1]
+        m, s = divmod(elapsed, 60)
         yield {
             'Name':e.name,
             'Parameters': trainable_count,
             'Blocks': e.blocks,
             'Epochs': epochs_count,
-            'Seconds': elapsed,
+            'Time': "{:d}m{:02d}s".format(int(m),int(s)),
             'Training accuracy': acc,
             'Validation accuracy': val_acc,
         }
 
 def save_experiment_results(tsv_path, results):
     keys = results[0].keys()
-    with open(tsv_path, 'w') as f:
+    with open(tsv_path, 'a') as f:
         f.write('\t'.join(keys))
         f.write('\n')
         for r in results:

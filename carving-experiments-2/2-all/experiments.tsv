@@ -1,0 +1,31 @@
+Name	Parameters	Blocks	Epochs	Seconds	Training accuracy	Validation accuracy
+D	393219	all	150	0m59s	0.68	0.58
+LD	37091	all	150	12m51s	0.39	0.43
+CL	24663	all	150	1m12s	0.67	0.67
+CMCML	295536	all	150	1m31s	0.77	0.78
+CMCMLL	320752	all	150	1m45s	0.82	0.76
+CLL	287824	all	150	1m48s	0.75	0.77
+CML	262416	all	150	1m58s	0.78	0.69
+CLD	1246339	all	150	6m38s	0.78	0.84
+CD	1059587	all	150	5m31s	0.78	0.73
+CM	24579	all	150	6m11s	0.69	0.67
+CCM	24600	all	150	5m56s	0.7	0.69
+Name	Parameters	Blocks	Epochs	Seconds	Training accuracy	Validation accuracy
+CCL	328688	all	150	1m53s	0.75	0.8
+CCLL	361712	all	150	2m02s	0.73	0.79
+Name	Parameters	Blocks	Epochs	Time	Training accuracy	Validation accuracy
+CCL	328688	all	113	10m04s	0.762	0.766
+CCLL	361712	all	98	10m02s	0.853	0.823
+CMCML	295536	all	84	7m42s	0.902	0.858
+CMCMLL	320752	all	94	10m01s	0.887	0.871
+Name	Parameters	Blocks	Epochs	Time	Training accuracy	Validation accuracy
+D	393219	all	150	7m45s	0.758	0.684
+LD	37091	all	13	10m10s	0.462	0.468
+CL	24663	all	150	8m38s	0.813	0.783
+CD	1059587	all	47	10m11s	0.745	0.739
+CM	24579	all	37	10m08s	0.79	0.765
+CCM	24600	all	36	10m13s	0.764	0.732
+Name	Parameters	Blocks	Epochs	Time	Training accuracy	Validation accuracy
+CLL	287824	all	98	10m00s	0.851	0.835
+CML	262416	all	131	10m04s	0.847	0.833
+CLD	1246339	all	31	10m01s	0.851	0.814
