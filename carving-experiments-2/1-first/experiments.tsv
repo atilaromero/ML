@@ -1,4 +1,4 @@
-Name	Parameters	Blocks	Epochs	Seconds	Training accuracy	Validation accuracy
-D	393219	first	2	0m01s	0.98	0.99
-LD	37091	first	19	1m50s	0.91	0.72
-CL	24663	first	4	0m04s	0.93	0.72
+Name	Parameters	Blocks	Epochs	Time	Training accuracy	Validation accuracy
+D	393219	first	1	0m01s	0.91	1.0
+LD	37091	first	28	2m54s	0.92	0.68
+CL	24663	first	4	0m05s	0.98	0.73

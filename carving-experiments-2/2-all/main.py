@@ -171,19 +171,19 @@ def CCM():
     return Experiment(myfuncname, model, 'all')
 
 experiments = [
-    # D(),
-    # LD(),
-    # CL(),
-    # CCL(),
-    # CCLL(),
-    # CMCML(),
-    # CMCMLL(),
+    D(),
+    LD(),
+    CL(),
+    CCL(),
+    CCLL(),
+    CMCML(),
+    CMCMLL(),
     CLL(),
     CML(),
     CLD(),
-    # CD(),
-    # CM(),
-    # CCM(),
+    CD(),
+    CM(),
+    CCM(),
 ]
 
 results = []
