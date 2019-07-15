@@ -106,7 +106,7 @@ def run_experiments(experiments,
             steps_per_epoch=steps_per_epoch,
             epochs=epochs,
             callbacks=[
-                MyCallback(),
+                MyCallback(e.name + '.h5'),
                 tf.keras.callbacks.TensorBoard(
                     log_dir='tboard/' + e.name
                 ),

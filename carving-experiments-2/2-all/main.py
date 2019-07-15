@@ -192,7 +192,7 @@ for d in run_experiments(experiments,
         validation_batch_size=10,
         validation_steps=100,
         steps_per_epoch=100,
-        epochs=150):
+        epochs=600):
     print(d)
     results.append(d)
 
