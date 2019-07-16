@@ -2,6 +2,7 @@ import os
 import sys
 import time
 import numpy as np
+import itertools
 from collections import namedtuple
 import tensorflow as tf
 import tensorflow.keras.backend as K
@@ -16,9 +17,28 @@ tf.set_random_seed(2)
 
 def main(modelpath):
     model = tf.keras.models.load_model(modelpath)
-    validation = utils.load.examples_from('../datasets/carving/dev/jpg')
-    results = model.predict_generator(sector_generator(validation, 10, 'all'), steps=1)
-    print(results)
+    validation = utils.load.examples_from('../datasets/carving/dev')
+    xs,ys = next(sector_generator(validation, 300, 'all')) # max is 300
+    for i in range(10-1):
+        xst,yst = next(sector_generator(validation, 300, 'all')) # max is 300
+        xs = np.r_[xs,xst]
+        ys = np.r_[ys, yst]
+    zs = model.predict(xs)
+    izs = np.argmax(zs, axis=1)
+    iys = np.argmax(ys, axis=1)
+    confyz = {}
+    print(len(izs))
+    for y in range(3):
+        for z in range(3):
+            confyz[(y,z)] = 0
+    for i in range(len(zs)):
+        confyz[(iys[i], izs[i])] +=1
+    print('t\p\t'+'\t'.join(categories))
+    for y in range(3):
+        print(categories[y], end='\t')
+        for z in range(3):
+            print(confyz[(y,z)],end='\t')
+        print()
 
 categories = ['pdf','png', 'jpg']
 ix_to_cat = dict([(i,x) for i,x in enumerate(categories)])
