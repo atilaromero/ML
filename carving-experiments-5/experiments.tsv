@@ -1,0 +1,2 @@
+Name	Parameters	Blocks	Epochs	Time	Training accuracy	Validation accuracy
+CMCMLL	320200	all	52	60m58s	0.4983	0.4952
