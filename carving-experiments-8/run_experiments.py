@@ -27,7 +27,7 @@ cat_to_ix = dict([(x,i) for i,x in enumerate(categories)])
 
 def sample_sector(path, fill_random=False):
     ys = np.ones((512))
-    count = count_sectors(f)
+    count = count_sectors(path)
     sector = np.random.randint(0,count)
     xs = get_sector(path, sector)
     return xs, ys
@@ -69,17 +69,17 @@ def xs_ys_from_filenames(filenames):
     xs = np.zeros((len(filenames),512,256))
     for i,f in enumerate(filenames):
         sampler = np.random.choice([sample_sector, last_sector], p=[0.5,0.5])
-        _xs, _ys = sampler(f, fill_random=True)
+        x, y = sampler(f, fill_random=True)
         xs[i] = utils.one_hot(x,256)
-        ys[i,cat_to_ix[cat]] = 1
+        ys[i] = y
     return xs, ys
 
-def sector_generator(filenames, batch_size, blocks):
+def sector_generator(filenames, batch_size):
     while True:
         sample = filenames[:]
         np.random.shuffle(sample)
         for i in range(0,len(sample),batch_size):
-            xs, ys = xs_ys_from_filenames(sample[i:i+batch_size], blocks)
+            xs, ys = xs_ys_from_filenames(sample[i:i+batch_size])
             yield xs, ys
 
 class MyCallback(tf.keras.callbacks.Callback):
@@ -112,8 +112,8 @@ def run_experiments(experiments,
         print(e.name)
         e.model.summary()
         start = time.time()
-        history = e.model.fit_generator(sector_generator(train, batch_size, e.blocks),
-            validation_data=sector_generator(validation, validation_batch_size, e.blocks),
+        history = e.model.fit_generator(sector_generator(train, batch_size),
+            validation_data=sector_generator(validation, validation_batch_size),
             validation_steps=validation_steps,
             steps_per_epoch=steps_per_epoch,
             epochs=epochs,
@@ -134,7 +134,6 @@ def run_experiments(experiments,
         yield {
             'Name':e.name,
             'Parameters': trainable_count,
-            'Blocks': e.blocks,
             'Epochs': epochs_count,
             'Time': "{:d}m{:02d}s".format(int(m),int(s)),
             'Training accuracy': acc,
