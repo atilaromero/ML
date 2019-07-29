@@ -1,0 +1,1 @@
+Tries to train a mask that recognize end sectors.
