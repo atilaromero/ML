@@ -1,0 +1,8 @@
+Name	Parameters	Blocks	Epochs	Time	Training accuracy	Validation accuracy
+CMCMLL	320752	all	566	40m03s	0.924	0.91
+CMCMLAD	324291	all	600	34m55s	0.926	0.903
+CCLAD3	365251	all	36	40m40s	0.87	0.88
+CCCLAD4	74323	all	36	40m20s	0.882	0.865
+Name	Parameters	Blocks	Epochs	Time	Training accuracy	Validation accuracy
+CCLAD3	365251	all	381	420m19s	0.909	0.909
+CCCLAD4	74323	all	390	420m53s	0.914	0.909
