@@ -25,38 +25,32 @@ categories = ['pdf','png', 'jpg']
 ix_to_cat = dict([(i,x) for i,x in enumerate(categories)])
 cat_to_ix = dict([(x,i) for i,x in enumerate(categories)])
 
-def sample_sector(path, fill_random=False):
-    ys = np.ones((512))
+def sample_sector(path, fill_random):
     count = count_sectors(path)
     sector = np.random.randint(0,count)
-    xs = get_sector(path, sector)
-    return xs, ys
+    x, y = get_sector(path, sector, fill_random)
+    return x, y
 
-def first_sector(path, fill_random=False):
-    ys = np.ones((512))
-    xs = get_sector(path, 0)
-    return xs, ys
+def first_sector(path, fill_random):
+    x, y = get_sector(path, 0, fill_random)
+    return x, y
 
-def last_sector(path, fill_random=False):
+def last_sector(path, fill_random):
     count = count_sectors(path)
-    partial = get_sector(path, count-1)
-    xs = np.zeros((512), dtype='int')
-    xs[:len(partial)] = partial
-    if fill_random:
-        xs[len(partial):] = np.random.randint(256, size=(512-len(partial)))
+    x, y = get_sector(path, count-1, fill_random)
+    return x, y
 
-    ys = np.zeros((512))
-    ys[:len(partial)] = 1
-    return xs, ys
-
-def get_sector(path, sector, fill_random=False):
-    assert not fill_random # todo
+def get_sector(path, sector, fill_random):
+    x = np.zeros((512), dtype='int')
+    y = np.zeros((512))
     with open(path, 'rb') as f:
         f.seek(sector*512,0)
         b = f.read(512)
-        n = np.zeros((len(b)),dtype='int')
-        n[:len(b)] = [int(x) for x in b]
-        return n
+        x[:len(b)] = [int(x) for x in b]
+        if fill_random:
+            x[len(b):] = np.random.randint(256, size=(512-len(b)))
+        y[:len(b)] = 1
+        return x, y
 
 def count_sectors(path):
     with open(path, 'rb') as f:
@@ -105,8 +99,8 @@ def run_experiments(experiments,
         validation_steps,
         steps_per_epoch,
         epochs):
-    train = utils.load.examples_from('../datasets/carving/train')
-    validation = utils.load.examples_from('../datasets/carving/dev')
+    train = utils.load.examples_from('../datasets/carving/train/pdf')
+    validation = utils.load.examples_from('../datasets/carving/dev/pdf')
     for e in experiments:
         compile(e.model)
         print(e.name)

@@ -12,7 +12,6 @@ def D():
     last = l0 = Input(shape=(512,256))
     last = Flatten()(last)
     last = Dense(NOUTPUT)(last)
-    last = Activation('softmax')(last)
     model = tf.keras.Model([l0], last)
     myfuncname = sys._getframe().f_code.co_name
     return Experiment(myfuncname, model, 'all')
@@ -22,7 +21,6 @@ def LD():
     last = l0 = Input(shape=(512,256))
     last = LSTM(32)(last)
     last = Dense(NOUTPUT)(last)
-    last = Activation('softmax')(last)
     model = tf.keras.Model([l0], last)
     myfuncname = sys._getframe().f_code.co_name
     return Experiment(myfuncname, model, 'all')
@@ -33,7 +31,6 @@ def CL():
     last = l0 = Input(shape=(512,256))
     last = Conv1D(3, (32,), strides=32)(last)
     last = LSTM(NOUTPUT)(last)
-    last = Activation('softmax')(last)
     model = tf.keras.Model([l0], last)
     myfuncname = sys._getframe().f_code.co_name
     return Experiment(myfuncname, model, 'all')
@@ -67,7 +64,6 @@ def CCL():
     last = Conv1D(128, (8,), strides=8)(last)
     last = Conv1D(64, (8,), strides=8)(last)
     last = LSTM(NOUTPUT)(last)
-    last = Activation('softmax')(last)
     model = tf.keras.Model([l0], last)
     myfuncname = sys._getframe().f_code.co_name
     return Experiment(myfuncname, model, 'all')
@@ -77,7 +73,6 @@ def CCLL():
     last = Conv1D(64, (8,), strides=8)(last)
     last = LSTM(64, return_sequences=True)(last)
     last = LSTM(NOUTPUT)(last)
-    last = Activation('softmax')(last)
     model = tf.keras.Model([l0], last)
     myfuncname = sys._getframe().f_code.co_name
     return Experiment(myfuncname, model, 'all')
@@ -89,7 +84,6 @@ def CMCML():
     last = Conv1D(64, (8,), strides=8)(last)
     last = MaxPooling1D(pool_size=2, strides=2, data_format='channels_first')(last)
     last = LSTM(NOUTPUT)(last)
-    last = Activation('softmax')(last)
     model = tf.keras.Model([l0], last)
     myfuncname = sys._getframe().f_code.co_name
     return Experiment(myfuncname, model, 'all')
@@ -102,7 +96,6 @@ def CMCMLL():
     last = MaxPooling1D(pool_size=2, strides=2, data_format='channels_first')(last)
     last = LSTM(64, return_sequences=True)(last)
     last = LSTM(NOUTPUT)(last)
-    last = Activation('softmax')(last)
     model = tf.keras.Model([l0], last)
     myfuncname = sys._getframe().f_code.co_name
     return Experiment(myfuncname, model, 'all')
@@ -114,7 +107,6 @@ def CLL():
     last = Conv1D(32, (32,), strides=32)(last)
     last = LSTM(64, return_sequences=True)(last)
     last = LSTM(NOUTPUT)(last)
-    last = Activation('softmax')(last)
     model = tf.keras.Model([l0], last)
     myfuncname = sys._getframe().f_code.co_name
     return Experiment(myfuncname, model, 'all')
@@ -124,7 +116,6 @@ def CML():
     last = Conv1D(32, (32,), strides=32)(last)
     last = MaxPooling1D(pool_size=2, strides=2, data_format='channels_first')(last)    
     last = LSTM(NOUTPUT)(last)
-    last = Activation('softmax')(last)
     model = tf.keras.Model([l0], last)
     myfuncname = sys._getframe().f_code.co_name
     return Experiment(myfuncname, model, 'all')
@@ -134,7 +125,6 @@ def CLD():
     last = Conv1D(256, (16,), strides=16)(last)
     last = LSTM(128)(last)
     last = Dense(NOUTPUT)(last)
-    last = Activation('softmax')(last)
     model = tf.keras.Model([l0], last)
     myfuncname = sys._getframe().f_code.co_name
     return Experiment(myfuncname, model, 'all')
@@ -146,20 +136,18 @@ def CD():
     last = Conv1D(64,(64,),strides=8)(last)
     last = Flatten()(last)
     last = Dense(NOUTPUT)(last)
-    last = Activation('softmax')(last)
     model = tf.keras.Model([l0], last)
     myfuncname = sys._getframe().f_code.co_name
     return Experiment(myfuncname, model, 'all')
-# 26
-def CM():
-    last = l0 = Input(shape=(512,256))
-    last = Conv1D(3, (32,), strides=1)(last)
-    last = MaxPooling1D(pool_size=481, strides=1)(last)
-    last = Flatten()(last)
-    last = Activation('softmax')(last)
-    model = tf.keras.Model([l0], last)
-    myfuncname = sys._getframe().f_code.co_name
-    return Experiment(myfuncname, model, 'all')
+# # 26
+# def CM():
+#     last = l0 = Input(shape=(512,256))
+#     last = Conv1D(3, (32,), strides=1)(last)
+#     last = MaxPooling1D(pool_size=481, strides=1)(last)
+#     last = Flatten()(last)
+#     model = tf.keras.Model([l0], last)
+#     myfuncname = sys._getframe().f_code.co_name
+#     return Experiment(myfuncname, model, 'all')
 # 27
 # def CCM():
 #     last = l0 = Input(shape=(512,256))
@@ -196,7 +184,6 @@ def CMCMLAD():
     last = attVector
 
     last = Dense(NOUTPUT)(last)
-    last = Activation('softmax')(last)
     model = tf.keras.Model([l0], last)
     myfuncname = sys._getframe().f_code.co_name
     return Experiment(myfuncname, model, 'all')
@@ -226,7 +213,6 @@ def CCLAD3():
     last = LSTM(64, return_sequences=True)(last)
     last = Attention(512, 64)(last)
     last = Dense(NOUTPUT)(last)
-    last = Activation('softmax')(last)
     model = tf.keras.Model([l0], last)
     myfuncname = sys._getframe().f_code.co_name
     return Experiment(myfuncname, model, 'all')
@@ -239,24 +225,23 @@ def CCCLAD4():
     last = LSTM(64, return_sequences=True)(last)
     last = Attention(512, 64)(last)
     last = Dense(NOUTPUT)(last)
-    last = Activation('softmax')(last)
     model = tf.keras.Model([l0], last)
     myfuncname = sys._getframe().f_code.co_name
     return Experiment(myfuncname, model, 'all')
 
 experiments = [
-    D(),
-    LD(),
-    CL(),
-    CCL(),
-    CCLL(),
-    CMCML(),
-    CMCMLL(),
+    # D(),
+    # LD(),
+    # CL(),
+    # CCL(),
+    # CCLL(),
+    # CMCML(),
+    # CMCMLL(),
     CLL(),
     CML(),
     CLD(),
     CD(),
-    CM(),
+    # CM(),
     # CCM(),
     CMCMLAD(),
     CCLAD3(),
