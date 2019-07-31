@@ -1,0 +1,1 @@
+Tries to train a LSTM network to predict the next byte.
