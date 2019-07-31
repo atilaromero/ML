@@ -10,7 +10,7 @@ NOUTPUT=511
 
 def L():
     last = l0 = Input(shape=(NINPUT,256))
-    last = LSTM(NOUTPUT, return_sequences=True)(last)
+    last = LSTM(256, return_sequences=True)(last)
     model = tf.keras.Model([l0], last)
     myfuncname = sys._getframe().f_code.co_name
     return Experiment(myfuncname, model)
@@ -31,10 +31,10 @@ if __name__ == '__main__':
             validation_batch_size=10,
             validation_steps=100,
             steps_per_epoch=100,
-            epochs=600,
+            epochs=100000,
             trainDir='../datasets/carving/train/'+t,
             validationDir='../datasets/carving/dev/'+t,
-            seconds_limit=10*60,
+            seconds_limit=6*60*60,
             acc_limit=None,
             val_acc_limit=1.0,
             ):

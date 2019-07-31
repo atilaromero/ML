@@ -43,7 +43,7 @@ def last_sector(path, fill_random):
 def get_sector(path, sector, fill_random):
     z = np.zeros((512), dtype='int')
     x = np.zeros((511), dtype='int')
-    y = np.zeros((511))
+    y = np.zeros((511), dtype='int')
     with open(path, 'rb') as f:
         f.seek(sector*512,0)
         b = f.read(512)
@@ -61,8 +61,8 @@ def count_sectors(path):
         return math.ceil(size/512.0)
 
 def xs_ys_from_filenames(filenames):
-    xs = np.zeros((len(filenames),512,256))
-    ys = np.zeros((len(filenames),512,256))
+    xs = np.zeros((len(filenames),511,256))
+    ys = np.zeros((len(filenames),511,256))
     for i,f in enumerate(filenames):
         sampler = sample_sector
         x, y = sampler(f, fill_random=True)
