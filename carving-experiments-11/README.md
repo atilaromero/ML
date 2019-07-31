@@ -1,0 +1,1 @@
+Same as experiment 10, but with more file types.

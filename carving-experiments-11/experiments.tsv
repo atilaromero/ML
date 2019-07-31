@@ -1,0 +1,10 @@
+Name	Parameters	Epochs	Time	Training accuracy	Validation accuracy
+CL-pdf	1081347	1	0m11s	0.79	1.0
+CLL-pdf	1468704	1	0m15s	0.821	1.0
+CML-pdf	1345568	1	0m12s	0.81	1.0
+CL-jpg	1081347	1	0m13s	1.0	1.0
+CLL-jpg	1468704	1	0m17s	1.0	1.0
+CML-jpg	1345568	1	0m15s	1.0	1.0
+CL-png	1081347	1	0m15s	1.0	1.0
+CLL-png	1468704	1	0m21s	1.0	1.0
+CML-png	1345568	1	0m18s	1.0	1.0
