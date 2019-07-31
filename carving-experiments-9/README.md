@@ -1,0 +1,1 @@
+Same as experiment 8 but uses sigmoid activation.
