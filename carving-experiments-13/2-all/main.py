@@ -171,19 +171,19 @@ def CCM():
     return Experiment(myfuncname, model, 'all')
 
 experiments = [
-    # D(),
-    # LD(),
-    # CL(),
-    # CCL(),
-    # CCLL(),
-    # CMCML(),
+    D(),
+    LD(),
+    CL(),
+    CCL(),
+    CCLL(),
+    CMCML(),
     CMCMLL(),
-    # CLL(),
-    # CML(),
-    # CLD(),
-    # CD(),
-    # CM(),
-    # CCM(),
+    CLL(),
+    CML(),
+    CLD(),
+    CD(),
+    CM(),
+    CCM(),
 ]
 
 results = []
@@ -192,7 +192,8 @@ for d in run_experiments(experiments,
         validation_batch_size=10,
         validation_steps=100,
         steps_per_epoch=100,
-        epochs=600):
+        epochs=600,
+        val_acc_limit=None):
     print(d)
     results.append(d)
 
