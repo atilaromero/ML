@@ -93,8 +93,14 @@ def run_experiments(experiments,
         validation_steps,
         steps_per_epoch,
         epochs):
-    train = utils.load.examples_from('../../datasets/carving/train')
-    validation = utils.load.examples_from('../../datasets/carving/dev')
+    train = utils.load.examples_from('dataset/train')
+    assert len(train) > 0, """dataset/train contain links to govdocs1 files
+    These files are not in the github repository, but they can be downloaded from
+    https://digitalcorpora.org/corpora/files"""
+    validation = utils.load.examples_from('dataset/dev')
+    assert len(validation) > 0, """dataset/dev contain links to govdocs1 files
+    These files are not in the github repository, but they can be downloaded from
+    https://digitalcorpora.org/corpora/files"""
     for e in experiments:
         compile(e.model)
         print(e.name)
