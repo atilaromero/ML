@@ -20,7 +20,7 @@ def compile(model):
         optimizer=tf.keras.optimizers.Adam(),
         metrics=['accuracy'])
 
-categories = ['pdf','png', 'jpg']
+categories = ['pdf','gif', 'jpg']
 ix_to_cat = dict([(i,x) for i,x in enumerate(categories)])
 cat_to_ix = dict([(x,i) for i,x in enumerate(categories)])
 
@@ -72,14 +72,15 @@ def sector_generator(filenames, batch_size, blocks):
             yield xs, ys
 
 class MyCallback(tf.keras.callbacks.Callback):
-    def __init__(self, save_file=None, seconds_limit=10*60):
+    def __init__(self, save_file=None, seconds_limit=10*60, val_acc_limit=None):
         self.seconds_limit = seconds_limit
         self.start_time = time.time()
         self.save_file = save_file
+        self.val_acc_limit = val_acc_limit
     def on_epoch_end(self, epoch, logs):
         if self.save_file:
             self.model.save(self.save_file)
-        if logs['acc'] > 0.9:
+        if self.val_acc_limit and logs['val_acc'] > self.val_acc_limit:
             self.model.stop_training = True
         elapsed = time.time()-self.start_time
         if self.seconds_limit and elapsed > self.seconds_limit:
@@ -92,12 +93,13 @@ def run_experiments(experiments,
         validation_batch_size,
         validation_steps,
         steps_per_epoch,
-        epochs):
-    train = utils.load.examples_from('dataset/train')
+        epochs,
+        val_acc_limit=0.9):
+    train = utils.load.examples_from('../dataset/train')
     assert len(train) > 0, """dataset/train contain links to govdocs1 files
     These files are not in the github repository, but they can be downloaded from
     https://digitalcorpora.org/corpora/files"""
-    validation = utils.load.examples_from('dataset/dev')
+    validation = utils.load.examples_from('../dataset/dev')
     assert len(validation) > 0, """dataset/dev contain links to govdocs1 files
     These files are not in the github repository, but they can be downloaded from
     https://digitalcorpora.org/corpora/files"""
@@ -112,7 +114,7 @@ def run_experiments(experiments,
             steps_per_epoch=steps_per_epoch,
             epochs=epochs,
             callbacks=[
-                MyCallback(e.name + '.h5'),
+                MyCallback(e.name + '.h5',val_acc_limit=val_acc_limit),
                 tf.keras.callbacks.TensorBoard(
                     log_dir='tboard/' + e.name
                 ),
