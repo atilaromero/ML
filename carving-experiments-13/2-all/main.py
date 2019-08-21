@@ -188,7 +188,7 @@ experiments = [
 
 results = []
 for d in run_experiments(experiments,
-        batch_size=10,
+        batch_size=100,
         validation_batch_size=10,
         validation_steps=100,
         steps_per_epoch=100,
