@@ -40,11 +40,12 @@ experiments = [
 
 results = []
 for d in run_experiments(experiments,
-        batch_size=10,
+        batch_size=100,
         validation_batch_size=10,
         validation_steps=10,
         steps_per_epoch=10,
-        epochs=150):
+        epochs=150,
+        val_acc_limit=0.9):
     print(d)
     results.append(d)
 
