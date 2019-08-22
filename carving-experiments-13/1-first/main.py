@@ -8,7 +8,7 @@ from run_experiments import Experiment, run_experiments, save_experiment_results
 def D():
     last = l0 = Input(shape=(512,256))
     last = Flatten()(last)
-    last = Dense(3)(last)
+    last = Dense(4)(last)
     last = Activation('softmax')(last)
     model = tf.keras.Model([l0], last)
     myfuncname = sys._getframe().f_code.co_name
@@ -17,7 +17,7 @@ def D():
 def LD():
     last = l0 = Input(shape=(512,256))
     last = LSTM(32)(last)
-    last = Dense(3)(last)
+    last = Dense(4)(last)
     last = Activation('softmax')(last)
     model = tf.keras.Model([l0], last)
     myfuncname = sys._getframe().f_code.co_name
@@ -26,7 +26,7 @@ def LD():
 def CL():
     last = l0 = Input(shape=(512,256))
     last = Conv1D(3, (32,), strides=32)(last)
-    last = LSTM(3)(last)
+    last = LSTM(4)(last)
     last = Activation('softmax')(last)
     model = tf.keras.Model([l0], last)
     myfuncname = sys._getframe().f_code.co_name

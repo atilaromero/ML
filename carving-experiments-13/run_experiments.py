@@ -20,7 +20,7 @@ def compile(model):
         optimizer=tf.keras.optimizers.Adam(),
         metrics=['accuracy'])
 
-categories = ['pdf','gif', 'jpg']
+categories = ['txt', 'csv', 'gif', 'jpg']
 ix_to_cat = dict([(i,x) for i,x in enumerate(categories)])
 cat_to_ix = dict([(x,i) for i,x in enumerate(categories)])
 
