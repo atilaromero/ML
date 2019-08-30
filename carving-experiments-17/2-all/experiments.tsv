@@ -1,0 +1,8 @@
+Name	Parameters	Blocks	Epochs	Time	Training accuracy	Validation accuracy
+LD	38015	all	588	600m27s	0.5866	0.494
+LL	44928	all	298	600m12s	0.1366	0.153
+Name	Parameters	Blocks	Epochs	Time	Training accuracy	Validation accuracy
+LD	38015	all	60	60m20s	0.2426	0.267
+LL	44928	all	31	61m37s	0.0816	0.019
+Name	Parameters	Blocks	Epochs	Time	Training accuracy	Validation accuracy
+LD	38015	all	407	960m31s	0.4026	0.386
