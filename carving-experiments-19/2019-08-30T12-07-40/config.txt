@@ -1,0 +1,11 @@
+METRIC='categorical_accuracy'
+ACTIVATION='softmax'
+LOSS='categorical_crossentropy'
+VALIDATION=['../datasets/govdocs1/sample/dev']
+TRAIN=['../datasets/govdocs1/sample/train']
+UNITS=31
+BATCH_SIZE=100
+VALIDATION_STEPS=1000
+STEPS_PER_EPOCH=100
+EPOCHS=100000000
+MAX_SECONDS=600
