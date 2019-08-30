@@ -1,7 +1,6 @@
 import os
 import sys
 import time
-import datetime
 import numpy as np
 from collections import namedtuple
 import tensorflow as tf
@@ -76,7 +75,7 @@ def sector_generator(filenames, batch_size, blocks):
             yield xs, ys
 
 class MyCallback(tf.keras.callbacks.Callback):
-    def __init__(self, save_file=None, seconds_limit=16*60*60, val_acc_limit=None):
+    def __init__(self, save_file=None, seconds_limit=10*60, val_acc_limit=None):
         self.seconds_limit = seconds_limit
         self.start_time = time.time()
         self.save_file = save_file
@@ -107,7 +106,6 @@ def run_experiments(experiments,
     assert len(validation) > 0, """dataset/dev contain links to govdocs1 files
     These files are not in the github repository, but they can be downloaded from
     https://digitalcorpora.org/corpora/files"""
-    tboard_dir = 'tboard/' + datetime.datetime.now().isoformat()[:19].replace(':','-')
     for e in experiments:
         compile(e.model)
         print(e.name)
@@ -121,7 +119,7 @@ def run_experiments(experiments,
             callbacks=[
                 MyCallback(e.name + '.h5',val_acc_limit=val_acc_limit),
                 tf.keras.callbacks.TensorBoard(
-                    log_dir=tboard_dir + '/' + e.name
+                    log_dir='tboard/' + e.name
                 ),
             ],
         )

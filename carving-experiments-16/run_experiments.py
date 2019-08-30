@@ -16,7 +16,7 @@ import utils.load
 import utils.sampler
 
 def compile(model):
-    model.compile(loss=tf.keras.losses.binary_crossentropy,
+    model.compile(loss=tf.keras.losses.categorical_crossentropy,
         optimizer=tf.keras.optimizers.Adam(),
         metrics=['binary_accuracy', 'categorical_accuracy'])
 

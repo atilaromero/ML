@@ -27,15 +27,6 @@ def LD():
     myfuncname = sys._getframe().f_code.co_name
     return Experiment(myfuncname, model, 'all')
 
-def LL():
-    last = l0 = Input(shape=(512,256))
-    last = LSTM(32, return_sequences=True)(last)
-    last = LSTM(NOUTPUT)(last)
-    last = Activation('softmax')(last)
-    model = tf.keras.Model([l0], last)
-    myfuncname = sys._getframe().f_code.co_name
-    return Experiment(myfuncname, model, 'all')
-
 
 #15, 14, 17
 def CL():
@@ -158,20 +149,19 @@ def CCM():
     return Experiment(myfuncname, model, 'all')
 
 experiments = [
-    # CCL(),
-    # CCLL(),
-    # CMCML(),
-    # CMCMLL(),
-    # CLL(),
-    # CML(),
-    # CLD(),
-    # CD(),
-    # CM(),
-    # CCM(),
-    # D(),
+    CCL(),
+    CCLL(),
+    CMCML(),
+    CMCMLL(),
+    CLL(),
+    CML(),
+    CLD(),
+    CD(),
+    CM(),
+    CCM(),
+    D(),
     LD(),
-    # CL(),
-    # LL(),
+    CL(),
 ]
 
 results = []
@@ -180,9 +170,23 @@ for d in run_experiments(experiments,
         validation_batch_size=10,
         validation_steps=100,
         steps_per_epoch=100,
-        epochs=10000000,
+        epochs=1000000,
         val_acc_limit=None):
     print(d)
     results.append(d)
 
 save_experiment_results('experiments.tsv', results)
+
+#############################
+def X24():
+    last = l0 = Input(shape=(512,256))
+    last = Conv1D(256,(2,),strides=2)(last)
+    last = Conv1D(128,(2,),strides=2)(last)
+    last = Conv1D(64,(2,),strides=2)(last)
+    last = Conv1D(32,(2,),strides=2)(last)
+    last = LSTM(32)(last)
+    last = Dense(NOUTPUT)(last)
+    last = Activation('softmax')(last)
+    model = tf.keras.Model([l0], last)
+    myfuncname = sys._getframe().f_code.co_name
+    return Experiment(myfuncname, model, 'all')
