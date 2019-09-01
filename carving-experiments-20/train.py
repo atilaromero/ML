@@ -4,13 +4,14 @@ import time
 import datetime
 from collections import namedtuple
 import inspect
-import models
-import block_sampler
+from typing import List
 import numpy as np
 from tensorflow.keras.callbacks import TensorBoard, Callback
 import tensorflow.keras.backend as K
 from tensorflow.keras.losses import binary_crossentropy, categorical_crossentropy
-from typing import List
+from tensorflow.keras.layers import Input
+import models
+import block_sampler
 
 selected_models = [
     models.D
@@ -34,27 +35,39 @@ config = Config(
     METRIC='categorical_accuracy',
     ACTIVATION='softmax',
     LOSS='categorical_crossentropy',
-    VALIDATION = ['../datasets/govdocs1/sample/dev'],
-    TRAIN = ['../datasets/govdocs1/sample/train'],
-    CLASSES=31,
-    BATCH_SIZE=50,
+    # VALIDATION = ['../datasets/govdocs1/sample/dev'],
+    # TRAIN = ['../datasets/govdocs1/sample/train'],
+    VALIDATION = ['../datasets/carving/dev'],
+    TRAIN = ['../datasets/carving/train'],
+    # CLASSES=31,
+    CLASSES=3,
+    BATCH_SIZE=30,
     VALIDATION_STEPS=100,
     STEPS_PER_EPOCH=100,
     EPOCHS=10000000,
-    MAX_SECONDS=10*60,
+    MAX_SECONDS=2*60,
 )
+
+def named_models():
+    selected_models = []
+    for n,f in inspect.getmembers(models, inspect.isfunction):
+        if inspect.getfullargspec(f).args == ['classes', 'len_byte_vector', 'activation', 'loss']:
+            selected_models.append(n)
+    return selected_models
+
+def gen_models(classes):
+    return list(models.genall(classes, Input(shape=(512,256))))
+
 def main(config: Config, *selected_models):
     selected_models = list(selected_models)
-    if len(selected_models) == 0:
-        for n,f in inspect.getmembers(models, inspect.isfunction):
-            if inspect.getfullargspec(f).args == ['classes', 'len_byte_vector', 'activation', 'loss']:
-                selected_models.append(n)
-    print(selected_models)
     selected_models = [getattr(models, x) for x in selected_models]
     compiled_models = []
     for model in selected_models:
         m = model(config.CLASSES, len_byte_vector=256, activation=config.ACTIVATION, loss=config.LOSS)
         compiled_models.append(m)
+    if len(compiled_models) == 0:
+        compiled_models = gen_models(config.CLASSES)
+    print([x.name for x in compiled_models])
 
     time_dir=datetime.datetime.now().isoformat()[:19].replace(':','-')
     tboard_dir = os.path.join(time_dir, 'tboard')
