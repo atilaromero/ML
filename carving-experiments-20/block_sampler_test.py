@@ -13,6 +13,14 @@ def test_xs_encoder_one_hot():
     assert result[0,0,255] == 1
     assert result.shape == (1,512,256)
 
+def test_xs_encoder_8bits():
+    block = np.ones((512,)) * 255
+    result = xs_encoder_one_hot([block])
+    assert np.sum(result) == 512
+    assert result[0,0,0] == 0
+    assert result[0,0,255] == 1
+    assert result.shape == (1,512,256)
+
 def test_mk_ys_encoder():
     ys_encoder = mk_ys_encoder(['a', 'b', 'c'])
     ys = ys_encoder(['a', 'a', 'a', 'c'])

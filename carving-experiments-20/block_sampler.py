@@ -45,6 +45,16 @@ def xs_encoder_one_hot(blocks):
         xs[i] = one_hot(block,256)
     return xs
 
+def xs_encoder_8bits(blocks):
+    xs = np.zeros((len(blocks),512,8), dtype='int')
+    for i,block in enumerate(blocks):
+        for j in range(512):
+            bits = [(n & (1<<x))>>x for x in [7,6,5,4,3,2,1,0]]
+            bits = np.array(bits, dtype='int')
+            xs[i,j] = bits
+    return xs
+
+
 def mk_ys_encoder(allcategories):
     cat_to_ix = dict([(x,i) for i,x in enumerate(allcategories)])
     def ys_encoder(cats):

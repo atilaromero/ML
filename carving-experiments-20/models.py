@@ -203,10 +203,10 @@ def C32_1C2_2M(classes, len_byte_vector, activation, loss):
     compile(model, loss)
     return model
 
-def C_gen(last):
-    for u in [256,]:
-        for w in [16,]:
-            for s in [16,]:
+def C_gen(l0):
+    for u in [128,256]:
+        for w in [16]:
+            for s in [16]:
                 if s>w:
                     continue
                 for p in [False, True]:
@@ -219,11 +219,11 @@ def C_gen(last):
                         if r:
                             options['activation'] = 'relu'
                             name += 'R'
-                        last = Conv1D(u, (w,), strides=s, **options)(last)
+                        last = Conv1D(u, (w,), strides=s, **options)(l0)
                         yield last, name
 
 def L_gen(last):
-    for u in [64]:
+    for u in [32, 64, 128]:
         yield LSTM(u)(last), 'L%d'%u
 
 def pre_last_gen(classes, l0):
@@ -245,8 +245,8 @@ def pre_last_gen(classes, l0):
 
 def last_gen(l0):
     for activation, loss, name in [
-            ('softmax', 'categorical_crossentropy', '_cat'),
-            ('sigmoid', 'binary_crossentropy', '_bin'),
+            # ('softmax', 'categorical_crossentropy', '_cat'),
+            # ('sigmoid', 'binary_crossentropy', '_bin'),
             ('sigmoid', 'mse', '_mse'),
         ]:
         last = Activation(activation)(l0)
@@ -258,6 +258,7 @@ def genall(classes, l0):
             for pl, npl in pre_last_gen(classes, ll):
                 for lt, nlt, loss in last_gen(pl):
                     name = nc+nll+npl+nlt
+                    print(name)
                     model = Model([l0], lt, name=name)
                     compile(model, loss)
                     yield model
