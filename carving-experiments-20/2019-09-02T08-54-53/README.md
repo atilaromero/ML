@@ -1,0 +1,1 @@
+mse melhor que cat e bin

@@ -1,0 +1,5 @@
+Name	Parameters	Epochs	Time	Training accuracy	Validation accuracy
+CLD	1249951	15	10m41s	0.5472	0.4856
+CCLD	2298783	9	10m37s	0.4078	0.399
+CRCRLD	2298783	9	10m03s	0.4454	0.4126
+CRLD	1249951	13	10m22s	0.5206	0.4734

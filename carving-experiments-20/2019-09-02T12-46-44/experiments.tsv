@@ -1,0 +1,4 @@
+Name	Parameters	Epochs	Time	Training accuracy	Validation accuracy
+C256_16_16PR_L32_D_cat	1086847	11	1m01s	0.262	0.318
+C256_16_16PR_L64_D_cat	1133023	11	1m04s	0.252	0.25
+C256_16_16PR_L128_D_cat	1249951	10	1m06s	0.26	0.29

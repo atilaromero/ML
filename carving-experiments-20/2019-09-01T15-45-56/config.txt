@@ -1,0 +1,11 @@
+METRIC='categorical_accuracy'
+ACTIVATION='softmax'
+LOSS='categorical_crossentropy'
+VALIDATION=['../datasets/carving/dev']
+TRAIN=['../datasets/carving/train']
+CLASSES=3
+BATCH_SIZE=30
+VALIDATION_STEPS=100
+STEPS_PER_EPOCH=100
+EPOCHS=10000000
+MAX_SECONDS=120
