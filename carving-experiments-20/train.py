@@ -29,12 +29,18 @@ Config = namedtuple('Config', [
     'STEPS_PER_EPOCH',
     'EPOCHS',
     'MAX_SECONDS',
+<<<<<<< HEAD
+=======
+    'XS_ENCODER',
+    'LEN_BYTE_VECTOR',
+>>>>>>> 7282463... testes progressivos
 ])
 
 config = Config(
     METRIC='categorical_accuracy',
     ACTIVATION='softmax',
     LOSS='categorical_crossentropy',
+<<<<<<< HEAD
     # VALIDATION = ['../datasets/govdocs1/sample/dev'],
     # TRAIN = ['../datasets/govdocs1/sample/train'],
     VALIDATION = ['../datasets/carving/dev'],
@@ -46,6 +52,21 @@ config = Config(
     STEPS_PER_EPOCH=100,
     EPOCHS=10000000,
     MAX_SECONDS=2*60,
+=======
+    VALIDATION = ['../datasets/govdocs1/sample/dev'],
+    TRAIN = ['../datasets/govdocs1/sample/train'],
+    # VALIDATION = ['../datasets/carving/dev'],
+    # TRAIN = ['../datasets/carving/train'],
+    CLASSES=31,
+    # CLASSES=3,
+    BATCH_SIZE=500,
+    VALIDATION_STEPS=10,
+    STEPS_PER_EPOCH=10,
+    EPOCHS=10000000,
+    MAX_SECONDS=2*60,
+    XS_ENCODER='8bits_11',
+    LEN_BYTE_VECTOR=8,
+>>>>>>> 7282463... testes progressivos
 )
 
 def named_models():
@@ -55,18 +76,28 @@ def named_models():
             selected_models.append(n)
     return selected_models
 
+<<<<<<< HEAD
 def gen_models(classes):
     return list(models.genall(classes, Input(shape=(512,256))))
 
+=======
+>>>>>>> 7282463... testes progressivos
 def main(config: Config, *selected_models):
     selected_models = list(selected_models)
     selected_models = [getattr(models, x) for x in selected_models]
     compiled_models = []
     for model in selected_models:
+<<<<<<< HEAD
         m = model(config.CLASSES, len_byte_vector=256, activation=config.ACTIVATION, loss=config.LOSS)
         compiled_models.append(m)
     if len(compiled_models) == 0:
         compiled_models = gen_models(config.CLASSES)
+=======
+        m = model(config.CLASSES, len_byte_vector=config.LEN_BYTE_VECTOR, activation=config.ACTIVATION, loss=config.LOSS)
+        compiled_models.append(m)
+    if len(compiled_models) == 0:
+        compiled_models = list(models.genall(config.CLASSES, shape=(512,config.LEN_BYTE_VECTOR)))
+>>>>>>> 7282463... testes progressivos
     print([x.name for x in compiled_models])
 
     time_dir=datetime.datetime.now().isoformat()[:19].replace(':','-')
@@ -77,13 +108,16 @@ def main(config: Config, *selected_models):
     print(config)
     results = []
     for model in compiled_models:
+        model.summary()
         train_blocks = iter(block_sampler.All(
             folders=config.TRAIN,
-            batch_size=config.BATCH_SIZE
+            batch_size=config.BATCH_SIZE,
+            xs_encoder=config.XS_ENCODER,
         ))
         dev_blocks = iter(block_sampler.All(
             folders=config.VALIDATION,
-            batch_size=config.BATCH_SIZE
+            batch_size=config.BATCH_SIZE,
+            xs_encoder=config.XS_ENCODER,
         ))
         result = train(model, 
             train_generator=train_blocks,
@@ -118,11 +152,20 @@ def train(model,
         steps_per_epoch=steps_per_epoch,
         epochs=epochs,
         callbacks=[
+<<<<<<< HEAD
             MyCallback(save_file=os.path.join(model_dir, model.name + '.h5'), seconds_limit=max_seconds, metric=metric),
+=======
+            # MyCallback(save_file=os.path.join(model_dir, model.name + '.h5'), seconds_limit=max_seconds, metric=metric),
+            MyCallback(seconds_limit=max_seconds, metric=metric),
+>>>>>>> 7282463... testes progressivos
             TensorBoard(
                 log_dir=os.path.join(log_dir, model.name)
             ),
         ],
+<<<<<<< HEAD
+=======
+        use_multiprocessing=True,
+>>>>>>> 7282463... testes progressivos
     )
     elapsed = time.time() - start
     trainable_count = int(

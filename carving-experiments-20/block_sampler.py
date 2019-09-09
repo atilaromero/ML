@@ -2,11 +2,48 @@ import os
 import numpy as np
 import random
 import math
+import threading
 from collections import namedtuple
 
+def xs_encoder_one_hot(blocks):
+    xs = np.zeros((len(blocks),512,256), dtype='int')
+    for i,block in enumerate(blocks):
+        block = np.array(block, dtype='int')
+        xs[i] = one_hot(block,256)
+    return xs
+
+def xs_encoder_264bits(blocks):
+    xs = np.zeros((len(blocks),512,264), dtype='int')
+    xs[:,:,:256] = xs_encoder_one_hot(blocks)
+    xs[:,:,256:] = xs_encoder_8bits_11(blocks)
+    return xs
+
+
+bitmap = np.array([128,64,32,16,8,4,2,1], dtype='int').reshape((1,8)).repeat(512,0)
+def xs_encoder_8bits01(blocks):
+    xs = np.zeros((len(blocks),512,8), dtype='int')
+    for i,block in enumerate(blocks):
+        blk = block.reshape((512,1)).repeat(8,1)
+        bits = np.bitwise_and(blk, bitmap)/bitmap
+        xs[i] = bits
+    return xs
+
+def xs_encoder_8bits_11(blocks):
+    xs = xs_encoder_8bits01(blocks)
+    xs = xs * 2 -1
+    return xs
+
+def xs_encoder_16bits(blocks):
+    xs = np.zeros((len(blocks),512,16), dtype='int')
+    xs8 = xs_encoder_8bits01(blocks)
+    xs[:,:,:8] = xs8
+    xs[:,:,8:] = 1 - xs8
+    return xs
+
 class All:
-    def __init__(self, folders, batch_size):
+    def __init__(self, folders, batch_size, xs_encoder=xs_encoder_one_hot):
         assert type(folders) is list
+        self.lock = threading.Lock()
         self.batch_size = batch_size
         self.filenames=[]
         for folder in folders:
@@ -14,10 +51,29 @@ class All:
         self.category_func = category_from_extension
         self.sampler = sample_file_then_block
         self.categories = sorted(set([self.category_func(x) for x in self.filenames]))
-        self.xs_encoder = xs_encoder_one_hot
+        if type(xs_encoder) == str:
+            xs_encoder = globals()['xs_encoder_' + xs_encoder]
+        self.xs_encoder = xs_encoder
         self.ys_encoder = mk_ys_encoder(self.categories)
+        self.gen = self.sampler(self.filenames, self.category_func)
 
     def __iter__(self):
+        while True:
+            xs, ys = next(self)
+            yield xs, ys
+
+    def __next__(self):
+        with self.lock:
+            batch = []
+            for _ in range(self.batch_size):
+                sample = next(self.gen)
+                batch.append(sample)
+            xs = self.xs_encoder([s.block for s in batch])
+            ys = self.ys_encoder([s.cat for s in batch])
+            return xs, ys
+
+
+    def __myiter__(self):
         gen = self.sampler(self.filenames, self.category_func)
         while True:
             batch = []
@@ -28,6 +84,22 @@ class All:
             ys = self.ys_encoder([s.cat for s in batch])
             yield xs, ys
 
+class threadsafe_iter:
+    """
+    Takes an iterator/generator and makes it thread-safe by
+    serializing call to the `next` method of given iterator/generator.
+    """
+    def __init__(self, it):
+        self.it = it
+        self.lock = threading.Lock()
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        with self.lock:
+            return self.it.__next__()
+
 BlockCat = namedtuple('BlockCat', ['block', 'cat'])
 def sample_file_then_block(filenames, category_func):
     while True:
@@ -37,23 +109,6 @@ def sample_file_then_block(filenames, category_func):
             block = sample_sector(f)
             cat = category_func(f)
             yield BlockCat(block, cat)
-
-def xs_encoder_one_hot(blocks):
-    xs = np.zeros((len(blocks),512,256), dtype='int')
-    for i,block in enumerate(blocks):
-        block = np.array(block, dtype='int')
-        xs[i] = one_hot(block,256)
-    return xs
-
-def xs_encoder_8bits(blocks):
-    xs = np.zeros((len(blocks),512,8), dtype='int')
-    for i,block in enumerate(blocks):
-        for j in range(512):
-            bits = [(n & (1<<x))>>x for x in [7,6,5,4,3,2,1,0]]
-            bits = np.array(bits, dtype='int')
-            xs[i,j] = bits
-    return xs
-
 
 def mk_ys_encoder(allcategories):
     cat_to_ix = dict([(x,i) for i,x in enumerate(allcategories)])
