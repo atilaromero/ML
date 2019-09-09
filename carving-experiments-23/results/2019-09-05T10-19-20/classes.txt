@@ -1,0 +1,2 @@
+classes
+dbase3 f gif gz html jpg log pdf png ps rtf swf txt unk xls xml

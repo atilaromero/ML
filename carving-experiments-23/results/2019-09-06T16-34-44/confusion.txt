@@ -1,0 +1,9 @@
+True	f	gif	gz	html	pdf	ppt	ps	unk
+f	33	0	1	2	0	2	6	21
+gif	1	37	20	0	3	1	0	0
+gz	0	18	32	0	5	0	1	0
+html	10	0	0	45	0	0	3	4
+pdf	0	18	20	1	13	0	9	0
+ppt	0	11	31	0	1	19	0	2
+ps	1	0	3	3	0	1	56	1
+unk	18	2	3	5	0	7	6	24

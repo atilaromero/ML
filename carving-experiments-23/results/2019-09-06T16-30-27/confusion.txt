@@ -1,0 +1,7 @@
+True	doc	gz	java	log	png	rtf
+doc	60	4	2	4	5	8
+gz	0	43	0	0	42	1
+java	3	0	69	9	0	0
+log	1	0	6	74	0	2
+png	1	35	0	0	52	0
+rtf	0	0	1	1	0	77

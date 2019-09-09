@@ -1,0 +1,4 @@
+True	gif	jpg	rtf
+gif	68	96	0
+jpg	4	162	0
+rtf	0	2	168

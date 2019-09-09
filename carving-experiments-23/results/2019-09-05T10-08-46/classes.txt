@@ -1,0 +1,2 @@
+classes
+doc f gif html java jpg png ppt ps rtf xls

@@ -1,0 +1,2 @@
+classes
+csv dbase3 f gif gz log png ps txt unk xls

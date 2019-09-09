@@ -1,0 +1,2 @@
+file	random	predicted_randomness
+0.9959183673469387	1.0	0.004081632653061273

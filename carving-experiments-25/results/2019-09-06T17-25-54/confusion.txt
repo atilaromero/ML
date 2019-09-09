@@ -1,0 +1,8 @@
+True	java	jpg	log	pdf	ps	rtf	txt
+java	77	0	7	1	0	0	15
+jpg	0	91	0	8	0	0	1
+log	3	0	67	0	2	0	28
+pdf	0	56	5	34	2	1	2
+ps	0	2	17	12	57	3	9
+rtf	1	0	2	0	6	76	15
+txt	3	0	13	0	2	2	80

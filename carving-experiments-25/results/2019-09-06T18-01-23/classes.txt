@@ -1,0 +1,2 @@
+classes
+dbase3 doc gif gz html java log pdf png ppt rtf swf txt unk

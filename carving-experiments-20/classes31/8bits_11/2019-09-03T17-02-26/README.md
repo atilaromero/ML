@@ -1,0 +1,1 @@
+camada 2/3: filters: 32, 64, 128. 64 foi ligeiramente melhor

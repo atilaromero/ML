@@ -1,0 +1,1 @@
+camada 1/3: stride 1. foi bem também

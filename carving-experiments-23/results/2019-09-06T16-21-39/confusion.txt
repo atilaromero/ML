@@ -1,0 +1,3 @@
+True	png	ps
+png	250	0
+ps	13	237

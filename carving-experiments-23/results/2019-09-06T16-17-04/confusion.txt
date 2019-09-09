@@ -1,0 +1,3 @@
+True	gif	xls
+gif	1	0
+xls	0	3

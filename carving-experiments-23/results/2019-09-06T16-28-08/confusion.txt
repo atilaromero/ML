@@ -1,0 +1,6 @@
+True	csv	doc	rtf	xls	xml
+csv	95	3	0	0	2
+doc	1	61	1	35	2
+rtf	0	1	97	0	2
+xls	1	13	0	86	0
+xml	0	9	6	0	85

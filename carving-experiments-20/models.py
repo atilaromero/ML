@@ -254,6 +254,8 @@ def name_from(layer, *args, **kwargs):
     if layer == activation_from:
         return args[0][:3]
     if issubclass(layer, LSTM):
+        if 'return_sequences' in kwargs:
+            return 'LV%d'%args[0]
         return 'L%d'%args[0]
     if issubclass(layer, Conv1D):
         nc = 'C%d_%d_%d'%(args[0],args[1][0],kwargs['strides'])
@@ -309,7 +311,7 @@ def genall(classes, shape):
         [(Input, x, y) for x,y in args_gen(shape=[shape])],
         [(Conv1D, x, y) for x,y in args_gen(
             [64], 
-            [(16,),(32,),(64,)], 
+            [(16,)], 
             strides=[2], 
             padding=['same'], 
             activation=['relu'],
@@ -317,8 +319,8 @@ def genall(classes, shape):
         )],
         [(Conv1D, x, y) for x,y in args_gen(
             [32], 
-            [(32,)], 
-            strides=[4], 
+            [(4,)], 
+            strides=[2], 
             padding=['same'], 
             activation=['relu'],
             # kernel_regularizer=[l2(0.01)],
@@ -326,10 +328,14 @@ def genall(classes, shape):
         [(Conv1D, x, y) for x,y in args_gen(
             [64], 
             [(32,)], 
-            strides=[4], 
+            strides=[2], 
             padding=['same'], 
             activation=['relu'],
             # kernel_regularizer=[l2(0.01)],
+        )],
+        [(LSTM, x, y) for x,y in args_gen(
+            [64],
+            return_sequences=[True],
         )],
         *endFD,
         # *endLD,

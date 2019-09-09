@@ -1,0 +1,2 @@
+Name	Parameters	Epochs	Time	Training accuracy	Validation accuracy
+C64_16_2PR_LV64_C32_4_2PR_C64_32_2PR_F_D31_cat	242111	10	2m07s	0.3692	0.3548

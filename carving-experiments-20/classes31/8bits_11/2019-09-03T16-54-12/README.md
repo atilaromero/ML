@@ -1,0 +1,1 @@
+camada 1/3: kernel_size 8, mas 16 foi melhor

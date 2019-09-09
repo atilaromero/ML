@@ -1,0 +1,1 @@
+compare each class to random

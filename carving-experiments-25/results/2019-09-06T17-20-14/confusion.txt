@@ -1,0 +1,5 @@
+True	html	png	rtf	unk
+html	70	0	12	18
+png	0	100	0	0
+rtf	4	0	89	7
+unk	19	9	6	66

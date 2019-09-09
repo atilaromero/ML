@@ -1,0 +1,6 @@
+True	doc	gif	html	jpg	unk
+doc	85	2	3	7	3
+gif	2	50	0	48	0
+html	8	0	80	0	12
+jpg	2	10	0	87	1
+unk	33	2	21	0	44

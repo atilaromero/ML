@@ -1,0 +1,7 @@
+True	dbase3	doc	html	java	pdf	swf
+dbase3	98	2	0	0	0	0
+doc	1	68	7	5	6	13
+html	5	7	67	15	6	0
+java	1	1	4	93	1	0
+pdf	0	0	9	0	44	47
+swf	0	4	0	0	13	83

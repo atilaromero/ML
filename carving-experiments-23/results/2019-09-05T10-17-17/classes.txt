@@ -1,0 +1,2 @@
+classes
+csv dbase3 f gif gz html java jpg log pdf png ps rtf txt xml

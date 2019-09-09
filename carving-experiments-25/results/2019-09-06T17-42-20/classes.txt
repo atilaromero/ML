@@ -1,0 +1,2 @@
+classes
+csv html jpg log pdf ppt rtf swf txt unk xls
