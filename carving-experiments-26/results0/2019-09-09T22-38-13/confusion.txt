@@ -1,0 +1,5 @@
+True	eps	kml	pptx	xml
+eps	103	0	0	0
+kml	7	78	0	9
+pptx	1	0	98	0
+xml	12	10	1	81

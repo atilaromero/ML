@@ -1,0 +1,2 @@
+classes
+dwf eps f fits gz hlp jpg kml png ppt pptx ps rtf sql tex text troff unk wp

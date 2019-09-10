@@ -1,0 +1,2 @@
+classes
+gif pptx rtf sql swf tmp txt wp

@@ -1,0 +1,2 @@
+classes
+csv dbase3 doc eps fits gz hlp html jpg kml kmz pdf pps ppt rtf swf tmp txt unk xls zip

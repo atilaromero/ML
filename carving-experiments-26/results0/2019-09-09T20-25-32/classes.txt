@@ -1,0 +1,2 @@
+classes
+csv docx eps f fits gif hlp html jpg kml pdf png pps ppt pptx ps sql text tmp troff wp xml

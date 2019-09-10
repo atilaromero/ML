@@ -1,0 +1,2 @@
+classes
+dbase3 doc docx eps gz kml kmz log pdf pps ppt rtf tex text tmp xls

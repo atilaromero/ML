@@ -1,0 +1,2 @@
+classes
+eps fits gif hlp html java jpg kmz ppt rtf tex troff xls zip

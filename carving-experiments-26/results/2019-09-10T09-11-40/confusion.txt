@@ -1,0 +1,5 @@
+True	eps	pdf	png	ppt
+eps	92	9	0	4
+pdf	6	29	36	24
+png	0	4	60	35
+ppt	1	1	32	67

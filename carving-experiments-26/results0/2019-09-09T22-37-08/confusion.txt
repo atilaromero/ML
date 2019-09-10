@@ -1,0 +1,4 @@
+True	eps	tex	unk
+eps	83	10	5
+tex	1	93	8
+unk	4	32	64

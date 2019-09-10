@@ -1,0 +1,5 @@
+True	docx	ppt	text	unk
+docx	43	65	1	0
+ppt	20	69	2	2
+text	14	28	39	18
+unk	1	7	46	45

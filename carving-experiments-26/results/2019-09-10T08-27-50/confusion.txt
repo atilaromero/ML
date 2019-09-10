@@ -1,0 +1,6 @@
+True	doc	hlp	png	ppt	xls
+doc	42	10	10	16	27
+hlp	1	94	0	0	1
+png	0	0	74	22	0
+ppt	7	2	43	38	11
+xls	5	10	2	6	79

@@ -1,0 +1,8 @@
+True	docx	html	java	jpg	kml	rtf	swf
+docx	20	0	0	52	0	0	35
+html	5	52	26	0	17	4	0
+java	0	9	84	0	2	2	0
+jpg	8	0	0	62	1	0	28
+kml	2	7	0	0	87	0	0
+rtf	0	8	2	0	0	91	0
+swf	8	0	0	55	0	0	33

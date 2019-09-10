@@ -1,0 +1,5 @@
+True	pdf	png	rtf	sql
+pdf	86	15	0	0
+png	65	38	0	1
+rtf	1	0	98	2
+sql	9	0	10	75

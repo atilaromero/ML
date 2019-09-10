@@ -1,0 +1,2 @@
+classes
+doc docx eps f gif gz java kmz log pps ppt pptx ps sql tex troff unk wp xls

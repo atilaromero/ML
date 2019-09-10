@@ -1,0 +1,3 @@
+True	csv	zzz
+csv	230	3
+zzz	0	267

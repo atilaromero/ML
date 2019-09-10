@@ -1,0 +1,2 @@
+classes
+docx f fits kmz pptx

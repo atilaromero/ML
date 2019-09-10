@@ -1,0 +1,2 @@
+classes
+doc docx eps f fits gz html png pps pptx rtf swf tex text tmp troff wp xml zip

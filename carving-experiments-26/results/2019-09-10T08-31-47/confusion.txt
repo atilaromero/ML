@@ -1,0 +1,9 @@
+True	dwf	hlp	html	kml	swf	unk	xls	xml
+dwf	28	0	0	0	66	1	1	0
+hlp	0	88	6	1	0	3	0	0
+html	0	9	53	6	0	12	1	22
+kml	0	0	1	93	0	1	1	5
+swf	20	0	1	0	71	2	7	0
+unk	3	20	14	7	10	32	13	3
+xls	2	1	2	0	5	7	82	0
+xml	0	8	27	12	0	3	0	50

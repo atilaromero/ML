@@ -1,0 +1,2 @@
+classes
+csv docx dwf eps gif java jpg log pdf png pptx ps rtf sql swf tex troff unk wp xls xml

@@ -1,0 +1,11 @@
+True	dbase3	dwf	html	ps	sql	tmp	troff	wp	xls	zip
+dbase3	101	0	0	0	1	0	1	0	0	0
+dwf	0	82	0	0	0	0	1	0	1	14
+html	3	0	78	1	9	2	4	3	0	0
+ps	1	2	8	68	2	8	4	1	0	0
+sql	14	0	13	2	49	10	13	0	0	0
+tmp	0	0	24	13	12	38	7	1	0	0
+troff	5	0	18	5	18	8	44	1	0	0
+wp	0	2	9	0	4	2	1	75	7	0
+xls	0	3	2	0	3	0	2	7	84	1
+zip	0	99	0	0	0	0	0	0	0	9

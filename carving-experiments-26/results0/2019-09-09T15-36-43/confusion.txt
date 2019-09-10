@@ -1,0 +1,7 @@
+True	hlp	png	ppt	swf	tex	text
+hlp	80	0	0	0	15	7
+png	0	47	10	36	0	1
+ppt	0	31	38	26	2	4
+swf	0	41	11	48	0	3
+tex	6	0	0	0	89	6
+text	7	13	18	10	22	29

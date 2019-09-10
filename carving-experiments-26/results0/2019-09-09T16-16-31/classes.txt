@@ -1,0 +1,2 @@
+classes
+doc eps fits gz html java jpg kml log pdf png pps ppt pptx tex txt wp xls

@@ -1,0 +1,2 @@
+classes
+fits gif gz java log png rtf swf tmp txt unk

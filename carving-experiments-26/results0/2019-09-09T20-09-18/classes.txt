@@ -1,0 +1,2 @@
+classes
+eps gif hlp html java kml pdf png pps pptx ps sql tex text tmp txt wp xls xml zip

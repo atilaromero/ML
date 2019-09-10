@@ -1,0 +1,12 @@
+True	csv	dbase3	docx	dwf	hlp	html	kmz	ppt	pptx	wp	xml
+csv	71	5	0	0	2	7	0	1	0	1	7
+dbase3	0	96	0	0	1	0	0	0	0	0	2
+docx	0	0	26	49	0	0	12	1	13	2	0
+dwf	0	1	4	74	0	0	7	2	6	2	0
+hlp	0	2	0	0	89	1	0	0	0	1	1
+html	6	5	0	0	3	48	0	2	0	5	38
+kmz	0	0	5	54	0	0	38	3	6	1	0
+ppt	0	0	12	41	0	0	6	17	9	13	0
+pptx	0	0	15	53	1	0	17	1	17	1	0
+wp	0	1	4	1	5	3	0	3	0	79	2
+xml	0	2	0	0	4	20	0	0	0	2	71

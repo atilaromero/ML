@@ -1,0 +1,3 @@
+True	ps	zzz
+ps	255	0
+zzz	0	245

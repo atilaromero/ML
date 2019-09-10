@@ -1,0 +1,3 @@
+True	jpg	zzz
+jpg	231	22
+zzz	189	58

@@ -1,0 +1,2 @@
+classes
+docx f gif gz java pdf pptx swf text tmp troff

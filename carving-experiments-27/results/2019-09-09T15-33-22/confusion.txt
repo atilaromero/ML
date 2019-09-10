@@ -1,0 +1,3 @@
+True	gif	zzz
+gif	215	54
+zzz	4	227

@@ -1,0 +1,11 @@
+True	docx	eps	fits	html	kml	log	png	pps	sql	text
+docx	36	0	0	0	0	0	23	34	0	5
+eps	0	81	0	4	0	9	0	1	0	6
+fits	0	0	78	0	0	2	5	4	0	7
+html	0	3	2	78	2	4	0	0	0	13
+kml	0	6	0	14	76	4	0	0	0	4
+log	0	5	1	17	1	64	0	0	8	3
+png	19	0	1	0	0	0	33	41	1	0
+pps	19	2	2	0	0	0	27	51	0	2
+sql	0	2	0	13	2	5	0	1	61	18
+text	11	7	6	5	0	4	6	25	1	35

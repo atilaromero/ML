@@ -1,0 +1,2 @@
+classes
+dbase3 docx eps fits ppt ps tex tmp

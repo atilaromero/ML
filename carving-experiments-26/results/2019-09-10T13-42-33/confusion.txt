@@ -1,0 +1,5 @@
+True	dbase3	kml	ppt	xml
+dbase3	99	0	0	0
+kml	3	85	0	10
+ppt	0	0	107	0
+xml	5	9	0	82

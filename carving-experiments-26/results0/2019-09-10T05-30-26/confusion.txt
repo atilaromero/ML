@@ -1,0 +1,8 @@
+True	dbase3	fits	gif	html	pdf	text	xml
+dbase3	101	0	0	0	0	2	0
+fits	0	87	2	0	4	8	1
+gif	0	2	60	0	35	6	0
+html	0	2	0	39	0	6	50
+pdf	0	4	9	0	79	5	1
+text	0	8	1	7	29	45	8
+xml	0	0	0	4	2	6	87

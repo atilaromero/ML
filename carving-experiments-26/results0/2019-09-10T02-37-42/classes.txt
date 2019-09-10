@@ -1,0 +1,2 @@
+classes
+doc docx f html jpg png pps pptx swf tex tmp txt unk xls xml zip

@@ -1,0 +1,2 @@
+classes
+dbase3 doc docx f fits gz kml kmz log pdf png ps tmp txt unk

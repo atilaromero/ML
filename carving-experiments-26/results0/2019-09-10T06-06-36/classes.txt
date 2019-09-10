@@ -1,0 +1,2 @@
+classes
+dbase3 f gz hlp html kmz pdf png ppt pptx ps troff txt unk wp xls zip

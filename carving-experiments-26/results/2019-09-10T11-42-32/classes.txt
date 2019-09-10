@@ -1,0 +1,2 @@
+classes
+csv doc fits gz java jpg pdf pps ppt swf tmp troff txt unk wp

@@ -1,0 +1,2 @@
+classes
+dbase3 doc dwf gif png pptx swf tmp

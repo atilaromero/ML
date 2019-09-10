@@ -1,0 +1,3 @@
+True	txt	zzz
+txt	276	0
+zzz	0	224

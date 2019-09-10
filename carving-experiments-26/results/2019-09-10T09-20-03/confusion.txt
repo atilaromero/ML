@@ -1,0 +1,4 @@
+True	doc	pps	swf
+doc	83	8	12
+pps	18	13	65
+swf	3	11	87

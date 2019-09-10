@@ -1,0 +1,2 @@
+classes
+dbase3 doc docx f gz html kml log png pptx tmp txt xml zip

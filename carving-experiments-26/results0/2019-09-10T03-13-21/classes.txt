@@ -1,0 +1,2 @@
+classes
+dbase3 doc docx f fits gz hlp html kml kmz png pps ppt rtf sql tex text troff txt wp xml zip

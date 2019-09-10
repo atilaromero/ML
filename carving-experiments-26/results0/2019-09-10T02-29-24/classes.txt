@@ -1,0 +1,2 @@
+classes
+csv doc dwf eps gif gz hlp kml log pptx troff txt unk wp

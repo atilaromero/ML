@@ -1,0 +1,2 @@
+classes
+csv gif html jpg kml pdf png ppt pptx rtf sql swf troff txt xls xml

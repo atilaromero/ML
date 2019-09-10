@@ -1,0 +1,2 @@
+classes
+docx hlp html kml pdf pps ps tmp troff unk

@@ -1,0 +1,3 @@
+True	tex	zzz
+tex	250	0
+zzz	0	250

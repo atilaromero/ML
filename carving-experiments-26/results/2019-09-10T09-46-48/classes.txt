@@ -1,0 +1,2 @@
+classes
+csv dbase3 dwf fits gif jpg kml png pptx ps swf text tmp troff txt wp xls xml

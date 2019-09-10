@@ -1,0 +1,6 @@
+True	dbase3	html	log	pps	swf
+dbase3	102	0	0	0	0
+html	4	84	7	0	0
+log	2	15	83	0	0
+pps	0	0	1	44	54
+swf	0	0	0	32	72

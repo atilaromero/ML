@@ -1,0 +1,6 @@
+True	csv	dwf	kml	troff	xml
+csv	95	1	1	2	3
+dwf	0	101	0	0	0
+kml	4	0	94	1	3
+troff	13	0	1	73	7
+xml	3	0	17	6	75

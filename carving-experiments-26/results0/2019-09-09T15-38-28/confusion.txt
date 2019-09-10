@@ -1,0 +1,9 @@
+True	doc	dwf	fits	java	log	ppt	ps	wp
+doc	59	6	0	0	1	14	0	15
+dwf	0	75	0	0	0	32	0	0
+fits	10	9	63	2	4	9	2	5
+java	1	0	0	80	2	0	5	8
+log	0	0	0	10	61	0	20	4
+ppt	13	41	0	0	0	42	3	2
+ps	0	2	0	2	5	1	90	1
+wp	2	1	2	1	0	5	1	89

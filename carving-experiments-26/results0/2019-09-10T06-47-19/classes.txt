@@ -1,0 +1,2 @@
+classes
+csv dwf eps f fits gif gz hlp html java jpg kml kmz log pdf ps rtf swf tex text tmp txt xls zip

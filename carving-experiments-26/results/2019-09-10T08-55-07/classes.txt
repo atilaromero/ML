@@ -1,0 +1,2 @@
+classes
+dbase3 doc dwf fits gz html png pps pptx rtf sql tex tmp wp xml zip

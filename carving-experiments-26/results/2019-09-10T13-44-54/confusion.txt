@@ -1,0 +1,7 @@
+True	csv	dbase3	eps	java	png	unk
+csv	88	6	1	0	0	4
+dbase3	0	102	0	0	0	0
+eps	11	0	79	1	0	8
+java	1	0	0	81	0	17
+png	0	0	0	0	101	1
+unk	9	3	7	10	2	68

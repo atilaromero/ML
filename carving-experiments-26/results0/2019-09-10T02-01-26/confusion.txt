@@ -1,0 +1,3 @@
+True	txt	wp
+txt	104	0
+wp	8	88

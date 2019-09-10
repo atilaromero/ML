@@ -1,0 +1,10 @@
+True	dbase3	f	fits	gz	html	java	kml	pps	tmp
+dbase3	101	0	0	0	0	0	0	0	0
+f	5	45	10	0	10	16	0	0	15
+fits	1	3	68	0	0	0	0	25	2
+gz	0	0	0	11	0	0	0	89	0
+html	0	2	3	0	70	9	4	0	10
+java	0	6	0	0	11	75	0	0	6
+kml	0	1	0	0	6	1	82	0	10
+pps	0	0	6	7	0	0	0	90	0
+tmp	2	9	4	0	8	2	1	0	74

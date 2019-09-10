@@ -1,0 +1,2 @@
+classes
+csv dbase3 gz hlp log pdf ppt ps rtf sql text tmp txt

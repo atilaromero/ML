@@ -1,0 +1,3 @@
+True	ppt	xls
+ppt	95	5
+xls	4	96

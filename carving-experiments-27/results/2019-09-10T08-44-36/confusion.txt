@@ -1,0 +1,3 @@
+True	swf	zzz
+swf	190	62
+zzz	58	190

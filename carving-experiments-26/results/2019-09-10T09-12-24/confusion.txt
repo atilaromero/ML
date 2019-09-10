@@ -1,0 +1,6 @@
+True	docx	f	fits	kmz	pptx
+docx	36	0	5	10	53
+f	0	96	0	0	0
+fits	2	12	82	1	4
+kmz	18	0	0	24	56
+pptx	37	2	1	14	47

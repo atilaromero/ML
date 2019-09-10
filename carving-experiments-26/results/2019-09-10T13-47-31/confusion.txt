@@ -1,0 +1,9 @@
+True	csv	dbase3	eps	java	jpg	kmz	pptx	text
+csv	86	2	2	2	0	0	0	4
+dbase3	0	103	0	0	0	0	0	1
+eps	6	1	76	9	0	0	0	4
+java	3	0	1	89	0	0	0	11
+jpg	0	0	0	0	47	29	30	3
+kmz	0	0	0	0	42	28	28	0
+pptx	0	0	0	1	44	20	30	3
+text	1	9	7	4	6	10	15	43

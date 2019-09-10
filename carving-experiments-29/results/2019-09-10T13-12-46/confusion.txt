@@ -1,0 +1,3 @@
+True	log	zzz
+log	234	0
+zzz	0	266

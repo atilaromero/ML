@@ -1,0 +1,6 @@
+True	eps	f	java	text	zip
+eps	88	0	2	7	1
+f	5	32	36	29	0
+java	5	9	86	1	0
+text	4	7	8	55	27
+zip	0	0	0	0	98

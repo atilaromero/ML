@@ -1,0 +1,9 @@
+True	csv	dwf	f	fits	gif	gz	kml	tex
+csv	82	0	10	4	0	0	1	0
+dwf	0	18	0	0	43	41	1	0
+f	4	0	85	7	0	0	3	2
+fits	0	4	5	76	4	6	1	0
+gif	0	7	0	2	82	9	0	0
+gz	0	17	0	2	32	53	0	0
+kml	8	0	1	1	0	0	87	1
+tex	0	0	15	0	0	0	12	74

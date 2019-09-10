@@ -1,0 +1,2 @@
+classes
+csv doc dwf eps gz hlp java kml kmz log pdf png pps pptx rtf sql tex text tmp xml

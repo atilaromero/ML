@@ -1,0 +1,8 @@
+True	dbase3	doc	fits	gz	java	ppt	wp
+dbase3	94	1	4	0	0	0	0
+doc	0	56	2	15	0	10	20
+fits	7	9	54	12	5	11	1
+gz	0	0	0	87	0	13	0
+java	1	5	0	0	95	0	3
+ppt	0	24	1	53	0	14	8
+wp	0	2	2	0	2	3	86

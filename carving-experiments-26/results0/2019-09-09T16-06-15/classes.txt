@@ -1,0 +1,2 @@
+classes
+dbase3 docx dwf gz html java kml pdf png rtf sql tex text troff unk xls zip

@@ -1,0 +1,2 @@
+classes
+doc f gif gz jpg png ppt tex tmp txt unk xls

@@ -1,0 +1,3 @@
+True	dbase3	txt
+dbase3	99	1
+txt	5	95

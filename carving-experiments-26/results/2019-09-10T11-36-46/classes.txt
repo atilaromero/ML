@@ -1,0 +1,2 @@
+classes
+doc fits html kmz log pdf png ps rtf tex unk xls xml

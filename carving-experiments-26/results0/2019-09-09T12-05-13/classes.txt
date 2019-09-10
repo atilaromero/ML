@@ -1,0 +1,2 @@
+classes
+doc gif html jpg kml pps sql text txt zip

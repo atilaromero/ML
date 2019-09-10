@@ -1,0 +1,3 @@
+True	gif	xls
+gif	101	4
+xls	5	90

@@ -1,0 +1,2 @@
+classes
+doc docx dwf eps f fits gz hlp java kmz log pdf pps ppt ps sql swf text tmp txt zip

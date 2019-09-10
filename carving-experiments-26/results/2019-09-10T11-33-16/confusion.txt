@@ -1,0 +1,12 @@
+True	dbase3	fits	hlp	html	jpg	kmz	pptx	rtf	swf	troff	unk
+dbase3	99	1	1	0	0	0	0	0	0	4	0
+fits	1	88	1	0	4	3	0	0	9	1	5
+hlp	0	0	67	4	0	0	0	3	0	8	15
+html	1	1	2	76	0	0	0	7	0	7	13
+jpg	0	1	0	0	37	21	9	0	31	0	0
+kmz	0	0	0	0	38	30	12	0	12	0	0
+pptx	0	2	0	0	41	17	13	0	35	0	0
+rtf	0	0	3	3	0	0	0	83	0	2	4
+swf	0	0	0	0	34	25	5	0	28	0	0
+troff	2	0	4	15	0	0	0	2	0	69	5
+unk	4	4	4	9	1	2	0	9	9	15	39

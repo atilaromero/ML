@@ -1,0 +1,5 @@
+True	dwf	png	sql	wp
+dwf	56	43	0	1
+png	46	49	0	1
+sql	0	0	98	6
+wp	0	0	3	97

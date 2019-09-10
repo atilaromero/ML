@@ -1,0 +1,2 @@
+classes
+csv doc docx dwf eps f gz hlp html log ppt pptx text wp

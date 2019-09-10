@@ -1,0 +1,6 @@
+True	docx	f	kml	ppt	xls
+docx	39	0	0	55	5
+f	2	93	3	0	2
+kml	0	6	98	0	0
+ppt	27	0	0	45	30
+xls	1	7	0	2	85

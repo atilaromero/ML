@@ -1,0 +1,2 @@
+classes
+csv dbase3 gif hlp html java kmz pps pptx ps sql text tmp

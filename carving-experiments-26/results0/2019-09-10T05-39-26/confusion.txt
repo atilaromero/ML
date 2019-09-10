@@ -1,0 +1,11 @@
+True	csv	doc	docx	gif	html	java	log	pptx	tmp	xml
+csv	95	0	0	0	4	0	0	0	0	0
+doc	4	61	9	3	19	0	1	4	0	0
+docx	0	11	46	25	0	0	0	23	0	0
+gif	0	0	22	71	0	0	0	4	0	0
+html	5	1	0	0	72	3	6	0	5	16
+java	3	1	0	0	25	71	1	0	1	1
+log	13	1	0	0	27	3	28	0	3	10
+pptx	0	5	45	24	0	0	0	26	0	0
+tmp	10	13	0	0	12	3	23	0	28	10
+xml	5	3	0	0	46	2	2	0	1	44

@@ -1,0 +1,2 @@
+classes
+doc dwf gif gz hlp jpg kmz log pdf pps ppt pptx ps rtf sql swf txt xml

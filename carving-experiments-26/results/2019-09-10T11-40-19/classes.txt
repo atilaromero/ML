@@ -1,0 +1,2 @@
+classes
+docx f fits html java jpg log pdf pps pptx tmp troff xls xml

@@ -1,0 +1,9 @@
+True	gif	pptx	rtf	sql	swf	tmp	txt	wp
+gif	57	29	0	0	13	1	0	0
+pptx	4	59	0	1	28	1	1	6
+rtf	0	0	88	0	0	3	2	5
+sql	1	0	2	77	0	14	4	1
+swf	14	42	0	0	39	0	0	4
+tmp	0	0	2	10	0	77	6	7
+txt	0	0	14	10	0	19	45	13
+wp	0	0	7	1	5	4	5	79

@@ -1,0 +1,2 @@
+classes
+dbase3 dwf eps fits gif java jpg kmz pdf png ppt pptx sql tex tmp unk wp xls xml zip

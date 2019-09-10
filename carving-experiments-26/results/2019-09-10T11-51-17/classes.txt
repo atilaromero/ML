@@ -1,0 +1,2 @@
+classes
+csv f fits gif html java jpg kml pdf png ppt sql swf tex troff txt unk wp

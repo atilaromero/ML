@@ -1,0 +1,2 @@
+classes
+docx dwf gif html kml png ppt pptx tex text tmp txt wp xml zip

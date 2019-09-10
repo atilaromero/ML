@@ -1,0 +1,4 @@
+True	f	kmz	troff
+f	65	1	34
+kmz	0	97	0
+troff	17	0	86

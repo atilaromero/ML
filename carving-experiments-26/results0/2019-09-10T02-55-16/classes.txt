@@ -1,0 +1,2 @@
+classes
+dbase3 dwf eps f fits gif hlp java jpg pdf pptx ps rtf swf tmp troff txt unk xml

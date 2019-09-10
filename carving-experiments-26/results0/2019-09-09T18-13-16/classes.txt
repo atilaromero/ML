@@ -1,0 +1,2 @@
+classes
+csv dbase3 doc docx dwf eps f fits gif gz hlp html java jpg kml kmz log pdf png ppt pptx ps rtf swf tex tmp troff txt unk wp xls zip

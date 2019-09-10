@@ -1,0 +1,2 @@
+classes
+doc dwf fits gif hlp html jpg kml kmz pdf png ppt ps rtf sql swf troff txt zip

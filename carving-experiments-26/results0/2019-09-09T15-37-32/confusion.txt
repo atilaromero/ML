@@ -1,0 +1,8 @@
+True	doc	f	gz	java	kml	pps	text
+doc	54	13	14	8	0	7	2
+f	2	69	1	16	3	0	9
+gz	0	0	92	0	0	11	0
+java	1	23	0	78	1	0	0
+kml	0	2	0	3	94	0	0
+pps	21	3	60	1	0	13	2
+text	10	29	18	10	3	4	23

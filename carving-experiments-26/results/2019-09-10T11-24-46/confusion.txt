@@ -1,0 +1,5 @@
+True	eps	java	png	ps
+eps	51	9	0	36
+java	0	96	0	1
+png	0	0	100	0
+ps	29	4	1	73

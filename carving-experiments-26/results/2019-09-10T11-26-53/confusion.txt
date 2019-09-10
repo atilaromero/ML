@@ -1,0 +1,8 @@
+True	fits	hlp	jpg	log	ppt	swf	xml
+fits	83	1	1	2	5	14	0
+hlp	1	86	0	3	0	0	12
+jpg	0	0	9	0	30	60	0
+log	4	5	0	77	0	0	16
+ppt	7	0	1	0	51	38	2
+swf	1	0	2	0	29	64	0
+xml	0	4	0	24	0	0	68

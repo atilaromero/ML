@@ -1,0 +1,2 @@
+classes
+doc hlp jpg kml kmz log png ps rtf swf troff txt unk wp xls xml zip

@@ -1,0 +1,6 @@
+True	f	gif	tmp	wp	zip
+f	78	0	5	20	1
+gif	0	43	2	1	51
+tmp	28	0	68	4	1
+wp	3	1	0	93	0
+zip	0	7	0	0	94

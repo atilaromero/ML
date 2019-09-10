@@ -1,0 +1,7 @@
+True	fits	gif	png	tex	unk	xml
+fits	79	8	6	0	5	1
+gif	0	72	24	0	1	0
+png	0	28	77	0	0	0
+tex	0	0	0	85	15	1
+unk	21	2	3	12	57	4
+xml	0	0	0	8	14	77

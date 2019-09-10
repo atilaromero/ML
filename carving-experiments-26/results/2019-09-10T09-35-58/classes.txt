@@ -1,0 +1,2 @@
+classes
+csv docx f fits html jpg log png pps ppt sql tex txt wp

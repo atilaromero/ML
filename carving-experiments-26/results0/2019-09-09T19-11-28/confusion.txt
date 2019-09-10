@@ -1,0 +1,8 @@
+True	dbase3	dwf	fits	java	ppt	rtf	text
+dbase3	95	0	1	0	0	0	1
+dwf	0	68	1	0	23	0	0
+fits	5	9	65	5	16	0	2
+java	0	0	0	92	0	6	1
+ppt	0	51	3	0	45	2	4
+rtf	0	0	0	0	2	95	0
+text	1	20	7	21	17	12	30

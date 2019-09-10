@@ -1,0 +1,6 @@
+True	f	fits	java	pdf	sql
+f	49	12	29	3	9
+fits	4	82	2	14	1
+java	2	0	91	1	4
+pdf	0	3	0	96	0
+sql	4	1	15	5	73

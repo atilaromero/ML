@@ -1,0 +1,5 @@
+True	kmz	ppt	troff	unk
+kmz	51	48	0	2
+ppt	26	65	1	7
+troff	0	1	100	5
+unk	3	13	53	25

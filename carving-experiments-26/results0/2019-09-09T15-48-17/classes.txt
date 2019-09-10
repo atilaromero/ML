@@ -1,0 +1,2 @@
+classes
+f gz jpg pdf pps rtf tex text troff txt wp xls

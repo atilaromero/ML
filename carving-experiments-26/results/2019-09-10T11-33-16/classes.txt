@@ -1,0 +1,2 @@
+classes
+dbase3 fits hlp html jpg kmz pptx rtf swf troff unk

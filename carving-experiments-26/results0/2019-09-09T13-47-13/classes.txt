@@ -1,0 +1,2 @@
+classes
+csv doc docx dwf fits gz hlp java kml kmz log png pps ppt pptx ps rtf sql swf tex tmp troff txt unk xml zip

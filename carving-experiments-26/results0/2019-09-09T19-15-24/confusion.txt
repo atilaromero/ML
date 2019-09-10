@@ -1,0 +1,10 @@
+True	csv	doc	dwf	eps	java	pdf	pptx	ps	tex
+csv	85	0	0	2	8	1	0	1	2
+doc	0	69	7	0	8	10	2	0	2
+dwf	0	1	47	0	0	45	7	0	0
+eps	2	2	0	70	5	1	0	19	1
+java	1	0	0	0	96	0	0	2	0
+pdf	0	2	27	7	0	52	9	5	1
+pptx	0	6	32	0	0	48	15	0	0
+ps	0	0	0	44	6	2	0	43	3
+tex	0	4	0	2	30	0	0	0	66

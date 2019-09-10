@@ -1,0 +1,2 @@
+classes
+f fits gif hlp java jpg kmz log pdf pps pptx sql swf tex text tmp troff unk wp xls xml zip

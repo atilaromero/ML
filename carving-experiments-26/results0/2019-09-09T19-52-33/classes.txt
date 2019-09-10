@@ -1,0 +1,2 @@
+classes
+csv doc docx fits gif html java ps rtf sql swf tex text troff txt wp xls zip

@@ -1,0 +1,7 @@
+True	gif	kml	log	png	ps	rtf
+gif	50	0	0	44	0	2
+kml	0	105	5	0	2	0
+log	0	4	101	0	4	1
+png	18	0	0	79	0	0
+ps	0	0	8	2	70	4
+rtf	0	0	4	0	11	86

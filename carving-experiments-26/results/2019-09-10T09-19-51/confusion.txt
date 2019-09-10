@@ -1,0 +1,3 @@
+True	doc	pdf
+doc	85	14
+pdf	2	99

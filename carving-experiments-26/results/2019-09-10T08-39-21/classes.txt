@@ -1,0 +1,2 @@
+classes
+dbase3 dwf gif java jpg pps ppt swf text wp xls zip

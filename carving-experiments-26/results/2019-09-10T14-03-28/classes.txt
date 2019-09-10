@@ -1,0 +1,2 @@
+classes
+doc f gz hlp java kmz log pdf ppt ps rtf swf troff unk wp

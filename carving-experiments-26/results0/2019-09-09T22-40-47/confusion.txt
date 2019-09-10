@@ -1,0 +1,7 @@
+True	dwf	pps	troff	txt	wp	zip
+dwf	18	10	0	0	2	70
+pps	11	16	1	0	18	61
+troff	0	0	89	9	1	0
+txt	0	0	34	59	3	0
+wp	2	0	2	7	83	0
+zip	5	10	0	0	0	89

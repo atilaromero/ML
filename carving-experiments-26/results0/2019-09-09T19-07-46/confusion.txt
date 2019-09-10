@@ -1,0 +1,5 @@
+True	gif	hlp	sql	xls
+gif	100	0	0	3
+hlp	0	90	10	0
+sql	2	7	90	0
+xls	6	2	3	87

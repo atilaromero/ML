@@ -1,0 +1,2 @@
+classes
+f fits gif hlp jpg log sql tex text troff unk wp xml

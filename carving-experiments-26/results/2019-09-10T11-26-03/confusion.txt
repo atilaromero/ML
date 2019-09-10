@@ -1,0 +1,7 @@
+True	docx	dwf	java	pdf	txt	wp
+docx	76	19	0	13	0	0
+dwf	54	31	0	13	0	2
+java	0	0	91	1	8	0
+pdf	31	22	1	41	3	2
+txt	0	0	9	2	71	18
+wp	3	0	0	0	7	82

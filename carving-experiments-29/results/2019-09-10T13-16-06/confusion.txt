@@ -1,0 +1,3 @@
+True	png	zzz
+png	227	40
+zzz	27	206

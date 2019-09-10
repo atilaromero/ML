@@ -1,0 +1,2 @@
+classes
+csv doc hlp log png ppt ps tmp troff txt wp zip

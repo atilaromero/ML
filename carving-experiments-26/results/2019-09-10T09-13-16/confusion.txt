@@ -1,0 +1,7 @@
+True	csv	html	java	kml	kmz	ps
+csv	85	5	3	3	0	4
+html	2	57	20	18	0	3
+java	0	4	98	1	0	1
+kml	0	8	4	88	0	0
+kmz	0	0	0	0	101	0
+ps	4	2	9	2	2	76

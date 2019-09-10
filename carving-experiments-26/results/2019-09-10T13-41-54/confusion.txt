@@ -1,0 +1,4 @@
+True	fits	log	xls
+fits	85	3	8
+log	2	90	6
+xls	1	5	100

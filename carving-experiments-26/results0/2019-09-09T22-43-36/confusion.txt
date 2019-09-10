@@ -1,0 +1,8 @@
+True	eps	f	java	ppt	text	unk	xml
+eps	82	2	3	0	7	1	9
+f	0	48	29	0	8	9	3
+java	0	7	93	0	0	1	3
+ppt	2	0	1	92	5	3	0
+text	1	13	10	24	27	20	1
+unk	3	20	19	7	12	28	8
+xml	1	3	6	0	1	6	82

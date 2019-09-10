@@ -1,0 +1,11 @@
+True	doc	gif	html	jpg	kml	pps	sql	text	txt	zip
+doc	59	6	4	8	1	7	1	2	9	6
+gif	1	52	0	20	0	5	1	1	0	14
+html	1	0	79	3	9	0	1	1	10	0
+jpg	0	7	0	58	0	4	0	2	0	28
+kml	0	0	12	0	86	0	0	0	2	0
+pps	17	6	0	32	0	19	1	2	1	24
+sql	4	0	16	0	0	0	63	0	10	0
+text	8	3	13	13	0	3	5	11	36	5
+txt	3	0	14	2	1	0	8	17	62	0
+zip	0	5	0	52	0	6	0	0	0	38

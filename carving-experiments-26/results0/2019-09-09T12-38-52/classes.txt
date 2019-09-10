@@ -1,0 +1,2 @@
+classes
+doc docx eps fits hlp kml kmz pps ps rtf text tmp troff txt xls zip

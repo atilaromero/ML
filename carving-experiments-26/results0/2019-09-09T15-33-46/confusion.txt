@@ -1,0 +1,3 @@
+True	dbase3	troff
+dbase3	100	2
+troff	25	73

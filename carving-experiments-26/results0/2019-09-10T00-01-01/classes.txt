@@ -1,0 +1,2 @@
+classes
+csv docx dwf f fits gif hlp java jpg png pps pptx ps swf tex text tmp troff txt unk wp xls xml zip

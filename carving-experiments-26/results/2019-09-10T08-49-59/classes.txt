@@ -1,0 +1,2 @@
+classes
+dbase3 docx dwf gif html java kml kmz pdf ppt pptx rtf text tmp xls

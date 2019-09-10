@@ -1,0 +1,2 @@
+classes
+dbase3 doc docx dwf fits gz html java kmz png pps pptx sql swf text tmp xml

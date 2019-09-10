@@ -1,0 +1,2 @@
+classes
+doc eps f fits gz hlp html kml ppt ps tex text troff unk wp xml

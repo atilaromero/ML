@@ -1,0 +1,2 @@
+classes
+csv dbase3 docx dwf hlp html kmz ppt pptx wp xml

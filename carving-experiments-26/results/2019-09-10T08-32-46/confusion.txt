@@ -1,0 +1,10 @@
+True	f	fits	gif	hlp	java	jpg	log	sql	unk
+f	39	6	0	8	7	0	15	8	17
+fits	1	79	6	0	0	9	3	0	3
+gif	0	2	59	0	0	37	0	0	0
+hlp	2	0	0	84	4	0	4	2	5
+java	9	0	0	4	69	0	13	1	4
+jpg	0	0	15	0	2	80	0	0	2
+log	4	1	0	3	2	0	82	4	4
+sql	9	9	0	8	7	0	32	34	5
+unk	13	7	3	8	3	9	17	4	33

@@ -1,0 +1,2 @@
+classes
+doc dwf f fits gif gz hlp html pdf pps rtf sql text troff unk wp xml
