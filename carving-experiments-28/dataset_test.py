@@ -10,6 +10,7 @@ def test_dataset():
     for b in d.generator():
         assert b.category in ['py']
         break
-    for b in d.generator(distribution='by_sector'):
+    d = d.clone(distribution='by_sector')
+    for b in d.generator():
         assert b.category in ['py']
         break

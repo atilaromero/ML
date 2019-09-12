@@ -1,9 +1,36 @@
-import os
 import numpy as np
-import random
-import math
 import threading
-from collections import namedtuple
+from dataset import Dataset
+
+_bitmap = np.array([128, 64, 32, 16, 8, 4, 2, 1],
+                  dtype='int').reshape((1, 8)).repeat(512, 0)
+
+class BatchEncoder:
+    def __init__(self, dataset: Dataset, batch_size, xs_encoder='one_hot'):
+        self.lock = threading.Lock()
+        self.dataset = dataset
+        self.batch_size = batch_size
+        if type(xs_encoder) == str:
+            assert xs_encoder in ['one_hot', '264bits', '8bits01', "8bits_11", "16bits"]
+            xs_encoder = globals()['xs_encoder_' + xs_encoder]
+        self.xs_encoder = xs_encoder
+        self.ys_encoder = mk_ys_encoder(dataset.cat_to_ix)
+        self.gen = dataset.generator()
+
+    def __iter__(self):
+        while True:
+            xs, ys = next(self)
+            yield xs, ys
+
+    def __next__(self):
+        with self.lock:
+            batch = []
+            for _ in range(self.batch_size):
+                sample = next(self.gen)
+                batch.append(sample)
+            xs = self.xs_encoder([s.block for s in batch])
+            ys = self.ys_encoder([s.category for s in batch])
+            return xs, ys
 
 
 def xs_encoder_one_hot(blocks):
@@ -20,16 +47,11 @@ def xs_encoder_264bits(blocks):
     xs[:, :, 256:] = xs_encoder_8bits_11(blocks)
     return xs
 
-
-bitmap = np.array([128, 64, 32, 16, 8, 4, 2, 1],
-                  dtype='int').reshape((1, 8)).repeat(512, 0)
-
-
 def xs_encoder_8bits01(blocks):
     xs = np.zeros((len(blocks), 512, 8), dtype='int')
     for i, block in enumerate(blocks):
         blk = block.reshape((512, 1)).repeat(8, 1)
-        bits = np.bitwise_and(blk, bitmap)/bitmap
+        bits = np.bitwise_and(blk, _bitmap)/_bitmap
         xs[i] = bits
     return xs
 
@@ -48,41 +70,8 @@ def xs_encoder_16bits(blocks):
     return xs
 
 
-class All:
-    def __init__(self, filenames, batch_size, xs_encoder=xs_encoder_one_hot):
-        self.lock = threading.Lock()
-        self.batch_size = batch_size
-        self.filenames = set(filenames)
-        self.category_func = category_from_extension
-        self.sampler = sample_file_then_block
-        self.categories = categories_from(self.filenames, self.category_func)
-        self.cat_to_ix = dict([(x, i) for i, x in enumerate(self.categories)])
-        self.ix_to_cat = dict([(i, x) for i, x in enumerate(self.categories)])
-        if type(xs_encoder) == str:
-            xs_encoder = globals()['xs_encoder_' + xs_encoder]
-        self.xs_encoder = xs_encoder
-        self.ys_encoder = mk_ys_encoder(self.cat_to_ix)
-        self.gen = self.sampler(self.filenames, self.category_func)
-
-    def __iter__(self):
-        while True:
-            xs, ys = next(self)
-            yield xs, ys
-
-    def __next__(self):
-        with self.lock:
-            batch = []
-            for _ in range(self.batch_size):
-                sample = next(self.gen)
-                batch.append(sample)
-            xs = self.xs_encoder([s.block for s in batch])
-            ys = self.ys_encoder([s.cat for s in batch])
-            return xs, ys
-
-
 def mk_ys_encoder(cat_to_ix):
     len_cats = len(cat_to_ix.keys())
-
     def ys_encoder(cats):
         ys = np.zeros((len(cats), len_cats), dtype='int')
         for i, cat in enumerate(cats):
@@ -92,25 +81,9 @@ def mk_ys_encoder(cat_to_ix):
     return ys_encoder
 
 
-def first_sector(path):
-    with open(path, 'rb') as f:
-        b = f.read(512)
-        n = np.zeros((512), dtype='int')
-        n[:len(b)] = [int(x) for x in b]
-        return n
-
-
 def one_hot(arr, num_categories):
     arr_shape = np.shape(arr)
     flatten = np.reshape(arr, -1)
     r = np.zeros((len(flatten), num_categories))
     r[np.arange(len(flatten)), flatten] = 1
     return r.reshape((*arr_shape, num_categories))
-# def one_hot(arr, num_categories):
-    # return np.eye(num_categories)[arr]
-
-
-if __name__ == '__main__':
-    a = All(['../datasets/govdocs1/sample2-train/'], 5)
-    for i, x in enumerate(a):
-        print(i,)

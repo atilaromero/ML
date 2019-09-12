@@ -1,10 +1,6 @@
 from block_sampler import *
 import numpy as np
 
-def test_files_from():
-    result = files_from('../carving-experiments-19')
-    assert '../carving-experiments-19/README.md' in result
-
 def test_xs_encoder_one_hot():
     block = np.ones((512,), dtype='int') * 255
     result = xs_encoder_one_hot([block])
@@ -35,17 +31,29 @@ def test_xs_encoder_16bits():
     assert result.shape == (1,512,16)
 
 def test_mk_ys_encoder():
-    ys_encoder = mk_ys_encoder(['a', 'b', 'c'])
+    ys_encoder = mk_ys_encoder({'a':0, 'b':1, 'c':2})
     ys = ys_encoder(['a', 'a', 'a', 'c'])
     assert np.sum(ys) == 4
     assert ys[0,0] == 1
     assert ys[1,0] == 1
     assert ys[2,0] == 1
     assert ys[3,2] == 1
-    ys_encoder = mk_ys_encoder(['c', 'b', 'a'])
+    ys_encoder = mk_ys_encoder({'a':2, 'b':1, 'c':0})
     ys = ys_encoder(['a', 'a', 'a', 'c'])
     assert np.sum(ys) == 4
     assert ys[0,2] == 1
     assert ys[1,2] == 1
     assert ys[2,2] == 1
     assert ys[3,0] == 1
+
+from dataset import Dataset
+
+def test_new():
+    d = Dataset(['dataset.py'])
+    b = BatchEncoder(d, 10, 'one_hot')
+    for xs, ys in b:
+        assert len(xs) == 10
+        assert len(ys) == 10
+        assert xs.shape == (10, 512, 256)
+        assert ys.shape == (10, 1)
+        break
