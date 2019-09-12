@@ -1,0 +1,5 @@
+True	gif	ppt	tmp	txt
+gif	79	21	0	0
+ppt	2	99	4	0
+tmp	1	0	80	13
+txt	0	0	17	84

@@ -1,0 +1,2 @@
+classes
+docx dwf eps f fits gz hlp html java jpg kmz pdf ppt swf tex text troff txt unk wp xls

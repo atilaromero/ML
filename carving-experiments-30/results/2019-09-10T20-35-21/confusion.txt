@@ -1,0 +1,10 @@
+True	kml	log	pdf	pptx	troff	txt	unk	wp	xml
+kml	85	5	0	0	2	0	0	0	5
+log	4	61	5	0	7	4	7	0	9
+pdf	0	1	61	32	0	0	2	0	2
+pptx	0	0	5	94	0	0	0	8	0
+troff	0	5	4	0	76	7	9	5	2
+txt	0	13	0	0	23	43	21	1	0
+unk	0	2	2	3	19	9	60	1	2
+wp	0	0	0	7	1	0	1	86	0
+xml	20	4	1	0	1	0	0	0	73

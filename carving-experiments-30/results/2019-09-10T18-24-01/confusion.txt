@@ -1,0 +1,5 @@
+True	pdf	ps	swf	tmp
+pdf	61	4	38	0
+ps	8	89	0	0
+swf	12	0	90	0
+tmp	10	11	0	77

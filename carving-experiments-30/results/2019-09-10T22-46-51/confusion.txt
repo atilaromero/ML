@@ -1,0 +1,11 @@
+True	dbase3	gz	html	java	log	ps	text	troff	txt	xls
+dbase3	104	0	0	0	0	0	0	0	0	0
+gz	0	103	0	0	0	0	2	0	0	0
+html	0	0	84	3	0	4	3	3	3	0
+java	0	0	0	68	7	0	1	7	5	0
+log	0	0	17	3	46	25	2	2	8	2
+ps	0	2	9	1	0	78	1	0	3	0
+text	0	10	4	1	0	3	45	11	14	16
+troff	0	0	3	4	0	5	1	72	21	0
+txt	0	0	3	8	5	5	26	16	36	0
+xls	0	0	0	0	0	0	13	0	1	81

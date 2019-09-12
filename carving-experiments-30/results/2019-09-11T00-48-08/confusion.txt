@@ -1,0 +1,3 @@
+True	f	log
+f	90	11
+log	15	84

@@ -1,0 +1,2 @@
+classes
+csv docx eps fits gz html log ppt pptx ps sql swf troff unk wp

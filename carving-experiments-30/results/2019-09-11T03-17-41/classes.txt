@@ -1,0 +1,2 @@
+classes
+doc docx java jpg kml pdf ps rtf tmp txt unk

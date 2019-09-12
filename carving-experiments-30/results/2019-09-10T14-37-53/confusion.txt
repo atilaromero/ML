@@ -1,0 +1,4 @@
+True	doc	troff	unk
+doc	92	1	4
+troff	3	76	22
+unk	7	19	76

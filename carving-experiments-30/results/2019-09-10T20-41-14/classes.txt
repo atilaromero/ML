@@ -1,0 +1,2 @@
+classes
+csv dbase3 doc dwf eps f gif jpg kml pdf png text

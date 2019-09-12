@@ -1,0 +1,2 @@
+classes
+dwf gif gz hlp jpg kmz pps ps rtf swf wp xls

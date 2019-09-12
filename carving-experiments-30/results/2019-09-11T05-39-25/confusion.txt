@@ -1,0 +1,10 @@
+True	dbase3	html	log	ppt	rtf	txt	unk	wp	xml
+dbase3	100	0	0	0	0	0	0	0	0
+html	0	80	5	0	0	6	1	0	9
+log	0	5	79	0	1	2	4	0	10
+ppt	0	0	0	87	0	0	4	10	0
+rtf	0	0	0	2	93	1	3	0	0
+txt	0	9	10	0	7	53	23	3	0
+unk	0	8	4	5	3	26	50	2	0
+wp	0	0	0	15	0	2	10	71	0
+xml	0	16	12	0	0	0	0	0	69

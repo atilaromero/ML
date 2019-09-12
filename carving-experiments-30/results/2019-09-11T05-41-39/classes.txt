@@ -1,0 +1,2 @@
+classes
+csv dbase3 docx gif hlp jpg kml rtf swf tex

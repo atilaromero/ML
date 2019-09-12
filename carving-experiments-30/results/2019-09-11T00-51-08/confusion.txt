@@ -1,0 +1,6 @@
+True	kml	kmz	pdf	troff	wp
+kml	103	0	0	0	0
+kmz	0	79	20	0	0
+pdf	2	6	91	1	0
+troff	8	0	9	83	0
+wp	0	1	10	5	82

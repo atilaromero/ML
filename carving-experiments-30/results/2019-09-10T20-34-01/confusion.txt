@@ -1,0 +1,9 @@
+True	csv	doc	gz	kmz	png	pps	text	wp
+csv	91	4	0	0	0	0	3	0
+doc	3	87	1	0	2	5	4	1
+gz	0	0	61	19	5	15	0	0
+kmz	0	2	9	75	8	6	0	2
+png	0	1	5	5	71	15	0	1
+pps	1	14	27	7	14	25	7	2
+text	8	25	1	1	2	6	61	0
+wp	1	9	0	5	8	6	5	64

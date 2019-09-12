@@ -1,0 +1,2 @@
+classes
+dwf eps f fits gif gz html jpg pdf pptx ps rtf tmp unk wp

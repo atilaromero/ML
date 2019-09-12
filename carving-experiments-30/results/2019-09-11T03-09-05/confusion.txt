@@ -1,0 +1,8 @@
+True	csv	fits	gif	html	tex	troff	wp
+csv	84	0	3	6	0	7	0
+fits	1	88	9	0	0	1	4
+gif	0	0	102	0	0	0	1
+html	3	0	0	93	2	0	0
+tex	5	0	0	11	77	2	4
+troff	9	3	0	14	0	69	3
+wp	0	2	13	1	0	0	83

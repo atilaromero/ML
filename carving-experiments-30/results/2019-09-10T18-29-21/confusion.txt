@@ -1,0 +1,10 @@
+True	fits	gz	kml	kmz	pdf	pptx	tex	txt	unk
+fits	88	1	0	0	2	5	0	0	4
+gz	0	59	0	10	2	29	0	0	0
+kml	0	0	86	0	2	0	3	3	3
+kmz	0	17	0	61	2	18	0	0	0
+pdf	6	9	0	5	62	15	0	1	2
+pptx	8	17	0	8	3	66	0	0	1
+tex	0	0	0	0	0	0	83	14	3
+txt	22	0	4	0	2	2	3	63	8
+unk	14	0	1	0	2	8	0	42	31

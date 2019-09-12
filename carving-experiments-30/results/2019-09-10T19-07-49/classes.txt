@@ -1,0 +1,2 @@
+classes
+dbase3 doc docx dwf eps f fits gif gz hlp html java kmz log png pps pptx ps sql swf wp xls xml

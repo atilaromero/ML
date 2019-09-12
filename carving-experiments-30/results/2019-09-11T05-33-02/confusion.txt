@@ -1,0 +1,7 @@
+True	f	gif	jpg	ppt	sql	xml
+f	87	0	0	0	9	6
+gif	0	89	5	2	0	0
+jpg	2	6	69	15	0	0
+ppt	1	9	15	70	0	0
+sql	34	0	0	0	74	0
+xml	3	0	0	0	5	99

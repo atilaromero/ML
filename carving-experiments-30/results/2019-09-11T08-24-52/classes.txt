@@ -1,0 +1,2 @@
+classes
+doc f fits gz hlp html log pdf png ppt pptx troff txt unk xml

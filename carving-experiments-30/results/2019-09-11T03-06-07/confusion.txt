@@ -1,0 +1,6 @@
+True	dwf	fits	gif	swf	txt
+dwf	85	3	0	15	1
+fits	3	80	4	8	1
+gif	4	4	66	24	0
+swf	5	4	5	87	0
+txt	0	40	0	2	59

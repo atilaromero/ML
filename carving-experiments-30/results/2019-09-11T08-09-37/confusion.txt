@@ -1,0 +1,11 @@
+True	dbase3	docx	eps	f	hlp	pps	pptx	rtf	swf	tmp
+dbase3	97	0	0	0	0	0	0	0	0	0
+docx	0	72	0	0	0	3	23	0	4	0
+eps	0	0	80	6	2	0	0	9	0	5
+f	0	0	1	77	14	0	0	5	0	4
+hlp	0	0	0	12	84	0	0	2	0	2
+pps	1	0	0	2	0	32	45	0	16	2
+pptx	0	8	0	0	0	7	57	0	27	0
+rtf	0	0	2	0	4	2	0	88	1	0
+swf	0	1	0	0	0	6	43	0	52	1
+tmp	0	6	9	18	3	0	0	6	0	59

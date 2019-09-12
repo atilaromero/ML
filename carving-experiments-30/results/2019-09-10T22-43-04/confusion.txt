@@ -1,0 +1,9 @@
+True	doc	eps	hlp	java	kml	pdf	ppt	rtf
+doc	82	0	2	3	0	2	11	0
+eps	0	86	0	2	2	2	0	10
+hlp	2	3	60	21	2	0	0	4
+java	0	0	2	94	8	0	0	3
+kml	0	2	0	6	88	0	0	1
+pdf	0	1	0	0	0	66	37	0
+ppt	27	0	0	0	0	17	55	0
+rtf	3	2	2	8	0	0	1	83

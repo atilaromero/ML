@@ -1,0 +1,2 @@
+classes
+doc docx dwf eps f gz html java kml log pdf png ps rtf tex text tmp troff txt unk wp

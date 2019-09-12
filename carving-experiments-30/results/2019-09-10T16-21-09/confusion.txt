@@ -1,0 +1,4 @@
+True	f	ps	tex
+f	96	0	5
+ps	16	70	8
+tex	18	0	87

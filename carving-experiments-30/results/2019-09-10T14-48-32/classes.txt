@@ -1,0 +1,2 @@
+classes
+csv doc f kml kmz png pps ps rtf swf text unk xls

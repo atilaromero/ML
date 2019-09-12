@@ -1,0 +1,6 @@
+True	fits	log	pptx	troff	xml
+fits	81	2	7	2	0
+log	4	85	2	1	8
+pptx	3	0	97	0	0
+troff	7	16	0	81	2
+xml	0	8	0	0	94

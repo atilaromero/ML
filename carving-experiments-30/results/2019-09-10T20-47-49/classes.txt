@@ -1,0 +1,2 @@
+classes
+doc docx dwf f fits gz html java jpg pdf ps swf text unk wp

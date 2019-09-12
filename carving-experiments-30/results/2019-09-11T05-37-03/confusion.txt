@@ -1,0 +1,9 @@
+True	fits	gif	hlp	kmz	pps	sql	swf	wp
+fits	88	1	0	0	9	0	1	1
+gif	0	84	0	3	0	0	4	2
+hlp	0	0	82	0	0	8	0	0
+kmz	0	1	0	80	23	0	1	0
+pps	0	6	0	7	88	1	7	1
+sql	3	0	21	0	2	69	0	0
+swf	1	5	0	5	44	0	47	3
+wp	1	0	7	1	17	0	2	74

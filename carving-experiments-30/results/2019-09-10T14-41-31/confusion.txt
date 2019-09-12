@@ -1,0 +1,9 @@
+True	fits	kmz	pdf	ppt	tmp	wp	xls	xml
+fits	88	0	9	1	2	0	4	0
+kmz	0	83	3	7	0	6	0	0
+pdf	0	4	65	20	5	0	0	2
+ppt	2	8	6	59	0	1	26	0
+tmp	8	0	7	0	72	4	4	4
+wp	2	1	0	4	1	94	2	0
+xls	1	0	0	6	2	0	90	0
+xml	0	0	0	0	4	0	0	93

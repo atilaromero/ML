@@ -1,0 +1,2 @@
+classes
+doc dwf eps fits java kml pdf png pps ppt rtf sql swf tex text tmp unk wp xls xml

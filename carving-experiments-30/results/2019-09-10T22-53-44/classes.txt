@@ -1,0 +1,2 @@
+classes
+eps fits gif kmz log pps ppt ps rtf tex tmp txt xls

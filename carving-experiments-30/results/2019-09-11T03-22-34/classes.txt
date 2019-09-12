@@ -1,0 +1,2 @@
+classes
+csv dwf fits gz html kml log pdf pps ppt sql tmp troff

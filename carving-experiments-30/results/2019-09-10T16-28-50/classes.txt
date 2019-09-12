@@ -1,0 +1,2 @@
+classes
+f gz java log png pptx ps swf tmp troff wp

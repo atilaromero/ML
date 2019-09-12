@@ -1,0 +1,9 @@
+True	csv	dbase3	html	java	pps	ppt	pptx	troff
+csv	70	0	18	4	0	0	0	8
+dbase3	0	100	0	0	0	0	0	0
+html	6	0	84	2	0	0	0	3
+java	1	0	5	91	0	0	0	5
+pps	0	0	0	0	10	61	32	0
+ppt	0	0	0	0	15	66	19	0
+pptx	0	0	0	0	14	32	52	1
+troff	12	0	12	10	0	0	0	67

@@ -1,0 +1,2 @@
+classes
+doc dwf f fits gz jpg kml kmz pdf pps pptx rtf sql text tmp xls xml

@@ -1,0 +1,2 @@
+classes
+docx dwf jpg kml ppt pptx tmp

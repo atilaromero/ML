@@ -1,0 +1,2 @@
+classes
+doc fits png ppt troff txt unk xls xml

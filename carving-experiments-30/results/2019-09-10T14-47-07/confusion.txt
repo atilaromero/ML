@@ -1,0 +1,13 @@
+True	csv	dbase3	doc	docx	fits	java	jpg	pdf	pps	tex	unk	wp
+csv	75	0	0	0	0	3	0	0	0	11	3	3
+dbase3	0	98	0	0	0	0	0	0	0	0	0	0
+doc	0	0	79	0	1	0	6	0	5	0	2	4
+docx	0	0	0	90	0	0	0	0	13	0	0	2
+fits	0	0	0	0	69	0	4	4	10	0	11	1
+java	0	0	0	0	0	63	0	0	0	6	31	0
+jpg	0	2	0	0	0	0	70	5	13	0	3	2
+pdf	0	0	0	0	1	2	1	60	28	1	8	0
+pps	0	1	14	0	4	0	2	6	70	0	1	1
+tex	1	0	0	0	0	3	0	0	0	94	6	0
+unk	7	0	4	1	8	12	3	4	4	4	51	5
+wp	0	0	3	1	1	0	1	0	16	2	8	72

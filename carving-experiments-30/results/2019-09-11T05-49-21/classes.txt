@@ -1,0 +1,2 @@
+classes
+csv eps fits gif html kml kmz log pdf ps sql tex xls

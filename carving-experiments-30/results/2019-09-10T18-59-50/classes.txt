@@ -1,0 +1,2 @@
+classes
+csv doc fits gz hlp kml kmz log png pps ppt pptx rtf sql swf tex text troff txt wp xls

@@ -1,0 +1,2 @@
+classes
+csv docx fits gif kmz log png ppt rtf swf tmp troff txt unk xml

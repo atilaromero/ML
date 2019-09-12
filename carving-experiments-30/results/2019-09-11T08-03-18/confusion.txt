@@ -1,0 +1,8 @@
+True	docx	dwf	jpg	kml	ppt	pptx	tmp
+docx	80	1	0	0	2	10	0
+dwf	0	80	5	0	2	11	1
+jpg	0	3	71	0	6	22	0
+kml	0	0	0	102	0	0	4
+ppt	2	2	6	0	42	50	1
+pptx	16	4	4	0	10	60	0
+tmp	0	0	8	6	0	0	89

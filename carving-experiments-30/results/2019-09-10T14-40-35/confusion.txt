@@ -1,0 +1,8 @@
+True	dwf	fits	java	swf	text	tmp	wp
+dwf	81	1	0	21	2	0	1
+fits	1	83	0	5	7	1	1
+java	0	0	85	0	2	18	0
+swf	11	0	0	79	1	0	8
+text	1	12	2	11	63	6	2
+tmp	0	3	3	0	21	68	3
+wp	4	6	1	4	4	0	78

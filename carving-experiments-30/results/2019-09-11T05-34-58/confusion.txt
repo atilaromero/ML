@@ -1,0 +1,8 @@
+True	dbase3	eps	html	java	png	text	troff
+dbase3	94	0	0	0	0	0	0
+eps	0	83	2	1	2	9	0
+html	0	7	95	6	0	1	2
+java	0	1	2	102	0	2	0
+png	0	0	0	0	93	5	0
+text	0	6	4	1	6	69	8
+troff	0	5	4	20	0	15	55

@@ -1,0 +1,4 @@
+True	csv	dbase3	troff
+csv	75	0	20
+dbase3	0	100	0
+troff	26	0	79

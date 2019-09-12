@@ -1,0 +1,2 @@
+classes
+dbase3 doc f gif hlp html java log pdf png pps ppt pptx rtf sql tex text troff txt unk wp xml

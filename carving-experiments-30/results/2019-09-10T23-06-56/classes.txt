@@ -1,0 +1,2 @@
+classes
+doc docx eps f gif gz hlp html java jpg pdf png rtf text troff unk xls

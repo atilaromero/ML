@@ -1,0 +1,5 @@
+True	gif	pdf	pps	txt
+gif	87	5	10	0
+pdf	4	68	16	8
+pps	3	14	81	0
+txt	0	2	0	102

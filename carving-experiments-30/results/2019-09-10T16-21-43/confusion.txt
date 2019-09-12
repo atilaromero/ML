@@ -1,0 +1,5 @@
+True	fits	pdf	ppt	troff
+fits	87	6	3	6
+pdf	4	66	16	13
+ppt	4	17	76	0
+troff	1	6	0	95

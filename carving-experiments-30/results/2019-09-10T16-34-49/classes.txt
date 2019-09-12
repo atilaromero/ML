@@ -1,0 +1,2 @@
+classes
+csv doc dwf f gif gz html pptx ps rtf tex text troff wp

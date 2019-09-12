@@ -1,0 +1,2 @@
+classes
+eps gif gz jpg kml log pdf ps sql text tmp unk

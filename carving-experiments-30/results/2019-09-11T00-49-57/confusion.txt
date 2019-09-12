@@ -1,0 +1,5 @@
+True	java	ppt	pptx	rtf
+java	103	0	0	0
+ppt	2	45	52	2
+pptx	0	10	91	0
+rtf	2	0	0	93

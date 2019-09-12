@@ -1,0 +1,2 @@
+classes
+eps f fits java kml pdf png pps ppt rtf swf tex text tmp

@@ -1,0 +1,2 @@
+classes
+dbase3 dwf gif gz hlp html jpg kmz png ppt txt wp

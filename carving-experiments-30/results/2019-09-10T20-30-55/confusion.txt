@@ -1,0 +1,7 @@
+True	f	gif	html	kml	text	troff
+f	77	0	8	0	4	15
+gif	0	85	0	0	17	0
+html	1	0	89	3	0	1
+kml	1	0	10	91	3	0
+text	15	9	3	0	66	3
+troff	16	0	8	0	15	60

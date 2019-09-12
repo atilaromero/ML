@@ -1,0 +1,12 @@
+True	csv	docx	dwf	html	jpg	pdf	sql	swf	unk	wp	xls
+csv	93	0	0	5	0	0	3	2	2	0	0
+docx	0	80	0	0	2	6	0	9	0	1	0
+dwf	0	0	85	0	0	9	0	7	0	1	0
+html	13	0	0	62	0	8	8	0	12	0	0
+jpg	0	0	0	0	69	6	0	12	4	1	0
+pdf	2	0	3	1	4	87	0	8	3	0	0
+sql	13	3	0	3	0	3	64	2	16	0	0
+swf	0	1	4	0	4	22	0	61	1	1	0
+unk	8	0	1	4	0	8	8	3	55	4	6
+wp	1	0	4	0	0	2	5	1	10	69	3
+xls	0	1	0	0	0	0	0	3	2	5	91

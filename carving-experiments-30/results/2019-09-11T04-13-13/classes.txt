@@ -1,0 +1,2 @@
+classes
+csv doc docx dwf gif gz hlp html kmz log pdf png ppt pptx rtf sql swf tex text tmp troff txt wp xls xml

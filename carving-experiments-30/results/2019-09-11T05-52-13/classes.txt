@@ -1,0 +1,2 @@
+classes
+csv doc gz hlp pdf pps ppt sql swf tex text troff wp xls

@@ -1,0 +1,6 @@
+True	fits	jpg	pdf	rtf	text
+fits	92	8	0	0	3
+jpg	1	75	19	0	7
+pdf	1	12	77	1	3
+rtf	1	0	0	96	3
+text	20	0	11	5	65

@@ -1,0 +1,7 @@
+True	docx	eps	kmz	log	text	xls
+docx	85	0	8	0	3	3
+eps	0	92	0	2	1	1
+kmz	0	0	105	0	2	0
+log	3	11	0	75	7	0
+text	0	20	7	3	55	14
+xls	0	0	0	0	5	98

@@ -1,0 +1,2 @@
+classes
+dbase3 doc eps gif gz hlp html jpg kmz pdf png pps pptx rtf sql swf tex txt unk wp xml

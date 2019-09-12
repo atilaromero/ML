@@ -1,0 +1,2 @@
+classes
+csv docx dwf eps f gz hlp jpg log pdf png pps ppt pptx ps swf tex text tmp troff xls xml

@@ -1,0 +1,2 @@
+classes
+doc eps fits hlp html kml pdf png pps pptx ps sql swf troff txt unk xls xml

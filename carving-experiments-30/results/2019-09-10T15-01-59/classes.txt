@@ -1,0 +1,2 @@
+classes
+csv dbase3 docx hlp html java kml kmz pdf png pps pptx sql swf tex text tmp txt unk

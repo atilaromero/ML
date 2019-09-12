@@ -1,0 +1,2 @@
+classes
+dbase3 docx dwf f gz hlp tex tmp troff txt

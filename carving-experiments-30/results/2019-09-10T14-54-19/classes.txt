@@ -1,0 +1,2 @@
+classes
+csv dbase3 doc fits gif hlp jpg log pdf png ps rtf tex tmp troff xls

@@ -1,0 +1,2 @@
+classes
+csv f html kml log pps ppt text troff txt wp

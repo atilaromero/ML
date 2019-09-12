@@ -1,0 +1,2 @@
+classes
+dbase3 doc docx gz java kmz pps pptx ps rtf sql tex text troff

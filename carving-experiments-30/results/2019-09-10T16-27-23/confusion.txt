@@ -1,0 +1,11 @@
+True	doc	docx	gz	jpg	kml	pdf	rtf	sql	txt	unk
+doc	91	0	1	4	0	1	0	0	1	2
+docx	1	83	10	1	0	1	0	0	0	3
+gz	0	0	87	0	0	8	0	0	0	0
+jpg	7	0	12	69	0	9	0	0	0	2
+kml	0	0	0	0	90	1	0	1	7	4
+pdf	0	0	32	2	1	71	0	1	1	3
+rtf	1	0	1	0	0	0	91	0	1	4
+sql	0	0	0	2	1	2	0	51	22	21
+txt	0	0	0	0	3	1	4	6	51	34
+unk	7	0	2	2	1	7	0	3	23	52

@@ -1,0 +1,5 @@
+True	csv	hlp	log	sql
+csv	78	4	14	2
+hlp	1	86	3	12
+log	5	4	85	6
+sql	16	18	3	63

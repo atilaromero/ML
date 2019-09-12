@@ -1,0 +1,2 @@
+classes
+csv docx dwf eps gif gz hlp html kml kmz log png ppt ps rtf swf text xls xml

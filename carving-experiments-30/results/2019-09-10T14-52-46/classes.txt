@@ -1,0 +1,2 @@
+classes
+dbase3 docx dwf jpg log png pps ppt rtf sql text troff unk xls xml

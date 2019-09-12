@@ -1,0 +1,2 @@
+classes
+doc eps gif hlp jpg kml log pps ppt ps rtf swf text troff txt xls

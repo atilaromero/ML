@@ -1,0 +1,3 @@
+True	jpg	xml
+jpg	96	1
+xml	0	103

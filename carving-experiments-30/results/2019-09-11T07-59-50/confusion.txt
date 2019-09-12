@@ -1,0 +1,6 @@
+True	csv	gz	ppt	sql	tmp
+csv	89	0	0	8	1
+gz	0	75	25	0	0
+ppt	0	22	78	0	0
+sql	14	0	0	58	24
+tmp	12	0	0	15	79

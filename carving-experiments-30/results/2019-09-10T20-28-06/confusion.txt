@@ -1,0 +1,4 @@
+True	dwf	hlp	png
+dwf	96	0	5
+hlp	0	100	0
+png	12	0	87

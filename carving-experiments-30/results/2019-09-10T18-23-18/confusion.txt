@@ -1,0 +1,4 @@
+True	fits	tmp	troff
+fits	98	2	2
+tmp	4	86	14
+troff	2	16	76

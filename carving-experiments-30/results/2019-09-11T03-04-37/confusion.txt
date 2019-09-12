@@ -1,0 +1,5 @@
+True	eps	f	png	text
+eps	88	5	3	1
+f	7	90	0	2
+png	0	0	103	6
+text	7	25	6	57

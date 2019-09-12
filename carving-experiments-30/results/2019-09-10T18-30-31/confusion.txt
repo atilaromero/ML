@@ -1,0 +1,11 @@
+True	dbase3	gz	java	kmz	png	ppt	pptx	ps	rtf	xls
+dbase3	97	0	0	0	0	0	0	0	0	0
+gz	0	67	0	11	4	6	15	0	0	0
+java	0	0	92	0	0	0	0	2	0	0
+kmz	0	13	0	58	22	4	3	0	0	0
+png	0	8	0	3	76	11	2	0	0	0
+ppt	0	13	0	1	20	37	12	0	0	21
+pptx	0	27	0	3	7	24	44	0	1	1
+ps	0	0	6	0	0	0	0	90	1	0
+rtf	0	0	3	0	0	0	0	14	84	0
+xls	1	0	0	0	2	12	1	0	0	81

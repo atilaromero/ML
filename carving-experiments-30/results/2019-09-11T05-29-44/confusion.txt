@@ -1,0 +1,5 @@
+True	docx	gif	text	xml
+docx	96	4	2	0
+gif	7	87	5	0
+text	7	4	85	4
+xml	0	0	15	84

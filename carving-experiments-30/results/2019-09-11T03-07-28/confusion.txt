@@ -1,0 +1,7 @@
+True	docx	dwf	html	kmz	rtf	tmp
+docx	91	3	0	11	0	0
+dwf	3	89	0	7	0	0
+html	0	0	92	0	4	5
+kmz	4	19	0	68	0	0
+rtf	2	0	1	0	105	1
+tmp	11	0	13	0	3	68

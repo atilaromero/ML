@@ -1,0 +1,2 @@
+classes
+dbase3 gz jpg kmz log pptx swf tex tmp troff txt wp

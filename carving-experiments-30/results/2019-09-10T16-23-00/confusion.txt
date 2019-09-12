@@ -1,0 +1,7 @@
+True	fits	html	kmz	rtf	sql	wp
+fits	86	0	6	1	0	6
+html	1	97	0	2	6	0
+kmz	1	0	108	0	0	2
+rtf	0	6	2	86	3	0
+sql	2	18	0	0	68	3
+wp	4	5	10	1	0	76

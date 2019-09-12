@@ -1,0 +1,2 @@
+classes
+docx fits hlp jpg kml png ps rtf text tmp troff unk wp

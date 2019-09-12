@@ -1,0 +1,2 @@
+classes
+dbase3 docx gif gz hlp java log png rtf sql swf wp xls

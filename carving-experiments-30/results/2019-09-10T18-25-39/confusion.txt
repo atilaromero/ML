@@ -1,0 +1,7 @@
+True	csv	dbase3	kmz	ppt	tex	wp
+csv	88	0	0	0	7	8
+dbase3	0	101	0	0	0	0
+kmz	0	0	86	15	0	0
+ppt	0	0	22	74	3	2
+tex	2	0	0	0	91	6
+wp	0	0	6	15	1	73

@@ -1,0 +1,10 @@
+True	gif	kml	ps	sql	troff	txt	wp	xls	xml
+gif	88	0	0	0	0	0	11	2	0
+kml	0	68	0	0	0	4	0	0	27
+ps	2	2	82	0	2	6	0	0	6
+sql	0	0	7	32	18	24	6	0	16
+troff	0	0	6	5	64	15	0	0	10
+txt	0	1	4	10	11	75	0	0	0
+wp	18	0	0	2	2	5	63	4	1
+xls	1	0	0	1	1	0	2	95	0
+xml	0	10	10	2	1	1	0	0	77

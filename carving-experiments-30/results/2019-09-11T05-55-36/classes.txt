@@ -1,0 +1,2 @@
+classes
+csv doc fits gz hlp java jpg kmz png pps sql troff unk xls xml

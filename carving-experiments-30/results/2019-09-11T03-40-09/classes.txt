@@ -1,0 +1,2 @@
+classes
+doc docx dwf eps fits gz hlp html jpg kmz log pps sql swf text troff wp xml

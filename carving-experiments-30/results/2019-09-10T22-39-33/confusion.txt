@@ -1,0 +1,6 @@
+True	java	jpg	log	swf	text
+java	87	0	8	0	3
+jpg	0	78	0	16	5
+log	12	0	78	0	8
+swf	0	47	1	53	3
+text	10	13	4	5	69

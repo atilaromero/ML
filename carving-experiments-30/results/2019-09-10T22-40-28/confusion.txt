@@ -1,0 +1,7 @@
+True	csv	docx	png	ps	text	xml
+csv	86	0	0	8	0	0
+docx	0	91	13	0	0	0
+png	1	5	93	0	2	0
+ps	5	0	0	81	10	2
+text	9	5	14	10	67	1
+xml	0	0	0	0	1	96

@@ -1,0 +1,2 @@
+classes
+csv doc gz kmz png pps text wp

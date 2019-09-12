@@ -1,0 +1,2 @@
+classes
+doc f html jpg log pptx ps rtf sql tex txt

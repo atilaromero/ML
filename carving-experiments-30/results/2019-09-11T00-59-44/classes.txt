@@ -1,0 +1,2 @@
+classes
+doc f fits gif gz png pps pptx swf xml

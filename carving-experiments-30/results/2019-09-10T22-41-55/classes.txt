@@ -1,0 +1,2 @@
+classes
+gif hlp kml kmz txt unk wp

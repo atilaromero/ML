@@ -1,0 +1,2 @@
+classes
+gif gz kml png pps ps sql swf tex text troff unk
