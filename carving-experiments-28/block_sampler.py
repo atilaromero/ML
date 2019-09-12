@@ -5,6 +5,7 @@ import math
 import threading
 from collections import namedtuple
 
+
 def xs_encoder_one_hot(blocks):
     xs = np.zeros((len(blocks), 512, 256), dtype='int')
     for i, block in enumerate(blocks):
@@ -79,35 +80,6 @@ class All:
             return xs, ys
 
 
-class threadsafe_iter:
-    """
-    Takes an iterator/generator and makes it thread-safe by
-    serializing call to the `next` method of given iterator/generator.
-    """
-
-    def __init__(self, it):
-        self.it = it
-        self.lock = threading.Lock()
-
-    def __iter__(self):
-        return self
-
-    def __next__(self):
-        with self.lock:
-            return self.it.__next__()
-
-
-
-def sample_file_then_block(filenames, category_func):
-    while True:
-        files = random.sample(filenames, len(filenames))
-        assert len(files) > 0
-        for f in files:
-            block = sample_sector(f)
-            cat = category_func(f)
-            yield BlockCat(block, cat)
-
-
 def mk_ys_encoder(cat_to_ix):
     len_cats = len(cat_to_ix.keys())
 
@@ -120,28 +92,12 @@ def mk_ys_encoder(cat_to_ix):
     return ys_encoder
 
 
-def sample_sector(path):
-    with open(path, 'rb') as f:
-        f.seek(0, 2)
-        size = f.tell()
-        i = np.random.randint(0, size)
-        sector = i//512
-        f.seek(sector*512, 0)
-        b = f.read(512)
-        assert len(b) > 0
-        n = np.zeros((512), dtype='int')
-        n[:len(b)] = [int(x) for x in b]
-        return n
-
-
 def first_sector(path):
     with open(path, 'rb') as f:
         b = f.read(512)
         n = np.zeros((512), dtype='int')
         n[:len(b)] = [int(x) for x in b]
         return n
-
-
 
 
 def one_hot(arr, num_categories):

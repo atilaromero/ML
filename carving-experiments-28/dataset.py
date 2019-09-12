@@ -1,5 +1,13 @@
 import os
+import math
 import random
+import numpy as np
+from typing import Generator
+
+class BlockInstance:
+    def __init__(self, block, category):
+        self.block = block
+        self.category = category
 
 class Dataset:
     def __init__(self, filenames, categories=None):
@@ -43,6 +51,26 @@ class Dataset:
             datasets[k].add(f)
         return datasets
 
+    def generator(self, distribution='by_file') -> Generator[BlockInstance, None, None]:
+        """ generator of BlockInstance
+        distribution = 'by_file' or 'by_sector'"""
+        assert distribution in ['by_file', 'by_sector']
+        filenames = list(self.filenames)
+        assert len(filenames) > 0
+        sectors = {}
+        for filename in filenames:
+            sectors[filename] = count_sectors(filename)
+        while True:
+            if distribution=='by_file':
+                files = random.sample(filenames, len(filenames))
+            if distribution=='by_sector':
+                files = random.choices(*zip(*sectors.items()), k=1000)
+            for f in files:
+                sector = random.randrange(sectors[f])
+                block = get_sector(f, sector)
+                yield BlockInstance(block, self.category_func(f))
+
+
     @classmethod
     def new_from_folders(cls, folders):
         result = set()
@@ -55,12 +83,18 @@ class Dataset:
     def new_from_folder(cls, folder):
         return Dataset.new_from_folders([folder])
 
-class Instance:
-    pass
+def count_sectors(filename):
+    stat = os.stat(filename)
+    return math.ceil(stat.st_size/512)
 
-BlockCat = namedtuple('BlockCat', ['block', 'cat'])
-
-
+def get_sector(filename, sector):
+    with open(filename, 'rb') as f:
+        f.seek(sector*512, 0)
+        b = f.read(512)
+        assert len(b) > 0
+        n = np.zeros((512), dtype='int')
+        n[:len(b)] = [int(x) for x in b]
+        return n
 
 def category_from_extension(path):
     ext = path.rsplit('.', 1)[1]
