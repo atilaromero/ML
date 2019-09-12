@@ -1,4 +1,4 @@
-from block_sampler import *
+from batch_encoder import *
 import numpy as np
 
 def test_xs_encoder_one_hot():
