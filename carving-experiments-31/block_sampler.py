@@ -13,13 +13,29 @@ class BlockInstance:
 
 
 class BlockSampler:
+    def __init__(self, dataset: Dataset, group_by='by_file'):
+        self.dataset = dataset
+        assert group_by in ['by_file', 'by_sector']
+        self.group_by = group_by
+    def __iter__(self) -> Generator[BlockInstance, None, None]:
+        filenames = list(self.dataset.filenames)
+        assert len(filenames) > 0
+        sectors = {}
+        for filename in filenames:
+            sectors[filename] = count_sectors(filename)
+        while True:
+            if self.group_by == 'by_file':
+                files = random.sample(filenames, len(filenames))
+            if self.group_by == 'by_sector':
+                files = random.choices(*zip(*sectors.items()), k=1000)
+            for f in files:
+                sector = random.randrange(sectors[f])
+                block = get_sector(f, sector)
+                yield BlockInstance(block, self.dataset.categories_from(f))
+
+class BlockSamplerByFile:
     def __init__(self, dataset: Dataset):
         self.dataset = dataset
-    @abstractmethod
-    def __iter__(self):
-        pass 
-
-class BlockSamplerByFile(BlockSampler):
     def __iter__(self) -> Generator[BlockInstance, None, None]:
         filenames = list(self.dataset.filenames)
         assert len(filenames) > 0
@@ -34,7 +50,9 @@ class BlockSamplerByFile(BlockSampler):
                 yield BlockInstance(block, self.dataset.categories_from(f))
 
 
-class BlockSamplerBySector(BlockSampler):
+class BlockSamplerBySector:
+    def __init__(self, dataset: Dataset):
+        self.dataset = dataset
     def __iter__(self) -> Generator[BlockInstance, None, None]:
         filenames = list(self.dataset.filenames)
         assert len(filenames) > 0
