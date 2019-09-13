@@ -1,5 +1,6 @@
 from batch_encoder import *
 import numpy as np
+from block_sampler import BlockSamplerByFile
 
 def test_xs_encoder_one_hot():
     block = np.ones((512,), dtype='int') * 255
@@ -50,8 +51,9 @@ from dataset import Dataset
 
 def test_new():
     d = Dataset(['dataset.py'])
-    b = BatchEncoder(d, 10, 'one_hot')
-    for xs, ys in b:
+    bs = BlockSamplerByFile(d)
+    be = BatchEncoder(bs, 10, 'one_hot')
+    for xs, ys in be:
         assert len(xs) == 10
         assert len(ys) == 10
         assert xs.shape == (10, 512, 256)

@@ -1,21 +1,21 @@
 import numpy as np
 import threading
 from dataset import Dataset
+from block_sampler import BlockSampler
 
 _bitmap = np.array([128, 64, 32, 16, 8, 4, 2, 1],
                   dtype='int').reshape((1, 8)).repeat(512, 0)
 
 class BatchEncoder:
-    def __init__(self, dataset: Dataset, batch_size, xs_encoder='one_hot'):
+    def __init__(self, sampler: BlockSampler, batch_size, xs_encoder='one_hot'):
         self.lock = threading.Lock()
-        self.dataset = dataset
+        self.sampler = iter(sampler)
         self.batch_size = batch_size
         if type(xs_encoder) == str:
             assert xs_encoder in ['one_hot', '264bits', '8bits01', "8bits_11", "16bits"]
             xs_encoder = globals()['xs_encoder_' + xs_encoder]
         self.xs_encoder = xs_encoder
-        self.ys_encoder = mk_ys_encoder(dataset.cat_to_ix)
-        self.gen = dataset.generator()
+        self.ys_encoder = mk_ys_encoder(sampler.dataset.cat_to_ix)
 
     def __iter__(self):
         while True:
@@ -26,7 +26,7 @@ class BatchEncoder:
         with self.lock:
             batch = []
             for _ in range(self.batch_size):
-                sample = next(self.gen)
+                sample = next(self.sampler)
                 batch.append(sample)
             xs = self.xs_encoder([s.block for s in batch])
             ys = self.ys_encoder([s.category for s in batch])
