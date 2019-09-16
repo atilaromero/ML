@@ -1,5 +1,4 @@
 import os
-import sys
 import datetime
 import random
 
@@ -7,7 +6,7 @@ from tensorflow.keras.callbacks import EarlyStopping
 
 import models
 from block_sampler import BlockSampler
-from dataset import Dataset, mk_minimum_filter
+from dataset import Dataset
 from batch_encoder import BatchEncoder
 import callbacks
 
@@ -75,7 +74,7 @@ def nclasses(
                                       epochs=epochs,
                                       callbacks=[
                                           timeIt,
-                                          # callbacks.SaveModel(os.path.join(model_dir, model.name + '.h5')),
+                                          # callbacks.SaveModel(os.path.join(result_dir, model.name + '.h5')),
                                           callbacks.TimeLimit(max_seconds),
                                           EarlyStopping(monitor='val_categorical_accuracy',
                                                         min_delta=1e-02, patience=2),
