@@ -6,10 +6,11 @@ from tensorflow.keras.metrics import binary_accuracy, categorical_accuracy, mean
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.regularizers import l1, l2
 
+
 def compile(model, loss):
     model.compile(loss=loss,
-        optimizer=Adam(),
-        metrics=[categorical_accuracy, binary_accuracy])
+                  optimizer=Adam(),
+                  metrics=[categorical_accuracy, binary_accuracy])
 
 
 def args_gen(*args, **kwargs):
@@ -22,9 +23,10 @@ def args_gen(*args, **kwargs):
         for _values in itertools.product(*values):
             _kwargs = dict(zip(keys, _values))
             # remove None values
-            __kwargs = dict([(k,v) for k,v in _kwargs.items() if v != None])
+            __kwargs = dict([(k, v) for k, v in _kwargs.items() if v != None])
             __args = [x for x in _args if x != None]
-            yield __args,__kwargs
+            yield __args, __kwargs
+
 
 def pre_last_gen(classes, l0):
     if len(l0.shape) == 2:
@@ -36,12 +38,13 @@ def pre_last_gen(classes, l0):
         last = l0
         name = ''
         pool_size = int(l0.shape[-2])
-        if l0.shape[-1]!=classes:
+        if l0.shape[-1] != classes:
             last = Conv1D(classes, (1,), strides=1)(l0)
             name = 'C32_1_1'
         last = MaxPooling1D(pool_size=pool_size, strides=1)(last)
         last = Flatten()(last)
         yield last, name+'M'
+
 
 def activation_from(loss):
     if loss[:3] in ['cat']:
@@ -50,16 +53,16 @@ def activation_from(loss):
         return Activation('sigmoid')
     raise Exception('activation_from need to be updated to acept loss =', loss)
 
-        
+
 def name_from(layer, *args, **kwargs):
     if layer == activation_from:
         return args[0][:3]
     if issubclass(layer, LSTM):
         if 'return_sequences' in kwargs:
-            return 'LV%d'%args[0]
-        return 'L%d'%args[0]
+            return 'LV%d' % args[0]
+        return 'L%d' % args[0]
     if issubclass(layer, Conv1D):
-        nc = 'C%d_%d_%d'%(args[0],args[1][0],kwargs['strides'])
+        nc = 'C%d_%d_%d' % (args[0], args[1][0], kwargs['strides'])
         if 'padding' in kwargs:
             nc += 'p'
         if 'activation' in kwargs:
@@ -68,7 +71,7 @@ def name_from(layer, *args, **kwargs):
             nc += 'k'
         return nc
     if issubclass(layer, Dense):
-        return 'D%d'%args[0]
+        return 'D%d' % args[0]
     if issubclass(layer, Flatten):
         return 'F'
     if issubclass(layer, MaxPooling1D):
@@ -79,73 +82,75 @@ def name_from(layer, *args, **kwargs):
         return 'A'
     raise Exception('name_from does not know', layer)
 
+
 def genall(classes, shape):
     def endLD(units):
         return [
-            [(LSTM, x, y) for x,y in args_gen(
+            [(LSTM, x, y) for x, y in args_gen(
                 [units],
             )],
-            [(Dense, x, y) for x,y in args_gen(
+            [(Dense, x, y) for x, y in args_gen(
                 [classes],
             )],
         ]
     endFD = [
-        [(Flatten, x, y) for x,y in args_gen()],
-        [(Dense, x, y) for x,y in args_gen(
+        [(Flatten, x, y) for x, y in args_gen()],
+        [(Dense, x, y) for x, y in args_gen(
             [classes],
         )],
     ]
     endL = [
-        [(LSTM, x, y) for x,y in args_gen(
+        [(LSTM, x, y) for x, y in args_gen(
             [classes],
         )],
     ]
+
     def endCM(pool_size):
         return [
-            [(Conv1D, x, y) for x,y in args_gen(
-                [classes], 
-                [(1,)], 
-                strides=[1], 
+            [(Conv1D, x, y) for x, y in args_gen(
+                [classes],
+                [(1,)],
+                strides=[1],
             )],
-            [(MaxPooling1D, x, y) for x,y in args_gen(
+            [(MaxPooling1D, x, y) for x, y in args_gen(
                 pool_size=[pool_size],
                 strides=[1],
             )],
-            [(Flatten, x, y) for x,y in args_gen()],
+            [(Flatten, x, y) for x, y in args_gen()],
         ]
     layers = [
-        [(Input, x, y) for x,y in args_gen(shape=[shape])],
+        [(Input, x, y) for x, y in args_gen(shape=[shape])],
 
-        [(Conv1D, x, y) for x,y in args_gen(
-            [64], 
-            [(16,)], 
-            strides=[2], 
-            padding=['same'], 
+        [(Conv1D, x, y) for x, y in args_gen(
+            [64],
+            [(16,)],
+            strides=[2],
+            padding=['same'],
             # activation=['relu'],
             # kernel_regularizer=[l2(0.01)],
         )],
-        [(BatchNormalization, x, y) for x,y in args_gen()],
-        [(Activation, x, y) for x,y in args_gen(['relu'])],
-        [(Conv1D, x, y) for x,y in args_gen(
-            [32], 
-            [(4,)], 
-            strides=[2], 
-            padding=['same'], 
+        [(BatchNormalization, x, y) for x, y in args_gen()],
+        [(Activation, x, y) for x, y in args_gen(['relu'])],
+        [(Conv1D, x, y) for x, y in args_gen(
+            [32],
+            [(4,)],
+            strides=[2],
+            padding=['same'],
             activation=['relu'],
             # kernel_regularizer=[l2(0.01)],
         )],
-        [(BatchNormalization, x, y) for x,y in args_gen()],
-        [(Activation, x, y) for x,y in args_gen(['relu'])],
-        [(Conv1D, x, y) for x,y in args_gen(
-            [64], 
-            [(32,)], 
-            strides=[2], 
-            padding=['same'], 
+        [(BatchNormalization, x, y) for x, y in args_gen()],
+        [(Activation, x, y) for x, y in args_gen(['relu'])],
+        [(Conv1D, x, y) for x, y in args_gen(
+            [64],
+            [(32,)],
+            strides=[2],
+            padding=['same'],
             activation=['relu'],
             # kernel_regularizer=[l2(0.01)],
         )],
-        [(BatchNormalization, x, y) for x,y in args_gen()],
-        [(Activation, x, y) for x,y in args_gen(['relu'])],
+        [(BatchNormalization, x, y) for x, y in args_gen()],
+        [(Activation, x, y) for x, y in args_gen(['relu'])],
         # [(LSTM, x, y) for x,y in args_gen(
         #     [64],
         #     return_sequences=[True],
@@ -154,11 +159,11 @@ def genall(classes, shape):
         *endLD(64),
         # *endL,
         # *endCM(8),
-        [(activation_from, x, y) for x,y in args_gen([
-            'categorical_crossentropy', 
-            # 'binary_crossentropy', 
+        [(activation_from, x, y) for x, y in args_gen([
+            'categorical_crossentropy',
+            # 'binary_crossentropy',
             # 'mse',
-            ]
+        ]
         )],
     ]
     for m in itertools.product(*layers):
@@ -167,7 +172,7 @@ def genall(classes, shape):
         name = []
         for l in m[1:]:
             last = l[0](*l[1], **l[2])(last)
-            name.append(name_from(l[0],*l[1], **l[2]))
+            name.append(name_from(l[0], *l[1], **l[2]))
         name = '_'.join(name)
         print(name)
         model = Model([l0], last, name=name)
@@ -175,6 +180,7 @@ def genall(classes, shape):
         compile(model, loss)
         yield model
 
+
 if __name__ == '__main__':
-    for m in genall(31, shape=(512,256)):
+    for m in genall(31, shape=(512, 256)):
         m.summary()

@@ -7,9 +7,7 @@ class TimeIt(Callback):
         self.start_time = time.time()
 
     def on_train_end(self, logs):
-        elapsed = time.time()-self.start_time
-        m, s = divmod(elapsed, 60)
-        self.elapsed = "{:d}m{:02d}s".format(int(m), int(s))
+        self.elapsed = time.time()-self.start_time
 
 
 class TimeLimit(Callback):

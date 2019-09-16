@@ -31,7 +31,7 @@ class BlockSampler:
             for f in files:
                 sector = random.randrange(sectors[f])
                 block = get_sector(f, sector)
-                yield BlockInstance(block, self.dataset.categories_from(f))
+                yield BlockInstance(block, self.dataset.category_from(f))
 
 class BlockSamplerByFile:
     def __init__(self, dataset: Dataset):
