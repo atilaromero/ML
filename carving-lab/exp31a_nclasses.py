@@ -13,9 +13,13 @@ import callbacks
 import report
 
 
+"""
+How the number of classes affects accuracy?
+"""
+
 def mk_result_dir():
     time_dir = datetime.datetime.now().isoformat()[:19].replace(':', '-')
-    model_dir = os.path.join('results', time_dir)
+    model_dir = os.path.join('results', 'exp31a', time_dir)
     os.makedirs(model_dir, exist_ok=True)
     return model_dir
 
@@ -71,24 +75,24 @@ def nclasses(
         timeIt = callbacks.TimeIt()
 
         history = model.fit_generator(iter(tbenc),
-                                      validation_data=iter(vbenc),
-                                      validation_steps=validation_steps,
-                                      steps_per_epoch=steps_per_epoch,
-                                      epochs=epochs,
-                                      callbacks=[
-                                          timeIt,
-                                          # callbacks.SaveModel(os.path.join(result_dir, model.name + '.h5')),
-                                          callbacks.TimeLimit(max_seconds),
-                                          EarlyStopping(monitor='val_categorical_accuracy',
-                                                        min_delta=1e-02, patience=2),
-                                          # TensorBoard(
-                                          #     log_dir=os.path.join(log_dir, model.name),
-                                          #     # update_freq=3100,
-                                          # ),
-                                      ],
-                                      use_multiprocessing=False,
-                                      workers=0,
-                                      )
+            validation_data=iter(vbenc),
+            validation_steps=validation_steps,
+            steps_per_epoch=steps_per_epoch,
+            epochs=epochs,
+            callbacks=[
+                timeIt,
+                # callbacks.SaveModel(os.path.join(result_dir, model.name + '.h5')),
+                callbacks.TimeLimit(max_seconds),
+                EarlyStopping(monitor='val_categorical_accuracy',
+                            min_delta=1e-02, patience=2),
+                # TensorBoard(
+                #     log_dir=os.path.join(log_dir, model.name),
+                #     # update_freq=3100,
+                # ),
+            ],
+            use_multiprocessing=False,
+            workers=0,
+            )
         report_data = OrderedDict()
         report_data['classes'] = n
         reports = [
