@@ -21,9 +21,7 @@ import matplotlib.pyplot as plt
 EXPERIMENT=34
 
 """
-Compares ROC curves of models trainded with purified and unmodified datasets.
-
-The purified model did not go well when evaluated in the unmodified dataset.
+Compares raw and purified datasets using precision X recall graph
 """
 
 def mk_result_dir():
