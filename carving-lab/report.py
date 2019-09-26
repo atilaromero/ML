@@ -71,6 +71,7 @@ class Reporter2:
             self.first_line = False
         self.f.write(str.encode('\t'.join([str(x) for x in kwargs.values()])))
         self.f.write(str.encode('\n'))
+        self.f.flush()
 
     def close(self):
         self.f.close()
