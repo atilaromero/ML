@@ -35,8 +35,26 @@ class BlockSampler:
                 yield BlockInstance(block, self.dataset.category_from(f))
 
 
+class BlockSamplerFirstBlock:
+    def __init__(self, dataset: Dataset, **kwargs):
+        self.dataset = dataset
+
+    def __iter__(self) -> Generator[BlockInstance, None, None]:
+        filenames = list(self.dataset.filenames)
+        assert len(filenames) > 0
+        sectors = {}
+        for filename in filenames:
+            sectors[filename] = count_sectors(filename)
+        while True:
+            files = random.sample(filenames, len(filenames))
+            for f in files:
+                sector = 0
+                block = get_sector(f, sector)
+                yield BlockInstance(block, self.dataset.category_from(f))
+
+
 class BlockSamplerByCategory:
-    def __init__(self, dataset: Dataset, ratio=0.9):
+    def __init__(self, dataset: Dataset, ratio=0.9, **kwargs):
         self.dataset = dataset
         self.ratio = ratio
         self.category_prob = {}
@@ -68,7 +86,7 @@ class BlockSamplerByCategory:
 
 
 class BlockSamplerByFile:
-    def __init__(self, dataset: Dataset):
+    def __init__(self, dataset: Dataset, **kwargs):
         self.dataset = dataset
 
     def __iter__(self) -> Generator[BlockInstance, None, None]:
@@ -86,7 +104,7 @@ class BlockSamplerByFile:
 
 
 class BlockSamplerBySector:
-    def __init__(self, dataset: Dataset):
+    def __init__(self, dataset: Dataset, **kwargs):
         self.dataset = dataset
 
     def __iter__(self) -> Generator[BlockInstance, None, None]:
@@ -119,7 +137,7 @@ def get_sector(filename, sector):
 
 
 class RandomSampler:
-    def __init__(self, blksampler, ratio=0.5, rnd_cat='random', not_rnd_cat='not_random'):
+    def __init__(self, blksampler, ratio=0.5, rnd_cat='random', not_rnd_cat='not_random', **kwargs):
         self.blksampler = blksampler
         self.ratio = ratio
         self.rnd_cat = rnd_cat

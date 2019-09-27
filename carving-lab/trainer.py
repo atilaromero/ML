@@ -20,7 +20,9 @@ class Trainer:
                  max_seconds=10*60,
                  batch_size=400,
                  min_delta=1e-03,
-                 patience=4):
+                 patience=4,
+                 blockSampler=BlockSampler,
+                 batchEncoder=BatchEncoder):
         self.model = model
         self.group_by = group_by
         self.xs_encoder = xs_encoder
@@ -31,15 +33,17 @@ class Trainer:
         self.batch_size = batch_size
         self.min_delta = min_delta
         self.patience = patience
+        self.blockSampler = blockSampler
+        self.batchEncoder = batchEncoder
 
     def train(self, tset, vset):
-        tsampler = BlockSampler(tset, self.group_by)
-        tbenc = BatchEncoder(tsampler, self.batch_size,
-                             xs_encoder=self.xs_encoder)
+        tsampler = self.blockSampler(tset, group_by=self.group_by)
+        tbenc = self.batchEncoder(tsampler, self.batch_size,
+                                  xs_encoder=self.xs_encoder)
 
-        vsampler = BlockSampler(vset, self.group_by)
-        vbenc = BatchEncoder(vsampler, self.batch_size,
-                             xs_encoder=self.xs_encoder)
+        vsampler = self.blockSampler(vset, group_by=self.group_by)
+        vbenc = self.batchEncoder(vsampler, self.batch_size,
+                                  xs_encoder=self.xs_encoder)
 
         model = self.model
 

@@ -61,6 +61,8 @@ def xs_encoder_8bits_11(blocks):
     xs = xs * 2 - 1
     return xs
 
+def decode_8bits_11(blocks):
+    return np.sum((blocks + 1) // 2 * 2**np.arange(8)[::-1], axis=-1)
 
 def xs_encoder_16bits(blocks):
     xs = np.zeros((len(blocks), 512, 16), dtype='int')
