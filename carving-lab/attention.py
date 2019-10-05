@@ -15,7 +15,7 @@ def Attention(timesteps, nfeatures, name):
         query = last                             # (None, TIMESTEPS, NFEATURES)
         # pick one of the convolutions
         query = MaxPooling1D(pool_size=TIMESTEPS, strides=1)(
-            query)  # (None, 1, NFEATURES)
+            query)                                       # (None, 1, NFEATURES)
         # remove dimension with size 1
         query = Lambda(lambda q: K.squeeze(q, 1))(query)    # (None, NFEATURES)
         query = Dense(NFEATURES)(query)                     # (None, NFEATURES)
