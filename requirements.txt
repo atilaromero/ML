@@ -14,7 +14,7 @@ mock==3.0.4
 more-itertools==7.0.0
 numpy==1.16.3
 pluggy==0.10.0
-protobuf==3.7.1
+protobuf==3.15.0
 py==1.8.0
 pycparser==2.19
 pytest==4.4.1
